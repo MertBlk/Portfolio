@@ -1,5 +1,11 @@
 :root {
   --primary-color: #8e44ad;
+  --primary-hover: #9b59b6;
   --text-color: #ffffff;
+  --text-secondary: #cccccc;
   --bg-color: #0e0e0e;
+  --bg-secondary: #1a1a1a;
+  --transition: all 0.3s ease;
+  --section-padding: 80px 20px;
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
