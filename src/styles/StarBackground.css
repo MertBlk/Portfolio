@@ -1,0 +1,31 @@
+.star-container {
+  position: fixed; /* Tekrar fixed yapıyoruz */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(circle at 50% 30%, #0a0a0a, #000000);
+  overflow: hidden;
+  z-index: -1; /* Tekrar -1 yapıyoruz */
+}
+
+.star {
+  position: absolute;
+  width: 2px; /* Yıldızları biraz daha büyük yapabilirsiniz */
+  height: 2px;
+  background: white;
+  border-radius: 50%; /* Yuvarlak şekil */
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.7); /* Parlama efektini artırabilirsiniz */
+  animation: twinkle 2s infinite ease-in-out; /* Yanıp sönme animasyonu */
+}
+
+@keyframes twinkle {
+  0%, 100% { 
+    opacity: 0.2; /* Minimum opaklığı artırabilirsiniz */
+    transform: scale(0.8); /* Başlangıç ve bitişte küçük ve soluk */
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.2); /* Ortada parlak ve biraz büyük */
+  }
+}

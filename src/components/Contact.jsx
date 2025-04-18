@@ -43,7 +43,7 @@ const Contact = () => {
 const styles = {
   container: {
     padding: 'var(--section-padding)',
-    background: 'var(--bg-secondary)',
+    backgroundColor: 'transparent', // Değişiklik burada - arka planı şeffaf yapıyoruz
   },
   content: {
     maxWidth: '1000px',

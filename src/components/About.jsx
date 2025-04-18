@@ -11,8 +11,9 @@ const About = () => {
       <div style={styles.content}>
         <div style={styles.textContent}>
           <p style={styles.description}>
-            Merhaba! Ben modern web uygulamaları geliştiren bir yazılımcıyım. 
-            React, JavaScript ve UI/UX konularında deneyimliyim. 
+            Merhaba! Ben modern web uygulamaları ve Mobil Uygulamaları geliştiren bir yazılımcıyım. 
+            React, React Native, JavaScript ve UI/UX konularında deneyimliyim.
+            Aynı zamanda Python ve temel seviye C# bilgim var.
             Performans odaklı, mobil uyumlu ve kullanıcı dostu arayüzler geliştiriyorum.
           </p>
           <div style={styles.skills}>
@@ -32,7 +33,7 @@ const About = () => {
 const styles = {
   container: {
     padding: 'var(--section-padding)',
-    backgroundColor: 'var(--bg-color)',
+    backgroundColor: 'transparent', // Değişiklik burada - arka planı şeffaf yapıyoruz
   },
   content: {
     maxWidth: '1000px',

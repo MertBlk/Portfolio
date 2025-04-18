@@ -9,9 +9,15 @@ const projects = [
   },
   {
     title: "Todo App",
-    description: "React ve Firebase ile yapılmış yapılacaklar uygulaması.",
+    description: "React ile yapılmış yapılacaklar uygulaması.",
     link: "#",
-    tags: ["React", "Firebase", "CRUD"]
+    tags: ["React","CRUD"]
+  },
+  {
+    title: "E-ticaret Tasarımı",
+    description: "Responsive e-ticaret ön yüz tasarımı.",
+    link: "#",
+    tags: ["HTML", "CSS", "JavaScript"]
   },
   {
     title: "E-ticaret Tasarımı",
@@ -24,25 +30,27 @@ const projects = [
 const Projects = () => {
   return (
     <section id="projects" style={styles.container}>
-      <h2 style={styles.title}>Projelerim</h2>
-      <div style={styles.grid}>
-        {projects.map((project, index) => (
-          <div key={index} style={styles.card}>
-            <div style={styles.cardContent}>
-              <h3 style={styles.projectTitle}>{project.title}</h3>
-              <p style={styles.description}>{project.description}</p>
-              <div style={styles.tags}>
-                {project.tags.map((tag, i) => (
-                  <span key={i} style={styles.tag}>{tag}</span>
-                ))}
+      <div style={styles.content}>
+        <h2 style={styles.title}>Projelerim</h2>
+        <div style={styles.grid}>
+          {projects.map((project, index) => (
+            <div key={index} style={styles.card}>
+              <div style={styles.cardContent}>
+                <h3 style={styles.projectTitle}>{project.title}</h3>
+                <p style={styles.description}>{project.description}</p>
+                <div style={styles.tags}>
+                  {project.tags.map((tag, i) => (
+                    <span key={i} style={styles.tag}>{tag}</span>
+                  ))}
+                </div>
+                <a href={project.link} style={styles.link}>
+                  Detaylar
+                  <span style={styles.arrow}>→</span>
+                </a>
               </div>
-              <a href={project.link} style={styles.link}>
-                Detaylar
-                <span style={styles.arrow}>→</span>
-              </a>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -51,6 +59,11 @@ const Projects = () => {
 const styles = {
   container: {
     padding: 'var(--section-padding)',
+    position: 'relative',
+    backgroundColor: 'transparent', // Eğer yoksa bu satırı ekleyin
+  },
+  content: {
+    // ... mevcut stil ...
   },
   title: {
     color: 'var(--primary-color)',
@@ -93,7 +106,7 @@ const styles = {
     marginBottom: '20px',
   },
   tag: {
-    backgroundColor: 'rgba(142, 68, 173, 0.2)',
+    backgroundColor: 'rgba(141, 68, 173, 0)',
     color: 'var(--primary-color)',
     padding: '5px 12px',
     borderRadius: '15px',

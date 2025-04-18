@@ -3,7 +3,7 @@ import React from 'react';
 const Navbar = () => {
   return (
     <nav style={styles.nav}>
-      <div style={styles.logo}>Yazılımcı Adı</div>
+      <div style={styles.logo}> Tech</div>
       <ul style={styles.menu}>
         {['Ana Sayfa', 'Hakkımda', 'Projeler', 'İletişim'].map((item) => (
           <li key={item} style={styles.menuItem}>
@@ -21,13 +21,14 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '20px 5%',
-    backgroundColor: 'var(--bg-secondary)',
+    backgroundColor: 'transparent',
+    backdropFilter: 'blur(10px)',
     position: 'fixed',
     top: 0,
     left: 0,
     right: 0,
     zIndex: 1000,
-    boxShadow: 'var(--card-shadow)',
+    
   },
   logo: {
     fontWeight: 'bold',
