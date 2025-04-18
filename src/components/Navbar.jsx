@@ -6,9 +6,9 @@ const Navbar = () => {
   return (
     <nav style={styles.nav}>
       <div style={styles.navContainer}>
-        <div style={styles.logo}></div>
+        {/* Logo kaldırıldı veya gizlendi */}
         
-        {/* Mobil hamburger menü */}
+        {/* Mobil hamburger menüsü */}
         <div 
           style={styles.hamburger} 
           onClick={() => setMenuOpen(!menuOpen)}
@@ -18,6 +18,7 @@ const Navbar = () => {
           <div style={{...styles.bar, ...(menuOpen && styles.bar3)}}></div>
         </div>
         
+        {/* Menü öğeleri */}
         <ul style={{
           ...styles.menu,
           ...(menuOpen ? styles.menuOpen : styles.menuClosed)
@@ -53,7 +54,7 @@ const styles = {
   },
   navContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'center', // Değişiklik: space-between yerine center
     alignItems: 'center',
     backgroundColor: 'rgba(26, 26, 26, 0.8)',
     backdropFilter: 'blur(10px)',
@@ -64,13 +65,7 @@ const styles = {
     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
     border: '1px solid rgba(255, 255, 255, 0.05)',
   },
-  logo: {
-    fontWeight: 'bold',
-    fontSize: '1.4rem',
-    color: 'var(--primary-color)',
-    transition: 'var(--transition)',
-    cursor: 'pointer',
-  },
+  // Logo stili kaldırıldı veya gizlendi
   menu: {
     display: 'flex',
     listStyle: 'none',
@@ -84,7 +79,9 @@ const styles = {
       backgroundColor: 'rgba(26, 26, 26, 0.95)',
       backdropFilter: 'blur(10px)',
       top: 'calc(100% + 10px)',
-      right: 0,
+      right: 'auto', // Değişiklik: right: 0 yerine auto
+      left: '50%', // Ekleme: mobilde ortada olması için
+      transform: 'translateX(-50%)', // Ekleme: mobilde tam ortada olması için
       borderRadius: '15px',
       padding: '20px',
       boxShadow: 'var(--card-shadow)',
@@ -95,6 +92,17 @@ const styles = {
     position: 'relative',
     transition: 'var(--transition)',
   },
+  menuLink: {
+    color: 'var(--text-color)',
+    textDecoration: 'none',
+    fontSize: '0.95rem',
+    fontWeight: '500',
+    transition: 'var(--transition)',
+    padding: '5px 0',
+    ':hover': {
+      color: 'var(--primary-color)',
+    },
+  },
   hamburger: {
     display: 'none',
     flexDirection: 'column',
@@ -103,6 +111,8 @@ const styles = {
     height: '20px',
     cursor: 'pointer',
     zIndex: 1001,
+    position: 'absolute', // Ekleme: Hamburger menüsü konumu için
+    right: '20px', // Ekleme: Sağ kenardan 20px içeride
     
     '@media (max-width: 768px)': {
       display: 'flex',
@@ -132,7 +142,7 @@ const styles = {
     '@media (max-width: 768px)': {
       opacity: 0,
       visibility: 'hidden',
-      transform: 'translateY(-20px)',
+      transform: 'translateX(-50%) translateY(-20px)', // Değişiklik: translateX(-50%) ekledik
     }
   },
   
@@ -140,19 +150,8 @@ const styles = {
     '@media (max-width: 768px)': {
       opacity: 1,
       visibility: 'visible',
-      transform: 'translateY(0)',
+      transform: 'translateX(-50%) translateY(0)', // Değişiklik: translateX(-50%) ekledik
     }
-  },
-  menuLink: {
-    color: 'var(--text-color)',
-    textDecoration: 'none',
-    fontSize: '0.95rem',
-    fontWeight: '500',
-    transition: 'var(--transition)',
-    padding: '5px 0',
-    ':hover': {
-      color: 'var(--primary-color)',
-    },
   },
 };
 

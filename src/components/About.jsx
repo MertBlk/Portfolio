@@ -6,7 +6,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" style={styles.container}>
+    <section id="hakkımda" style={styles.container}>
       <h2 style={styles.title}>Hakkımda</h2>
       <div style={styles.content}>
         <div style={styles.textContent}>
@@ -14,8 +14,12 @@ const About = () => {
             Merhaba! Ben modern web uygulamaları ve Mobil Uygulamaları geliştiren bir yazılımcıyım. 
             React, React Native, JavaScript ve UI/UX konularında deneyimliyim.
             Aynı zamanda Python ve temel seviye C# bilgim var.
-            Performans odaklı, mobil uyumlu ve kullanıcı dostu arayüzler geliştiriyorum.
           </p>
+          <p style={styles.description}>
+            Performans odaklı, mobil uyumlu ve kullanıcı dostu arayüzler geliştiriyorum.
+            Her projede yeni teknolojiler öğrenmeye ve kendimi geliştirmeye devam ediyorum.
+          </p>
+          
           <div style={styles.skills}>
             <h3 style={styles.skillsTitle}>Yeteneklerim</h3>
             <div style={styles.skillTags}>
@@ -33,13 +37,17 @@ const About = () => {
 const styles = {
   container: {
     padding: 'var(--section-padding)',
-    backgroundColor: 'transparent', // Değişiklik burada - arka planı şeffaf yapıyoruz
+    backgroundColor: 'transparent',
+    position: 'relative',
+    zIndex: 1,
   },
   content: {
+    maxWidth: '1000px',
+    margin: '0 auto',
     display: 'flex',
+    gap: '50px',
+    alignItems: 'center',
     flexDirection: 'column',
-    gap: '30px',
-    // Sadece büyük ekranlarda yan yana dizilim
     '@media (min-width: 768px)': {
       flexDirection: 'row',
     }
@@ -48,7 +56,7 @@ const styles = {
     color: 'var(--primary-color)',
     textAlign: 'center',
     marginBottom: '50px',
-    fontSize: '2.5rem',
+    fontSize: 'var(--heading-medium, 2.5rem)',
   },
   textContent: {
     flex: 1,
@@ -57,7 +65,7 @@ const styles = {
     fontSize: '1.2rem',
     lineHeight: '1.8',
     color: 'var(--text-color)',
-    marginBottom: '40px',
+    marginBottom: '20px',
   },
   skills: {
     marginTop: '30px',
@@ -80,7 +88,9 @@ const styles = {
     fontSize: '1rem',
     boxShadow: 'var(--card-shadow)',
     transition: 'var(--transition)',
+    border: '1px solid rgba(255, 255, 255, 0.05)',
   },
+  
 };
 
 export default About;
