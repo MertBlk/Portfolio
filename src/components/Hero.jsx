@@ -3,7 +3,7 @@ import React from 'react';
 const Hero = () => {
   return (
     <section id="hero" style={styles.container}>
-      <h1 style={styles.title}>Merhaba, ben <span style={styles.name}>[Adınız]</span></h1>
+      <h1 style={styles.title}>Merhaba, ben <span style={styles.name}>[Mert Bölükbaşı!]</span></h1>
       <p style={styles.subtitle}>Frontend Geliştirici | React & JavaScript</p>
       <a href="#projects" style={styles.button}>Projelerime Göz At</a>
     </section>
