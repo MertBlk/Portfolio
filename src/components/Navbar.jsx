@@ -1,13 +1,32 @@
 import React, { useState } from 'react';
 
+const MenuItem = ({ item, setMenuOpen }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  return (
+    <li style={styles.menuItem}>
+      <a 
+        href={`#${item.toLowerCase().replace(' ', '')}`}
+        style={{
+          ...styles.menuLink,
+          color: isHovered ? 'var(--primary-color)' : 'var(--text-color)'
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={() => setMenuOpen(false)}
+      >
+        {item}
+      </a>
+    </li>
+  );
+};
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav style={styles.nav}>
       <div style={styles.navContainer}>
-        {/* Logo kaldırıldı veya gizlendi */}
-        
         {/* Mobil hamburger menüsü */}
         <div 
           style={styles.hamburger} 
@@ -24,15 +43,7 @@ const Navbar = () => {
           ...(menuOpen ? styles.menuOpen : styles.menuClosed)
         }}>
           {['Ana Sayfa', 'Hakkımda', 'Projeler', 'İletişim'].map((item) => (
-            <li key={item} style={styles.menuItem}>
-              <a 
-                href={`#${item.toLowerCase().replace(' ', '')}`} 
-                style={styles.menuLink}
-                onClick={() => setMenuOpen(false)}
-              >
-                {item}
-              </a>
-            </li>
+            <MenuItem key={item} item={item} setMenuOpen={setMenuOpen} />
           ))}
         </ul>
       </div>
@@ -99,10 +110,24 @@ const styles = {
     fontWeight: '500',
     transition: 'var(--transition)',
     padding: '5px 0',
-    ':hover': {
-      color: 'var(--primary-color)',
+    position: 'relative',
+    // Hover stilini burada ekliyoruz
+    ':after': {
+      content: '""',
+      position: 'absolute',
+      bottom: '-2px',
+      left: '0',
+      width: '0%',
+      height: '2px',
+      backgroundColor: 'var(--primary-color)',
+      transition: 'var(--transition)',
+    },
+    ':hover:after': {
+      width: '100%',
     },
   },
+  
+  
   hamburger: {
     display: 'none',
     flexDirection: 'column',

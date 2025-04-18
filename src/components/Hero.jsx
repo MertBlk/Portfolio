@@ -7,7 +7,7 @@ const Hero = () => {
         <h1 style={styles.title}>
           Merhaba, ben <span style={styles.name}>[Mert]</span>
         </h1>
-        <p style={styles.subtitle}>Full Stack Geliştirici | React & JavaScript | Mobil Geliştirme</p>
+        <p style={styles.subtitle}>Full Stack Geliştirici |  Mobil Geliştirme</p>
         <div style={styles.cta}>
           <a href="#projects" style={styles.button}>Projelerime Göz At</a>
           <a href="#contact" style={styles.outlineButton}>İletişime Geç</a>

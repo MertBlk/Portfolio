@@ -6,7 +6,7 @@ const StarBackground = () => {
     const container = document.querySelector('.star-container');
     if (!container) return; // Ensure container exists
 
-    const starCount = 950; // Number of stars
+    const starCount = 350; // Number of stars
 
     const createStars = () => {
       // Clear existing stars before creating new ones

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const About = () => {
   const skills = [
     "JavaScript", "React", "React Native", "HTML5", "CSS", "Python", "Git", "Responsive Design"
   ];
+
+  // Hover durumunu takip etmek için bir state oluşturalım
+  const [hoveredSkill, setHoveredSkill] = useState(null);
 
   return (
     <section id="hakkımda" style={styles.container}>
@@ -24,11 +27,23 @@ const About = () => {
             <h3 style={styles.skillsTitle}>Yeteneklerim</h3>
             <div style={styles.skillTags}>
               {skills.map((skill, index) => (
-                <span key={index} style={styles.skillTag}>{skill}</span>
+                <span 
+                  key={index} 
+                  style={{
+                    ...styles.skillTag,
+                    ...(hoveredSkill === index ? styles.skillTagHovered : {})
+                  }}
+                  onMouseEnter={() => setHoveredSkill(index)}
+                  onMouseLeave={() => setHoveredSkill(null)}
+                >
+                  {skill}
+                </span>
               ))}
             </div>
           </div>
         </div>
+        
+        
       </div>
     </section>
   );
@@ -89,8 +104,58 @@ const styles = {
     boxShadow: 'var(--card-shadow)',
     transition: 'var(--transition)',
     border: '1px solid rgba(255, 255, 255, 0.05)',
+    cursor: 'pointer', // Tıklanabilir görünüm için imleç ekledik
   },
-  
+  skillTagHovered: {
+    backgroundColor: 'rgba(241, 196, 15, 0.1)', // Sarı rengin hafif arkaplanı
+    color: 'var(--primary-color)', // Sarı renk
+    borderColor: 'var(--primary-color)', // Sarı kenarlık
+    transform: 'translateY(-3px)', // Hafif yukarı kalkma efekti
+    boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)', // Daha belirgin gölge
+  },
+  imageContainer: {
+    position: 'relative',
+    width: '300px',
+    height: '300px',
+    flexShrink: 0,
+  },
+  imageFrame: {
+    width: '100%',
+    height: '100%',
+    borderRadius: '50%',
+    overflow: 'hidden',
+    boxShadow: 'var(--card-shadow)',
+  },
+  imagePlaceholder: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'var(--bg-secondary)',
+  },
+  imagePlaceholderText: {
+    color: 'var(--text-color)',
+    fontSize: '1.2rem',
+  },
+  experienceBox: {
+    position: 'absolute',
+    bottom: '-20px',
+    right: '-20px',
+    backgroundColor: 'var(--primary-color)',
+    color: 'white',
+    padding: '10px 20px',
+    borderRadius: '10px',
+    boxShadow: 'var(--card-shadow)',
+    textAlign: 'center',
+  },
+  experienceNumber: {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+  },
+  experienceText: {
+    fontSize: '1rem',
+  },
 };
 
 export default About;
