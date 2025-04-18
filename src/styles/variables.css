@@ -6,8 +6,17 @@
   --bg-color: #0e0e0e;
   --bg-secondary: #1a1a1a;
   --transition: all 0.3s ease;
-  --section-padding: 80px 20px;
+  --section-padding: clamp(40px, 8vw, 80px) clamp(15px, 4vw, 20px);
   --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   --star-color: rgba(255, 255, 255, 0.8);
   --star-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+
+  /* Responsive değişkenler */
+  --heading-large: clamp(2.5rem, 8vw, 6rem);
+  --heading-medium: clamp(1.8rem, 5vw, 2.5rem);
+  --heading-small: clamp(1.2rem, 4vw, 1.5rem);
+  
+  --spacing-large: clamp(50px, 8vw, 80px);
+  --spacing-medium: clamp(30px, 5vw, 50px);
+  --spacing-small: clamp(15px, 3vw, 25px);
 }

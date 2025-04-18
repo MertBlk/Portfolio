@@ -36,11 +36,13 @@ const styles = {
     backgroundColor: 'transparent', // Değişiklik burada - arka planı şeffaf yapıyoruz
   },
   content: {
-    maxWidth: '1000px',
-    margin: '0 auto',
     display: 'flex',
-    gap: '50px',
-    alignItems: 'center',
+    flexDirection: 'column',
+    gap: '30px',
+    // Sadece büyük ekranlarda yan yana dizilim
+    '@media (min-width: 768px)': {
+      flexDirection: 'row',
+    }
   },
   title: {
     color: 'var(--primary-color)',

@@ -19,22 +19,24 @@ const Hero = () => {
 
 const styles = {
   container: {
-    minHeight: '80vh', // 100vh'den 80vh'ye düşürdük
+    minHeight: '80vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
     padding: 'var(--section-padding)',
-    background: 'transparent', // Arka planı şeffaf yapıyoruz
+    background: 'transparent',
     position: 'relative',
     zIndex: 1,
   },
   content: {
     maxWidth: '800px',
+    width: '100%',
+    padding: '0 20px',
   },
   title: {
-    fontSize: '6rem', // 3.5rem'den 3rem'e düşürdük
-    marginBottom: '35px', // 20px'den 15px'e düşürdük
+    fontSize: 'clamp(2.5rem, 10vw, 6rem)',
+    marginBottom: '35px',
     lineHeight: 1.2,
   },
   name: {
@@ -43,14 +45,15 @@ const styles = {
     paddingBottom: '5px',
   },
   subtitle: {
-    fontSize: '1.5rem', // 1.5rem'den 1.3rem'e düşürdük
+    fontSize: 'clamp(1rem, 4vw, 1.5rem)',
     color: 'var(--text-secondary)',
-    marginBottom: '40px', // 40px'den 30px'e düşürdük
+    marginBottom: '40px',
   },
   cta: {
     display: 'flex',
     gap: '20px',
     justifyContent: 'center',
+    flexWrap: 'wrap',
   },
   button: {
     padding: '12px 30px',
