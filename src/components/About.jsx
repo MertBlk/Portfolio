@@ -9,7 +9,7 @@ const About = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
   return (
-    <section id="hakkımda" style={styles.container}>
+    <section id="hakkimda" style={styles.container}>
       <h2 style={styles.title}>Hakkımda</h2>
       <div style={styles.content}>
         <div style={styles.textContent}>

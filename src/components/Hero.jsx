@@ -2,7 +2,7 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <section id="hero" style={styles.container}>
+    <section id="anasayfa" style={styles.container}>
       <div style={styles.content}>
         <h1 style={styles.title}>
           Merhaba, ben <span style={styles.name}>[Mert]</span>

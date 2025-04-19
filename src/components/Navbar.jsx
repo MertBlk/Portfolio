@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-const MenuItem = ({ item, setMenuOpen }) => {
+const MenuItem = ({ item, path, setMenuOpen }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const location = useLocation();
+  const isActive = location.hash === path || (location.pathname === '/' && path === '#anasayfa');
+  
+  const handleClick = (e) => {
+    setMenuOpen(false);
+    if (path.startsWith('#')) {
+      e.preventDefault();
+      const element = document.getElementById(path.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
   
   return (
     <li style={styles.menuItem}>
       <a 
-        href={`#${item.toLowerCase().replace(' ', '')}`}
+        href={path}
         style={{
           ...styles.menuLink,
-          color: isHovered ? 'var(--primary-color)' : 'var(--text-color)'
+          color: isActive || isHovered ? 'var(--primary-color)' : 'var(--text-color)',
+          borderBottom: isActive ? '2px solid var(--primary-color)' : 'none'
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={() => setMenuOpen(false)}
+        onClick={handleClick}
       >
         {item}
       </a>
@@ -23,11 +38,34 @@ const MenuItem = ({ item, setMenuOpen }) => {
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setScrolled(offset > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const menuItems = [
+    { name: 'Ana Sayfa', path: '#anasayfa' },
+    { name: 'Hakkımda', path: '#hakkimda' },
+    { name: 'Projeler', path: '#projeler' },
+    { name: 'İletişim', path: '#iletisim' }
+  ];
 
   return (
-    <nav style={styles.nav}>
-      <div style={styles.navContainer}>
-        {/* Mobil hamburger menüsü */}
+    <nav style={{
+      ...styles.nav,
+      ...(scrolled ? styles.navScrolled : {})
+    }}>
+      <div style={{
+        ...styles.navContainer,
+        ...(scrolled ? styles.navContainerScrolled : {})
+      }}>
         <div 
           style={styles.hamburger} 
           onClick={() => setMenuOpen(!menuOpen)}
@@ -37,13 +75,17 @@ const Navbar = () => {
           <div style={{...styles.bar, ...(menuOpen && styles.bar3)}}></div>
         </div>
         
-        {/* Menü öğeleri */}
         <ul style={{
           ...styles.menu,
           ...(menuOpen ? styles.menuOpen : styles.menuClosed)
         }}>
-          {[ 'Hakkımda', 'Projeler', 'İletişim'].map((item) => (
-            <MenuItem key={item} item={item} setMenuOpen={setMenuOpen} />
+          {menuItems.map((item) => (
+            <MenuItem 
+              key={item.name} 
+              item={item.name} 
+              path={item.path}
+              setMenuOpen={setMenuOpen} 
+            />
           ))}
         </ul>
       </div>
@@ -62,6 +104,11 @@ const styles = {
     left: 0,
     right: 0,
     zIndex: 1000,
+    transition: 'all 0.3s ease',
+  },
+  navScrolled: {
+    top: '10px',
+    padding: '10px 0',
   },
   navContainer: {
     display: 'flex',
@@ -75,6 +122,11 @@ const styles = {
     width: '90%',
     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
     border: '1px solid rgba(255, 255, 255, 0.05)',
+    transition: 'all 0.3s ease',
+  },
+  navContainerScrolled: {
+    backgroundColor: 'rgba(26, 26, 26, 0.95)',
+    padding: '8px 25px',
   },
   // Logo stili kaldırıldı veya gizlendi
   menu: {
@@ -108,7 +160,7 @@ const styles = {
     textDecoration: 'none',
     fontSize: '0.95rem',
     fontWeight: '500',
-    transition: 'var(--transition)',
+    transition: 'all 0.3s ease',
     padding: '5px 0',
     position: 'relative',
     // Hover stilini burada ekliyoruz
@@ -120,7 +172,7 @@ const styles = {
       width: '0%',
       height: '2px',
       backgroundColor: 'var(--primary-color)',
-      transition: 'var(--transition)',
+      transition: 'all 0.3s ease',
     },
     ':hover:after': {
       width: '100%',

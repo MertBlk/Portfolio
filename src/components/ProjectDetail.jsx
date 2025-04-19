@@ -45,6 +45,51 @@ const ProjectDetail = () => {
         "İlan yönetim sistemi"
       ],
       githubLink: "https://github.com/username/arac-satis"
+    },
+    {
+      id: "e-ticaret",
+      title: "E-ticaret Tasarımı",
+      description: "Modern ve kullanıcı dostu e-ticaret platformu",
+      fullDescription: "Responsive tasarıma sahip modern bir e-ticaret platformu. Kullanıcılar ürünleri kategorilere göre filtreleyebilir, sepete ekleyebilir ve satın alma işlemlerini gerçekleştirebilirler. Admin paneli üzerinden ürün ve kategori yönetimi yapılabilir.",
+      images: [
+        "/Portfolio/images/ruvido.jpeg",
+        "/Portfolio/images/ruvido2.jpeg",
+        "/Portfolio/images/ruvido3.jpeg",
+      ],
+      technologies: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Firebase","Sanal POS"],
+      features: [
+        "Responsive tasarım",
+        "Ürün filtreleme ve arama",
+        "Sepet yönetimi",
+        "Kullanıcı hesap sistemi",
+        "Admin paneli",
+        "Ödeme entegrasyonu"
+      ],
+      githubLink: "https://github.com/username/e-commerce"
+    },
+    {
+      id: "otel-tanitim",
+      title: "Otel Tanıtım Sitesi",
+      description: "Lüks otel tanıtım ve rezervasyon platformu",
+      fullDescription: "Modern ve şık tasarıma sahip otel tanıtım sitesi. Kullanıcılar odaları inceleyebilir, fiyatları görebilir ve online rezervasyon yapabilirler. Ayrıca otelin sunduğu hizmetler, restoranlar ve aktiviteler hakkında detaylı bilgi edinebilirler.",
+      images: [
+        "/Portfolio/images/otel.jpeg",
+        "/Portfolio/images/otel4.jpg",
+        "/Portfolio/images/otel2.jpeg",
+        "/Portfolio/images/otel3.jpeg",
+        
+      ],
+      technologies: ["HTML", "CSS", "JavaScript", "Bootstrap 5", "PHP", "MySQL"],
+      features: [
+        "Responsive tasarım",
+        "Online rezervasyon sistemi",
+        "Oda kategorileri ve detayları",
+        "Fiyat karşılaştırma",
+        "Otel hizmetleri tanıtımı",
+        "Müşteri yorumları",
+        "İletişim formu"
+      ],
+      githubLink: "https://github.com/username/hotel-website"
     }
   ];
 
@@ -68,7 +113,7 @@ const ProjectDetail = () => {
 
   return (
     <div style={styles.container}>
-      
+      <Link to="/" style={styles.backButton}>← Ana Sayfaya Dön</Link>
       
       <div style={styles.contentWrapper}>
         <div style={styles.imageSection}>
@@ -288,6 +333,8 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '10px',
+    justifyContent: 'center', // Merkeze hizalama ekledim
+    alignItems: 'center', // Dikey hizalama da ekledim
   },
   tag: {
     backgroundColor: 'rgba(241, 196, 15, 0.1)',
@@ -295,6 +342,9 @@ const styles = {
     padding: '8px 16px',
     borderRadius: '20px',
     fontSize: '1rem',
+    display: 'inline-flex', // Eklendi
+    alignItems: 'center', // Eklendi
+    justifyContent: 'center', // Eklendi
   },
   featureList: {
     listStyle: 'none',
@@ -312,6 +362,20 @@ const styles = {
       left: 0,
       color: 'var(--primary-color)',
     },
+  },
+  technologies: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '10px',
+    marginBottom: '25px',
+  },
+  technology: {
+    backgroundColor: 'rgba(241, 196, 15, 0.1)',
+   
+    color: 'var(--primary-color)',
+    padding: '8px 16px',
+    borderRadius: '20px',
+    fontSize: '1rem',
   },
   githubButton: {
     display: 'inline-block',

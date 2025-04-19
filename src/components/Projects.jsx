@@ -23,18 +23,12 @@ const projects = [
     image: "/Portfolio/images/aracSatis.png",
     tags: ["HTML", "CSS", "JavaScript", "UI/UX","Node.js"]
   },
-  {
-    id: "sehir-tanitim",
-    title: "Şehir Tanıtıcı App",
-    description: "Java ile yapılan andorid için şehir tanıtımı uygulaması.",
-    image: "/Portfolio/images/aracAraclar.png",
-    tags: ["Java", "Android","Sqlite","Admin Management"]
-  },
+ 
   {
     id: "otel-tanitim",
     title:"Otel Tanıtım Sitesi",
     description: "Otel tanıtım sitesi tasarımı. Kullanıcı arayüzü ve deneyimi odaklı.",
-    image: "/Portfolio/images/aracHesap.png",
+    image: "/Portfolio/images/otel.jpeg",
     tags: ["HTML", "CSS", "JavaScript","Bootstrap5", "UI/UX"]
   }
 ];

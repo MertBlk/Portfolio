@@ -1,11 +1,8 @@
 import React from 'react';
 
-// Font Awesome veya başka bir ikon kütüphanesi eklenebilir
-// Bu örnekte sadece basit metin kullanıyoruz
-
 const Contact = () => {
   return (
-    <section id="iletişim" style={styles.container}>
+    <section id="iletisim" style={styles.container}>
       <h2 style={styles.title}>İletişim</h2>
       <div style={styles.content}>
         <p style={styles.description}>
