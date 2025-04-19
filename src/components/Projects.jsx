@@ -1,53 +1,43 @@
 import React, { useState } from 'react';
-import esyaHatirlatici from '/images/esyaHatirla.png';
-import esyaHatirlatici2 from '../assets/images/esyaHatirlatici2.jpeg';
-import ruvido from '/images/ruvido.jpeg';
-import aracAraclar from '/images/aracAraclar.png';
-import aracHesap from '/images/aracHesap.png';
-import aracSatis from '/images/aracSatis.png';
-import esyaAyar from '/images/esyaAyar.png';
-import esyaBildirim from '/images/esyaBildirim.png';
-import esyaKonum from '/images/esyaKonum.png';
+import { Link } from 'react-router-dom';
 
 const projects = [
   {
+    id: "esya-hatirlatici",
     title: "Eşya Hatırlatıcı App",
-    description: "React ile yapılmış eşya hatırlatıcı uygulaması.",
-    image: esyaHatirlatici,
-    link: "/todo-project",
+    description: "React Native ile yapılmış eşya hatırlatıcı uygulaması.",
+    image: "/Portfolio/images/esyaHatirla.png",
     tags: ["React Native", "İos"]
   },
   {
+    id: "e-ticaret",
     title: "E-ticaret Tasarımı",
     description: "Responsive e-ticaret ön yüz tasarımı. Ürün listeleme, sepet işlemleri ve kullanıcı hesap yönetimi.",
-    image: ruvido,
-    link: "/ecommerce-project",
+    image: "/Portfolio/images/ruvido.jpeg",
     tags: ["HTML", "CSS", "JavaScript"]
   },
   {
+    id: "arac-satis",
     title: "Araç Satış Sitesi",
     description: "Araç satış sitesi tasarımı. Kullanıcı arayüzü ve deneyimi odaklı.",
-    image: aracSatis,
-    link: "/car-sales-project",
+    image: "/Portfolio/images/aracSatis.png",
     tags: ["HTML", "CSS", "JavaScript", "UI/UX","Node.js"]
   },
   {
+    id: "sehir-tanitim",
     title: "Şehir Tanıtıcı App",
     description: "Java ile yapılan andorid için şehir tanıtımı uygulaması.",
-    
-    link: "/android-project",
+    image: "/Portfolio/images/aracAraclar.png",
     tags: ["Java", "Android","Sqlite","Admin Management"]
   },
   {
+    id: "otel-tanitim",
     title:"Otel Tanıtım Sitesi",
     description: "Otel tanıtım sitesi tasarımı. Kullanıcı arayüzü ve deneyimi odaklı.",
-    image: aracHesap,
-    link: "/hotel-project",
+    image: "/Portfolio/images/aracHesap.png",
     tags: ["HTML", "CSS", "JavaScript","Bootstrap5", "UI/UX"]
   }
 ];
-
-// Sabit gradyan renklerini tanımlayalım - Ana renk ve koyu versiyonu
 
 const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -57,46 +47,39 @@ const Projects = () => {
       <h2 style={styles.title}>Projelerim</h2>
       <div style={styles.grid}>
         {projects.map((project, index) => (
-          <div 
-            key={index} 
-            style={{
-              ...styles.card,
-              ...(hoveredIndex === index ? styles.cardHovered : {})
-            }}
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
+          <Link 
+            to={`/project/${project.id}`} 
+            key={index}
+            style={{ textDecoration: 'none' }}
           >
-            <div style={styles.imageContainer}>
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                style={styles.projectImage} 
-              />
-            </div>
-            
-            <div style={styles.cardContent}>
-              <h3 style={styles.projectTitle}>{project.title}</h3>
-              <p style={styles.description}>{project.description}</p>
-              
-              <div style={styles.tags}>
-                {project.tags.map((tag, i) => (
-                  <span key={i} style={styles.tag}>{tag}</span>
-                ))}
+            <div 
+              style={{
+                ...styles.card,
+                ...(hoveredIndex === index ? styles.cardHovered : {})
+              }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <div style={styles.imageContainer}>
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  style={styles.projectImage} 
+                />
               </div>
               
-              <div style={styles.links}>
-                <a 
-                  href={project.link} 
-                  style={styles.projectButton}
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <span>Projeyi Görüntüle</span>
-                  <span style={styles.arrow}>→</span>
-                </a>
+              <div style={styles.cardContent}>
+                <h3 style={styles.projectTitle}>{project.title}</h3>
+                <p style={styles.description}>{project.description}</p>
+                
+                <div style={styles.tags}>
+                  {project.tags.map((tag, i) => (
+                    <span key={i} style={styles.tag}>{tag}</span>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
@@ -141,7 +124,7 @@ const styles = {
   },
   imageContainer: {
     width: '100%',
-    height: '250px',
+    height: '22rem',
     overflow: 'hidden',
     borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
     position: 'relative',

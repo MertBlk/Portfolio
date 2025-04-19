@@ -16,7 +16,7 @@ const About = () => {
           <p style={styles.description}>
             Merhaba! Ben modern web uygulamaları ve Mobil Uygulamaları geliştiren bir yazılımcıyım. 
             React, React Native, JavaScript ve UI/UX konularında deneyimliyim.
-            Aynı zamanda Python ve temel seviye C# bilgim var.
+            Aynı zamanda Python ve temel seviye C# 
           </p>
           <p style={styles.description}>
             Performans odaklı, mobil uyumlu ve kullanıcı dostu arayüzler geliştiriyorum.

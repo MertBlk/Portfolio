@@ -42,7 +42,7 @@ const Navbar = () => {
           ...styles.menu,
           ...(menuOpen ? styles.menuOpen : styles.menuClosed)
         }}>
-          {['Ana Sayfa', 'Hakkımda', 'Projeler', 'İletişim'].map((item) => (
+          {[ 'Hakkımda', 'Projeler', 'İletişim'].map((item) => (
             <MenuItem key={item} item={item} setMenuOpen={setMenuOpen} />
           ))}
         </ul>
