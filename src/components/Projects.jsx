@@ -1,40 +1,47 @@
 import React, { useState } from 'react';
+import esyaHatirlatici from '/images/esyaHatirla.png';
+import esyaHatirlatici2 from '../assets/images/esyaHatirlatici2.jpeg';
+import ruvido from '/images/ruvido.jpeg';
+import aracAraclar from '/images/aracAraclar.png';
+import aracHesap from '/images/aracHesap.png';
+import aracSatis from '/images/aracSatis.png';
+import esyaAyar from '/images/esyaAyar.png';
+import esyaBildirim from '/images/esyaBildirim.png';
+import esyaKonum from '/images/esyaKonum.png';
 
 const projects = [
- 
   {
     title: "Eşya Hatırlatıcı App",
     description: "React ile yapılmış eşya hatırlatıcı uygulaması.",
-    image: "https://via.placeholder.com/400x200?text=Esya+Hatirlatici",
+    image: esyaHatirlatici,
     link: "/todo-project",
-    tags: ["React Native", "İos",]
+    tags: ["React Native", "İos"]
   },
   {
     title: "E-ticaret Tasarımı",
     description: "Responsive e-ticaret ön yüz tasarımı. Ürün listeleme, sepet işlemleri ve kullanıcı hesap yönetimi.",
-    image: "https://via.placeholder.com/400x200?text=Esya+Hatirlatici", // public klasörünün kök dizininde
+    image: ruvido,
     link: "/ecommerce-project",
     tags: ["HTML", "CSS", "JavaScript"]
   },
   {
     title: "Araç Satış Sitesi",
     description: "Araç satış sitesi tasarımı. Kullanıcı arayüzü ve deneyimi odaklı.",
-    image: "https://via.placeholder.com/400x200?text=Esya+Hatirlatici", // public klasörünün kök dizininde
+    image: aracSatis,
     link: "/car-sales-project",
     tags: ["HTML", "CSS", "JavaScript", "UI/UX","Node.js"]
   },
-
   {
     title: "Şehir Tanıtıcı App",
     description: "Java ile yapılan andorid için şehir tanıtımı uygulaması.",
-    image: "https://via.placeholder.com/400x200?text=Esya+Hatirlatici",
-    link: "/todo-project",
+    
+    link: "/android-project",
     tags: ["Java", "Android","Sqlite","Admin Management"]
   },
   {
     title:"Otel Tanıtım Sitesi",
     description: "Otel tanıtım sitesi tasarımı. Kullanıcı arayüzü ve deneyimi odaklı.",
-    image: "https://via.placeholder.com/400x200?text=Esya+Hatirlatici", // public klasörünün kök dizininde
+    image: aracHesap,
     link: "/hotel-project",
     tags: ["HTML", "CSS", "JavaScript","Bootstrap5", "UI/UX"]
   }
@@ -60,13 +67,11 @@ const Projects = () => {
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <div style={styles.imageContainer}>
-              {/* Resim eklemek için img etiketi kullanıyoruz */}
               <img 
                 src={project.image} 
                 alt={project.title} 
                 style={styles.projectImage} 
               />
-              <span style={styles.projectNumber}>0{index + 1}</span>
             </div>
             
             <div style={styles.cardContent}>
@@ -80,7 +85,6 @@ const Projects = () => {
               </div>
               
               <div style={styles.links}>
-                {/* GitHub yerine proje sayfasına yönlendirme */}
                 <a 
                   href={project.link} 
                   style={styles.projectButton}
@@ -113,14 +117,14 @@ const styles = {
   },
   grid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-    gap: '30px',
-    maxWidth: '1200px',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))',
+    gap: '40px',
+    maxWidth: '1400px',
     margin: '0 auto',
   },
   card: {
     backgroundColor: 'var(--bg-secondary)',
-    borderRadius: '15px',
+    borderRadius: '20px',
     overflow: 'hidden',
     transition: 'all 0.4s ease',
     cursor: 'pointer',
@@ -137,29 +141,24 @@ const styles = {
   },
   imageContainer: {
     width: '100%',
-    height: '180px',
+    height: '250px',
     overflow: 'hidden',
     borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
     position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'var(--bg-secondary)',
   },
   projectImage: {
     width: '100%',
     height: '100%',
-    objectFit: 'cover', // Resmi kırpmadan, container'a sığdır
+    objectFit: 'contain',
+    padding: '10px',
     transition: 'transform 0.5s ease',
   },
-  projectNumber: {
-    position: 'absolute',
-    top: '10px',
-    right: '15px',
-    fontSize: '2.5rem',
-    fontWeight: 'bold',
-    opacity: 0.7,
-    color: 'rgba(255, 255, 255, 0.8)',
-    textShadow: '0 2px 4px rgba(0,0,0,0.3)', // Metin okunabilirliği için gölge
-  },
   cardContent: {
-    padding: '25px',
+    padding: '35px',
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
