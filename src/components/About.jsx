@@ -13,15 +13,18 @@ const About = () => {
       <h2 style={styles.title}>Hakkımda</h2>
       <div style={styles.content}>
         <div style={styles.textContent}>
-          <p style={styles.description}>
-            Merhaba! Ben modern web uygulamaları ve Mobil Uygulamaları geliştiren bir yazılımcıyım. 
-            React, React Native, JavaScript ve UI/UX konularında deneyimliyim.
-            Aynı zamanda Python ve temel seviye C# 
-          </p>
-          <p style={styles.description}>
-            Performans odaklı, mobil uyumlu ve kullanıcı dostu arayüzler geliştiriyorum.
-            Her projede yeni teknolojiler öğrenmeye ve kendimi geliştirmeye devam ediyorum.
-          </p>
+          <div style={styles.descriptionContainer}>
+            <p style={styles.description}>
+              Merhaba! Ben modern web uygulamaları ve mobil uygulamalar geliştiren bir yazılımcıyım.
+              React, React Native, JavaScript ve UI/UX konularında deneyimliyim.
+              Aynı zamanda Python ve temel seviye C# bilgisine sahibim.
+            </p>
+            <p style={styles.description}>
+              Performans odaklı, mobil uyumlu ve kullanıcı dostu arayüzler geliştiriyorum.
+              Her projede yeni teknolojiler öğrenmeye ve kendimi geliştirmeye devam ediyorum.
+              Sürekli öğrenme ve gelişim odaklı çalışıyorum.
+            </p>
+          </div>
           
           <div style={styles.skills}>
             <h3 style={styles.skillsTitle}>Yeteneklerim</h3>
@@ -63,37 +66,65 @@ const styles = {
     gap: '50px',
     alignItems: 'center',
     flexDirection: 'column',
+    '@media (max-width: 768px)': {
+      flexDirection: 'column',
+      position: 'relative',
+      padding: '20px',
+      backdropFilter: 'blur(10px)',
+      backgroundColor: 'rgba(15, 23, 42, 0.8)',
+      borderRadius: '20px',
+      border: '1px solid rgba(255, 255, 255, 0.1)',
+      boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+    },
     '@media (min-width: 768px)': {
       flexDirection: 'row',
     }
   },
-  title: {
-    color: 'var(--primary-color)',
-    textAlign: 'center',
-    marginBottom: '50px',
-    fontSize: 'var(--heading-medium, 2.5rem)',
-  },
   textContent: {
     flex: 1,
+    '@media (max-width: 768px)': {
+      padding: '10px',
+    }
+  },
+  descriptionContainer: {
+    maxWidth: '800px',
+    margin: '0 auto',
+    textAlign: 'justify',
+    hyphens: 'auto',
+    WebkitHyphens: 'auto',
+    msHyphens: 'auto',
+    '@media (max-width: 768px)': {
+      padding: '15px',
+      borderRadius: '15px',
+    }
   },
   description: {
     fontSize: '1.2rem',
     lineHeight: '1.8',
     color: 'var(--text-color)',
     marginBottom: '20px',
+    padding: '0 20px',
+    '@media (max-width: 768px)': {
+      fontSize: '1.1rem',
+      lineHeight: '1.6',
+    },
   },
   skills: {
     marginTop: '30px',
+    textAlign: 'center', // Eklendi
   },
   skillsTitle: {
     color: 'var(--primary-color)',
     fontSize: '1.5rem',
     marginBottom: '20px',
+    textAlign: 'center', // Eklendi
   },
   skillTags: {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '12px',
+    justifyContent: 'center', // Eklendi
+    alignItems: 'center', // Eklendi
   },
   skillTag: {
     backgroundColor: 'var(--bg-secondary)',
@@ -104,7 +135,10 @@ const styles = {
     boxShadow: 'var(--card-shadow)',
     transition: 'var(--transition)',
     border: '1px solid rgba(255, 255, 255, 0.05)',
-    cursor: 'pointer', // Tıklanabilir görünüm için imleç ekledik
+    cursor: 'pointer',
+    display: 'inline-flex', // Eklendi
+    alignItems: 'center', // Eklendi
+    justifyContent: 'center', // Eklendi
   },
   skillTagHovered: {
     backgroundColor: 'rgba(241, 196, 15, 0.1)', // Sarı rengin hafif arkaplanı

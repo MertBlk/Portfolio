@@ -35,3 +35,19 @@ input, textarea {
   button:hover {
     background-color: #732d91;
   }
+
+@keyframes colorChange {
+  0% { color: #F1C40F; }    /* Başlangıç rengi (sarı) */
+  33% { color: #3498DB; }   /* Mavi */
+  66% { color: #cc2e2e; }   /* Yeşil */
+  100% { color: #F1C40F; }  /* Tekrar başlangıç rengine dön */
+}
+
+@keyframes flowingGradient {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

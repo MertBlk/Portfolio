@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate();
+
+  const handleNavigation = (e, sectionId) => {
+    e.preventDefault();
+    navigate('/', { state: { scrollTo: sectionId } });
+  };
 
   const projects = [
     {
@@ -112,8 +118,36 @@ const ProjectDetail = () => {
   };
 
   return (
-    <div style={styles.container}>
+    <div style={styles.container}>  
       <Link to="/" style={styles.backButton}>← Ana Sayfaya Dön</Link>
+      <nav style={styles.navbar}>
+        <div style={styles.navContainer}>
+          <ul style={styles.navList}>
+            <li>
+              <a href="#anasayfa" onClick={(e) => handleNavigation(e, 'anasayfa')} style={styles.navLink}>
+                Ana Sayfa
+              </a>
+            </li>
+            <li>
+              <a href="#hakkimda" onClick={(e) => handleNavigation(e, 'hakkimda')} style={styles.navLink}>
+                Hakkımda
+              </a>
+            </li>
+            <li>
+              <a href="#projeler" onClick={(e) => handleNavigation(e, 'projeler')} style={styles.navLink}>
+                Projeler
+              </a>
+            </li>
+            <li>
+              <a href="#iletisim" onClick={(e) => handleNavigation(e, 'iletisim')} style={styles.navLink}>
+                İletişim
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+   
       
       <div style={styles.contentWrapper}>
         <div style={styles.imageSection}>
@@ -389,6 +423,46 @@ const styles = {
     transition: 'transform 0.2s ease',
     '&:hover': {
       transform: 'translateY(-2px)',
+    },
+  },
+  navbar: {
+    position: 'fixed',
+    top: '20px',
+    left: 0,
+    right: 0,
+    zIndex: 1000,
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '0 20px',
+  },
+  navContainer: {
+    backgroundColor: 'rgba(26, 26, 26, 0.8)',
+    backdropFilter: 'blur(10px)',
+    borderRadius: '50px',
+    padding: '10px 30px',
+    maxWidth: '800px',
+    width: '90%',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+    border: '1px solid rgba(255, 255, 255, 0.05)',
+  },
+  navList: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '25px',
+    listStyle: 'none',
+    margin: 0,
+    padding: 0,
+  },
+  navLink: {
+    color: 'var(--text-color)',
+    textDecoration: 'none',
+    fontSize: '0.95rem',
+    fontWeight: '500',
+    transition: 'all 0.3s ease',
+    padding: '5px 0',
+    '&:hover': {
+      color: 'var(--primary-color)',
     },
   },
 };

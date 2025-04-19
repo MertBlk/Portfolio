@@ -4,14 +4,15 @@ const Hero = () => {
   return (
     <section id="anasayfa" style={styles.container}>
       <div style={styles.content}>
-        <h1 style={styles.title}>
-          Merhaba, ben <span style={styles.name}>[Mert]</span>
-        </h1>
-        <p style={styles.subtitle}>Full Stack Geliştirici |  Mobil Geliştirme</p>
-        <div style={styles.cta}>
-          <a href="#projects" style={styles.button}>Projelerime Göz At</a>
-          <a href="#contact" style={styles.outlineButton}>İletişime Geç</a>
-        </div>
+      <h1 style={styles.title}>
+  Selam! Ben <span style={styles.name}>Mert Bölükbaşı</span>
+</h1>
+<p style={styles.subtitle}>Hayallerini koda döken bir geliştirici.</p>
+<p style={styles.subtitle}>Full Stack | Mobil Geliştirme</p>
+<div style={styles.cta}>
+  <a href="#projects" style={styles.button}>Neler Yaptım?</a>
+  <a href="#contact" style={styles.outlineButton}>Bana Ulaş</a>
+</div>
       </div>
     </section>
   );
@@ -40,8 +41,13 @@ const styles = {
     lineHeight: 1.2,
   },
   name: {
-    color: 'var(--primary-color)',
-    borderBottom: '3px solid var(--primary-color)',
+    background: 'linear-gradient(to left, #F1C40F, #E74C3C, #9B59B6, #3498DB, #2ECC71, #F39C12, #F1C40F)',
+    backgroundSize: '300% 100%',
+    animation: 'flowingGradient 10s linear infinite',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    textFillColor: 'transparent',
     paddingBottom: '5px',
   },
   subtitle: {

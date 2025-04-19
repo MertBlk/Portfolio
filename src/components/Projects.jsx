@@ -14,7 +14,7 @@ const projects = [
     title: "E-ticaret Tasarımı",
     description: "Responsive e-ticaret ön yüz tasarımı. Ürün listeleme, sepet işlemleri ve kullanıcı hesap yönetimi.",
     image: "/Portfolio/images/ruvido.jpeg",
-    tags: ["HTML", "CSS", "JavaScript"]
+    tags: ["HTML", "CSS", "JavaScript","React", "UI/UX", "Node.js","Firebase"]
   },
   {
     id: "arac-satis",
@@ -82,26 +82,34 @@ const Projects = () => {
 
 const styles = {
   container: {
-    padding: 'var(--section-padding)',
+    padding: '40px 15px', // Mobilde daha az padding
     position: 'relative',
     backgroundColor: 'transparent',
+    '@media (min-width: 768px)': {
+      padding: 'var(--section-padding)',
+    },
   },
   title: {
     color: 'var(--primary-color)',
     textAlign: 'center',
-    marginBottom: '50px',
-    fontSize: 'var(--heading-medium, 2.5rem)',
+    marginBottom: '30px', // Mobilde daha az margin
+    fontSize: '2rem', // Mobilde daha küçük başlık
+    '@media (min-width: 768px)': {
+      marginBottom: '50px',
+      fontSize: 'var(--heading-medium, 2.5rem)',
+    },
   },
   grid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))',
-    gap: '40px',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', // Daha küçük minimum genişlik
+    gap: '20px', // Boşlukları azalttım
     maxWidth: '1400px',
     margin: '0 auto',
+    padding: '0 15px', // Kenarlarda padding ekledim
   },
   card: {
     backgroundColor: 'var(--bg-secondary)',
-    borderRadius: '20px',
+    borderRadius: '15px', // Biraz daha küçük radius
     overflow: 'hidden',
     transition: 'all 0.4s ease',
     cursor: 'pointer',
@@ -118,7 +126,7 @@ const styles = {
   },
   imageContainer: {
     width: '100%',
-    height: '22rem',
+    height: '200px', // Mobilde daha küçük resim alanı
     overflow: 'hidden',
     borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
     position: 'relative',
@@ -126,6 +134,9 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'var(--bg-secondary)',
+    '@media (min-width: 768px)': {
+      height: '250px', // Tablet ve üstünde daha büyük
+    },
   },
   projectImage: {
     width: '100%',
@@ -135,36 +146,53 @@ const styles = {
     transition: 'transform 0.5s ease',
   },
   cardContent: {
-    padding: '35px',
+    padding: '20px', // Mobilde daha az padding
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
     justifyContent: 'space-between',
+    '@media (min-width: 768px)': {
+      padding: '25px', // Tablet ve üstünde daha fazla padding
+    },
   },
   projectTitle: {
     color: 'var(--text-color)',
-    fontSize: '1.5rem',
-    marginBottom: '15px',
+    fontSize: '1.25rem', // Mobilde daha küçük başlık
+    marginBottom: '10px',
+    '@media (min-width: 768px)': {
+      fontSize: '1.5rem',
+    },
   },
   description: {
     color: 'var(--text-secondary)',
-    marginBottom: '20px',
-    lineHeight: '1.6',
-    fontSize: '1rem',
+    marginBottom: '15px',
+    lineHeight: '1.5',
+    fontSize: '0.9rem', // Mobilde daha küçük yazı
+    '@media (min-width: 768px)': {
+      fontSize: '1rem',
+      marginBottom: '20px',
+    },
   },
   tags: {
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '10px',
-    marginBottom: '25px',
+    gap: '8px', // Mobilde daha az boşluk
+    marginBottom: '20px',
+    '@media (min-width: 768px)': {
+      gap: '10px',
+    },
   },
   tag: {
     backgroundColor: 'rgba(241, 196, 15, 0.1)',
     color: 'var(--primary-color)',
-    padding: '5px 12px',
-    borderRadius: '15px',
-    fontSize: '0.85rem',
+    padding: '4px 10px', // Mobilde daha küçük padding
+    borderRadius: '12px',
+    fontSize: '0.8rem', // Mobilde daha küçük yazı
     fontWeight: '500',
+    '@media (min-width: 768px)': {
+      padding: '5px 12px',
+      fontSize: '0.85rem',
+    },
   },
   links: {
     display: 'flex',

@@ -29,7 +29,7 @@ const Contact = () => {
             </div>
             <div style={styles.contactText}>
               <h3 style={styles.contactTitle}>LinkedIn</h3>
-              <p style={styles.contactValue}>https://www.linkedin.com/MertBölükbaşı</p>
+              <p style={styles.contactValue}></p>
             </div>
           </a>
           
