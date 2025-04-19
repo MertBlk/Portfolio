@@ -8,11 +8,8 @@ const Hero = () => {
   Selam! Ben <span style={styles.name}>Mert Bölükbaşı</span>
 </h1>
 <p style={styles.subtitle}>Hayallerini koda döken bir geliştirici.</p>
-<p style={styles.subtitle}>Full Stack | Mobil Geliştirme</p>
-<div style={styles.cta}>
-  <a href="#projects" style={styles.button}>Neler Yaptım?</a>
-  <a href="#contact" style={styles.outlineButton}>Bana Ulaş</a>
-</div>
+<p style={styles.subtitle2}>Full Stack | Mobil Geliştirme</p>
+
       </div>
     </section>
   );
@@ -41,18 +38,17 @@ const styles = {
     lineHeight: 1.2,
   },
   name: {
-    background: 'linear-gradient(to left, #F1C40F, #E74C3C, #9B59B6, #3498DB, #2ECC71, #F39C12, #F1C40F)',
-    backgroundSize: '300% 100%',
-    animation: 'flowingGradient 10s linear infinite',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-    textFillColor: 'transparent',
+    color: 'var(--primary-color)',
     paddingBottom: '5px',
   },
   subtitle: {
     fontSize: 'clamp(1rem, 4vw, 1.5rem)',
     color: 'var(--text-secondary)',
+    marginBottom: '40px',
+  },
+  subtitle2: {
+    fontSize: 'clamp(1rem, 4vw, 1.5rem)',
+    color: 'var(--primary-color)', // Sarı renk
     marginBottom: '40px',
   },
   cta: {

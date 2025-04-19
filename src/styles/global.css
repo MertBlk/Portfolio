@@ -36,18 +36,21 @@ input, textarea {
     background-color: #732d91;
   }
 
-@keyframes colorChange {
-  0% { color: #F1C40F; }    /* Başlangıç rengi (sarı) */
-  33% { color: #3498DB; }   /* Mavi */
-  66% { color: #cc2e2e; }   /* Yeşil */
-  100% { color: #F1C40F; }  /* Tekrar başlangıç rengine dön */
+/* Blur efekti için gerekli destek */
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .blur-bg {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
 }
 
-@keyframes flowingGradient {
-  0% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+/* Safari için özel düzenleme */
+@media not all and (min-resolution:.001dpcm) { 
+  @supports (-webkit-appearance:none) {
+    .blur-bg {
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
   }
 }
+

@@ -11,7 +11,7 @@ const About = () => {
   return (
     <section id="hakkimda" style={styles.container}>
       <h2 style={styles.title}>Hakkımda</h2>
-      <div style={styles.content}>
+      <div className="blur-bg" style={styles.content}>
         <div style={styles.textContent}>
           <div style={styles.descriptionContainer}>
             <p style={styles.description}>
@@ -70,11 +70,18 @@ const styles = {
       flexDirection: 'column',
       position: 'relative',
       padding: '20px',
+      WebkitBackdropFilter: 'blur(10px)',
       backdropFilter: 'blur(10px)',
-      backgroundColor: 'rgba(15, 23, 42, 0.8)',
+      backgroundColor: 'rgba(15, 23, 42, 0.7)',
       borderRadius: '20px',
       border: '1px solid rgba(255, 255, 255, 0.1)',
       boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+      WebkitTransform: 'translate3d(0, 0, 0)',
+      transform: 'translate3d(0, 0, 0)',
+      WebkitPerspective: '1000',
+      perspective: '1000',
+      WebkitBackfaceVisibility: 'hidden',
+      backfaceVisibility: 'hidden'
     },
     '@media (min-width: 768px)': {
       flexDirection: 'row',
