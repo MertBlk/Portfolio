@@ -119,36 +119,39 @@ const ProjectDetail = () => {
 
   return (
     <div style={styles.container}>  
-      <Link to="/" style={styles.backButton}>← Ana Sayfaya Dön</Link>
-      <nav style={styles.navbar}>
-        <div style={styles.navContainer}>
-          <ul style={styles.navList}>
-            <li>
-              <a href="#anasayfa" onClick={(e) => handleNavigation(e, 'anasayfa')} style={styles.navLink}>
-                Ana Sayfa
-              </a>
-            </li>
-            <li>
-              <a href="#hakkimda" onClick={(e) => handleNavigation(e, 'hakkimda')} style={styles.navLink}>
-                Hakkımda
-              </a>
-            </li>
-            <li>
-              <a href="#projeler" onClick={(e) => handleNavigation(e, 'projeler')} style={styles.navLink}>
-                Projeler
-              </a>
-            </li>
-            <li>
-              <a href="#iletisim" onClick={(e) => handleNavigation(e, 'iletisim')} style={styles.navLink}>
-                İletişim
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-   
+      <div style={styles.navWrapper}>
+        <nav style={styles.navbar}>
+          <div style={styles.navContainer}>
+            <ul style={styles.navList}>
+              <li style={styles.navItem}>
+                <a href="#anasayfa" onClick={(e) => handleNavigation(e, 'anasayfa')} style={styles.navLink}>
+                  Ana Sayfa
+                </a>
+              </li>
+              <li style={styles.navItem}>
+                <a href="#hakkimda" onClick={(e) => handleNavigation(e, 'hakkimda')} style={styles.navLink}>
+                  Hakkımda
+                </a>
+              </li>
+              <li style={styles.navItem}>
+                <a href="#projeler" onClick={(e) => handleNavigation(e, 'projeler')} style={styles.navLink}>
+                  Projeler
+                </a>
+              </li>
+              <li style={styles.navItem}>
+                <a href="#iletisim" onClick={(e) => handleNavigation(e, 'iletisim')} style={styles.navLink}>
+                  İletişim
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
       
+      <div style={styles.headerSection}>
+        <Link to="/" style={styles.backButton}>← Ana Sayfaya Dön</Link>
+      </div>
+
       <div style={styles.contentWrapper}>
         <div style={styles.imageSection}>
           <div style={styles.imageContainer}>
@@ -227,57 +230,143 @@ const styles = {
   container: {
     maxWidth: '1400px',
     margin: '0 auto',
-    padding: '40px 15px',
-    '@media (max-width: 768px)': {
-      padding: '20px 15px',
+    padding: '20px 15px',
+    position: 'relative',
+    '@media (min-width: 768px)': {
+      padding: '40px 15px',
+    }
+  },
+  navWrapper: {
+    position: 'fixed',
+    top: '20px',
+    left: 0,
+    right: 0,
+    zIndex: 1000,
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '0 15px',
+  },
+  navbar: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  navContainer: {
+    backgroundColor: 'rgba(26, 26, 26, 0.8)',
+    backdropFilter: 'blur(10px)',
+    borderRadius: '25px',
+    padding: '8px 15px',
+    maxWidth: '800px',
+    width: '100%',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+    border: '1px solid rgba(255, 255, 255, 0.05)',
+    '@media (min-width: 768px)': {
+      padding: '10px 30px',
+      borderRadius: '50px',
+    }
+  },
+  navList: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: '10px',
+    listStyle: 'none',
+    margin: 0,
+    padding: '5px 0',
+    '@media (min-width: 768px)': {
+      gap: '25px',
+      flexWrap: 'nowrap',
+    }
+  },
+  navItem: {
+    fontSize: '0.9rem',
+    '@media (min-width: 768px)': {
+      fontSize: '0.95rem',
+    }
+  },
+  navLink: {
+    color: 'var(--text-color)',
+    textDecoration: 'none',
+    fontWeight: '500',
+    transition: 'all 0.3s ease',
+    padding: '5px 8px',
+    '@media (min-width: 768px)': {
+      padding: '5px 0',
+    },
+    ':hover': {
+      color: 'var(--primary-color)',
+    }
+  },
+  headerSection: {
+    marginTop: '80px',
+    marginBottom: '20px',
+    '@media (min-width: 768px)': {
+      marginTop: '100px',
+    }
+  },
+  backButton: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    color: 'var(--primary-color)',
+    textDecoration: 'none',
+    fontSize: '1rem',
+    transition: 'all 0.3s ease',
+    ':hover': {
+      transform: 'translateX(-5px)',
+    },
+    '@media (min-width: 768px)': {
+      fontSize: '1.1rem',
     }
   },
   contentWrapper: {
     display: 'grid',
-    gridTemplateColumns: '1.2fr 0.8fr',
-    gap: '40px',
-    marginTop: '80px',
-    '@media (max-width: 1024px)': {
-      gridTemplateColumns: '1fr',
+    gridTemplateColumns: '1fr',
+    gap: '30px',
+    marginTop: '40px',
+    '@media (min-width: 1024px)': {
+      gridTemplateColumns: '1.2fr 0.8fr',
+      gap: '40px',
       marginTop: '60px',
     }
   },
   imageSection: {
-    position: 'sticky',
-    top: '100px',
-    height: 'fit-content',
-    '@media (max-width: 1024px)': {
-      position: 'relative',
-      top: 0,
+    position: 'relative',
+    '@media (min-width: 1024px)': {
+      position: 'sticky',
+      top: '100px',
+      height: 'fit-content',
     }
   },
   imageContainer: {
     backgroundColor: 'var(--bg-secondary)',
-    borderRadius: '20px',
-    padding: '30px',
+    borderRadius: '15px',
+    padding: '15px',
     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)',
-    '@media (max-width: 768px)': {
-      padding: '15px',
+    '@media (min-width: 768px)': {
+      padding: '30px',
+      borderRadius: '20px',
     }
   },
   mainImageWrapper: {
     position: 'relative',
     width: '100%',
-    height: '600px',
+    height: '300px',
     backgroundColor: 'var(--bg-primary)',
-    borderRadius: '10px',
+    borderRadius: '8px',
     overflow: 'hidden',
-    '@media (max-width: 768px)': {
-      height: '300px',
+    '@media (min-width: 768px)': {
+      height: '600px',
+      borderRadius: '10px',
     }
   },
   mainImage: {
     width: '100%',
     height: '100%',
     objectFit: 'contain',
-    padding: '20px',
-    '@media (max-width: 768px)': {
-      padding: '10px',
+    padding: '10px',
+    '@media (min-width: 768px)': {
+      padding: '20px',
     }
   },
   navButton: {
@@ -286,134 +375,179 @@ const styles = {
     transform: 'translateY(-50%)',
     backgroundColor: 'var(--primary-color)',
     color: '#000',
-    width: '50px',
-    height: '50px',
+    width: '40px',
+    height: '40px',
     border: 'none',
     borderRadius: '50%',
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '24px',
+    fontSize: '20px',
     transition: 'all 0.3s ease',
     opacity: 0.8,
-    '@media (max-width: 768px)': {
-      width: '40px',
-      height: '40px',
-      fontSize: '20px',
+    '@media (min-width: 768px)': {
+      width: '50px',
+      height: '50px',
+      fontSize: '24px',
     },
-    '&:hover': {
+    ':hover': {
       opacity: 1,
       transform: 'translateY(-50%) scale(1.1)',
     }
   },
+  leftButton: {
+    left: '10px',
+    '@media (min-width: 768px)': {
+      left: '20px',
+    }
+  },
+  rightButton: {
+    right: '10px',
+    '@media (min-width: 768px)': {
+      right: '20px',
+    }
+  },
+  imageInfo: {
+    textAlign: 'center',
+    marginTop: '10px',
+    color: 'var(--text-secondary)',
+    fontSize: '0.9rem',
+    '@media (min-width: 768px)': {
+      marginTop: '15px',
+      fontSize: '1rem',
+    }
+  },
   thumbnails: {
     display: 'flex',
-    gap: '15px',
-    marginTop: '25px',
+    gap: '8px',
+    marginTop: '15px',
     overflowX: 'auto',
-    padding: '10px 0',
+    padding: '5px 0',
     justifyContent: 'center',
-    '@media (max-width: 768px)': {
-      gap: '10px',
-      marginTop: '15px',
+    '@media (min-width: 768px)': {
+      gap: '15px',
+      marginTop: '25px',
+      padding: '10px 0',
     }
   },
   thumbnailContainer: {
-    width: '80px',
-    height: '80px',
-    borderRadius: '8px',
+    width: '60px',
+    height: '60px',
+    borderRadius: '6px',
     overflow: 'hidden',
     cursor: 'pointer',
     opacity: 0.6,
     transition: 'all 0.3s ease',
     backgroundColor: 'var(--bg-primary)',
-    padding: '5px',
-    '@media (max-width: 768px)': {
-      width: '60px',
-      height: '60px',
+    padding: '3px',
+    '@media (min-width: 768px)': {
+      width: '80px',
+      height: '80px',
+      borderRadius: '8px',
+      padding: '5px',
     },
-    '&:hover': {
+    ':hover': {
       opacity: 0.8,
       transform: 'scale(1.05)',
     }
   },
+  activeThumbnail: {
+    opacity: 1,
+    border: '2px solid var(--primary-color)',
+  },
+  thumbnail: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: '4px',
+    '@media (min-width: 768px)': {
+      borderRadius: '6px',
+    }
+  },
+  infoSection: {
+    padding: '0',
+    '@media (min-width: 768px)': {
+      padding: '0 20px',
+    }
+  },
   title: {
-    fontSize: '2.5rem',
+    fontSize: '1.8rem',
     color: 'var(--text-color)',
-    marginBottom: '20px',
-    '@media (max-width: 768px)': {
-      fontSize: '1.8rem',
-      marginBottom: '15px',
+    marginBottom: '15px',
+    '@media (min-width: 768px)': {
+      fontSize: '2.5rem',
+      marginBottom: '20px',
     }
   },
   description: {
-    fontSize: '1.2rem',
+    fontSize: '1rem',
     color: 'var(--text-secondary)',
     lineHeight: '1.6',
-    marginBottom: '40px',
-    '@media (max-width: 768px)': {
-      fontSize: '1rem',
-      marginBottom: '30px',
+    marginBottom: '30px',
+    '@media (min-width: 768px)': {
+      fontSize: '1.2rem',
+      marginBottom: '40px',
     }
   },
   section: {
-    marginBottom: '40px',
-    '@media (max-width: 768px)': {
-      marginBottom: '30px',
+    marginBottom: '30px',
+    '@media (min-width: 768px)': {
+      marginBottom: '40px',
     }
   },
   sectionTitle: {
-    fontSize: '1.8rem',
+    fontSize: '1.4rem',
     color: 'var(--text-color)',
-    marginBottom: '20px',
-    '@media (max-width: 768px)': {
-      fontSize: '1.4rem',
-      marginBottom: '15px',
+    marginBottom: '15px',
+    '@media (min-width: 768px)': {
+      fontSize: '1.8rem',
+      marginBottom: '20px',
     }
   },
   tags: {
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '10px',
+    gap: '8px',
     justifyContent: 'center',
-    '@media (max-width: 768px)': {
-      gap: '8px',
+    '@media (min-width: 768px)': {
+      gap: '10px',
     }
   },
   tag: {
     backgroundColor: 'rgba(241, 196, 15, 0.1)',
     color: 'var(--primary-color)',
-    padding: '8px 16px',
-    borderRadius: '20px',
-    fontSize: '1rem',
+    padding: '6px 12px',
+    borderRadius: '15px',
+    fontSize: '0.9rem',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    '@media (max-width: 768px)': {
-      padding: '6px 12px',
-      fontSize: '0.9rem',
+    '@media (min-width: 768px)': {
+      padding: '8px 16px',
+      fontSize: '1rem',
+      borderRadius: '20px',
     }
   },
   featureList: {
     listStyle: 'none',
-    padding: '0 20px',
-    '@media (max-width: 768px)': {
-      padding: '0 15px',
+    padding: '0 15px',
+    '@media (min-width: 768px)': {
+      padding: '0 20px',
     }
   },
   feature: {
-    fontSize: '1.1rem',
+    fontSize: '0.95rem',
     color: 'var(--text-secondary)',
-    marginBottom: '10px',
+    marginBottom: '8px',
     position: 'relative',
-    paddingLeft: '20px',
-    '@media (max-width: 768px)': {
-      fontSize: '0.95rem',
-      marginBottom: '8px',
-      paddingLeft: '15px',
+    paddingLeft: '15px',
+    '@media (min-width: 768px)': {
+      fontSize: '1.1rem',
+      marginBottom: '10px',
+      paddingLeft: '20px',
     },
-    '&::before': {
+    ':before': {
       content: '"•"',
       position: 'absolute',
       left: 0,
@@ -424,73 +558,20 @@ const styles = {
     display: 'inline-block',
     backgroundColor: 'var(--primary-color)',
     color: '#000000',
-    padding: '12px 24px',
-    borderRadius: '8px',
+    padding: '10px 20px',
+    borderRadius: '6px',
     textDecoration: 'none',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     fontWeight: '600',
     transition: 'transform 0.2s ease',
-    '@media (max-width: 768px)': {
-      padding: '10px 20px',
-      fontSize: '1rem',
+    '@media (min-width: 768px)': {
+      padding: '12px 24px',
+      fontSize: '1.1rem',
+      borderRadius: '8px',
     },
-    '&:hover': {
+    ':hover': {
       transform: 'translateY(-2px)',
     }
-  },
-  backButton: {
-    display: 'inline-block',
-    color: 'var(--primary-color)',
-    textDecoration: 'none',
-    fontSize: '1.1rem',
-    marginBottom: '20px',
-    '@media (max-width: 768px)': {
-      fontSize: '1rem',
-      marginBottom: '15px',
-    }
-  },
-  infoSection: {
-    // ...existing code...
-  },
-  navbar: {
-    position: 'fixed',
-    top: '20px',
-    left: 0,
-    right: 0,
-    zIndex: 1000,
-    display: 'flex',
-    justifyContent: 'center',
-    padding: '0 20px',
-  },
-  navContainer: {
-    backgroundColor: 'rgba(26, 26, 26, 0.8)',
-    backdropFilter: 'blur(10px)',
-    borderRadius: '50px',
-    padding: '10px 30px',
-    maxWidth: '800px',
-    width: '90%',
-    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
-    border: '1px solid rgba(255, 255, 255, 0.05)',
-  },
-  navList: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '25px',
-    listStyle: 'none',
-    margin: 0,
-    padding: 0,
-  },
-  navLink: {
-    color: 'var(--text-color)',
-    textDecoration: 'none',
-    fontSize: '0.95rem',
-    fontWeight: '500',
-    transition: 'all 0.3s ease',
-    padding: '5px 0',
-    '&:hover': {
-      color: 'var(--primary-color)',
-    },
   },
 };
 

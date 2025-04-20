@@ -24,21 +24,23 @@ function App() {
   }, [location]);
 
   return (
-    <div className="App">
+    <>
       <StarBackground />
-      <Routes>
-        <Route path="/" element={
-          <>
-            <Navbar />
-            <Hero />
-            <About />
-            <Projects />
-            <Contact />
-          </>
-        } />
-        <Route path="project/:id" element={<ProjectDetail />} />
-      </Routes>
-    </div>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Navbar />
+              <Hero />
+              <About />
+              <Projects />
+              <Contact />
+            </>
+          } />
+          <Route path="project/:id" element={<ProjectDetail />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 
