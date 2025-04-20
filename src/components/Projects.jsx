@@ -122,7 +122,7 @@ const styles = {
   cardHovered: {
     transform: 'translateY(-10px)',
     boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-    borderColor: 'var(--primary-color)',
+    
   },
   imageContainer: {
     width: '100%',

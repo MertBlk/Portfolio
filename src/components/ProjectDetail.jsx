@@ -227,27 +227,38 @@ const styles = {
   container: {
     maxWidth: '1400px',
     margin: '0 auto',
-    padding: '40px 20px',
+    padding: '40px 15px',
+    '@media (max-width: 768px)': {
+      padding: '20px 15px',
+    }
   },
   contentWrapper: {
     display: 'grid',
     gridTemplateColumns: '1.2fr 0.8fr',
     gap: '40px',
-    marginTop: '30px',
+    marginTop: '80px',
     '@media (max-width: 1024px)': {
       gridTemplateColumns: '1fr',
-    },
+      marginTop: '60px',
+    }
   },
   imageSection: {
     position: 'sticky',
     top: '100px',
     height: 'fit-content',
+    '@media (max-width: 1024px)': {
+      position: 'relative',
+      top: 0,
+    }
   },
   imageContainer: {
     backgroundColor: 'var(--bg-secondary)',
     borderRadius: '20px',
     padding: '30px',
     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)',
+    '@media (max-width: 768px)': {
+      padding: '15px',
+    }
   },
   mainImageWrapper: {
     position: 'relative',
@@ -256,17 +267,18 @@ const styles = {
     backgroundColor: 'var(--bg-primary)',
     borderRadius: '10px',
     overflow: 'hidden',
+    '@media (max-width: 768px)': {
+      height: '300px',
+    }
   },
   mainImage: {
     width: '100%',
     height: '100%',
     objectFit: 'contain',
     padding: '20px',
-  },
-  imageInfo: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: '15px',
+    '@media (max-width: 768px)': {
+      padding: '10px',
+    }
   },
   navButton: {
     position: 'absolute',
@@ -285,21 +297,15 @@ const styles = {
     fontSize: '24px',
     transition: 'all 0.3s ease',
     opacity: 0.8,
+    '@media (max-width: 768px)': {
+      width: '40px',
+      height: '40px',
+      fontSize: '20px',
+    },
     '&:hover': {
       opacity: 1,
       transform: 'translateY(-50%) scale(1.1)',
-    },
-  },
-  leftButton: {
-    left: '20px',
-  },
-  rightButton: {
-    right: '20px',
-  },
-  imageCounter: {
-    color: 'var(--text-secondary)',
-    fontSize: '1.1rem',
-    fontWeight: '500',
+    }
   },
   thumbnails: {
     display: 'flex',
@@ -308,6 +314,10 @@ const styles = {
     overflowX: 'auto',
     padding: '10px 0',
     justifyContent: 'center',
+    '@media (max-width: 768px)': {
+      gap: '10px',
+      marginTop: '15px',
+    }
   },
   thumbnailContainer: {
     width: '80px',
@@ -319,56 +329,57 @@ const styles = {
     transition: 'all 0.3s ease',
     backgroundColor: 'var(--bg-primary)',
     padding: '5px',
+    '@media (max-width: 768px)': {
+      width: '60px',
+      height: '60px',
+    },
     '&:hover': {
       opacity: 0.8,
       transform: 'scale(1.05)',
-    },
-  },
-  thumbnail: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'contain',
-  },
-  activeThumbnail: {
-    opacity: 1,
-    border: '2px solid var(--primary-color)',
-    transform: 'scale(1.05)',
-  },
-  infoSection: {
-    // ...existing code...
-  },
-  backButton: {
-    display: 'inline-block',
-    marginBottom: '30px',
-    color: 'var(--primary-color)',
-    textDecoration: 'none',
-    fontSize: '1.1rem',
+    }
   },
   title: {
     fontSize: '2.5rem',
     color: 'var(--text-color)',
     marginBottom: '20px',
+    '@media (max-width: 768px)': {
+      fontSize: '1.8rem',
+      marginBottom: '15px',
+    }
   },
   description: {
     fontSize: '1.2rem',
     color: 'var(--text-secondary)',
     lineHeight: '1.6',
     marginBottom: '40px',
+    '@media (max-width: 768px)': {
+      fontSize: '1rem',
+      marginBottom: '30px',
+    }
   },
   section: {
     marginBottom: '40px',
+    '@media (max-width: 768px)': {
+      marginBottom: '30px',
+    }
   },
   sectionTitle: {
     fontSize: '1.8rem',
     color: 'var(--text-color)',
     marginBottom: '20px',
+    '@media (max-width: 768px)': {
+      fontSize: '1.4rem',
+      marginBottom: '15px',
+    }
   },
   tags: {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '10px',
-    justifyContent: 'center', // Merkeze hizalama ekledim
-    alignItems: 'center', // Dikey hizalama da ekledim
+    justifyContent: 'center',
+    '@media (max-width: 768px)': {
+      gap: '8px',
+    }
   },
   tag: {
     backgroundColor: 'rgba(241, 196, 15, 0.1)',
@@ -376,40 +387,38 @@ const styles = {
     padding: '8px 16px',
     borderRadius: '20px',
     fontSize: '1rem',
-    display: 'inline-flex', // Eklendi
-    alignItems: 'center', // Eklendi
-    justifyContent: 'center', // Eklendi
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    '@media (max-width: 768px)': {
+      padding: '6px 12px',
+      fontSize: '0.9rem',
+    }
   },
   featureList: {
     listStyle: 'none',
-    padding: 0,
+    padding: '0 20px',
+    '@media (max-width: 768px)': {
+      padding: '0 15px',
+    }
   },
   feature: {
     fontSize: '1.1rem',
     color: 'var(--text-secondary)',
     marginBottom: '10px',
-    paddingLeft: '20px',
     position: 'relative',
+    paddingLeft: '20px',
+    '@media (max-width: 768px)': {
+      fontSize: '0.95rem',
+      marginBottom: '8px',
+      paddingLeft: '15px',
+    },
     '&::before': {
       content: '"•"',
       position: 'absolute',
       left: 0,
       color: 'var(--primary-color)',
-    },
-  },
-  technologies: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '10px',
-    marginBottom: '25px',
-  },
-  technology: {
-    backgroundColor: 'rgba(241, 196, 15, 0.1)',
-   
-    color: 'var(--primary-color)',
-    padding: '8px 16px',
-    borderRadius: '20px',
-    fontSize: '1rem',
+    }
   },
   githubButton: {
     display: 'inline-block',
@@ -421,9 +430,27 @@ const styles = {
     fontSize: '1.1rem',
     fontWeight: '600',
     transition: 'transform 0.2s ease',
+    '@media (max-width: 768px)': {
+      padding: '10px 20px',
+      fontSize: '1rem',
+    },
     '&:hover': {
       transform: 'translateY(-2px)',
-    },
+    }
+  },
+  backButton: {
+    display: 'inline-block',
+    color: 'var(--primary-color)',
+    textDecoration: 'none',
+    fontSize: '1.1rem',
+    marginBottom: '20px',
+    '@media (max-width: 768px)': {
+      fontSize: '1rem',
+      marginBottom: '15px',
+    }
+  },
+  infoSection: {
+    // ...existing code...
   },
   navbar: {
     position: 'fixed',

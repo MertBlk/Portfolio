@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 const MenuItem = ({ item, path, setMenuOpen }) => {
   const [isHovered, setIsHovered] = useState(false);
   const location = useLocation();
-  const isActive = location.hash === path || (location.pathname === '/' && path === '#anasayfa');
   
   const handleClick = (e) => {
     setMenuOpen(false);
@@ -23,8 +22,7 @@ const MenuItem = ({ item, path, setMenuOpen }) => {
         href={path}
         style={{
           ...styles.menuLink,
-          color: isActive || isHovered ? 'var(--primary-color)' : 'var(--text-color)',
-          borderBottom: isActive ? '2px solid var(--primary-color)' : 'none'
+          color: isHovered ? 'var(--primary-color)' : 'var(--text-color)',
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -115,7 +113,7 @@ const styles = {
     justifyContent: 'center', // Değişiklik: space-between yerine center
     alignItems: 'center',
     backgroundColor: 'rgba(26, 26, 26, 0.8)',
-    backdropFilter: 'blur(10px)',
+    backdropFilter: 'blur(7px)',
     borderRadius: '50px',
     padding: '10px 30px',
     maxWidth: '800px',
@@ -140,7 +138,7 @@ const styles = {
       position: 'absolute',
       flexDirection: 'column',
       backgroundColor: 'rgba(26, 26, 26, 0.95)',
-      backdropFilter: 'blur(10px)',
+      backdropFilter: 'blur(7px)',
       top: 'calc(100% + 10px)',
       right: 'auto', // Değişiklik: right: 0 yerine auto
       left: '50%', // Ekleme: mobilde ortada olması için
