@@ -4,6 +4,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 const ProjectDetail = () => {
   const { id } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleNavigation = (e, sectionId) => {
@@ -117,6 +118,14 @@ const ProjectDetail = () => {
     );
   };
 
+  const handleImageClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div style={styles.container}>  
       <div style={styles.navWrapper}>
@@ -147,11 +156,8 @@ const ProjectDetail = () => {
           </div>
         </nav>
       </div>
-      
-      <div style={styles.headerSection}>
-        <Link to="/" style={styles.backButton}>← Ana Sayfaya Dön</Link>
-      </div>
 
+      
       <div style={styles.contentWrapper}>
         <div style={styles.imageSection}>
           <div style={styles.imageContainer}>
@@ -160,6 +166,7 @@ const ProjectDetail = () => {
                 src={project.images[currentImageIndex]} 
                 alt={`${project.title} ${currentImageIndex + 1}`} 
                 style={styles.mainImage}
+                onClick={handleImageClick}
               />
               <button onClick={prevImage} style={{...styles.navButton, ...styles.leftButton}}>←</button>
               <button onClick={nextImage} style={{...styles.navButton, ...styles.rightButton}}>→</button>
@@ -222,6 +229,42 @@ const ProjectDetail = () => {
           </a>
         </div>
       </div>
+
+      {isModalOpen && (
+        <div style={styles.modal} onClick={closeModal}>
+          <div style={styles.modalContent}>
+            <img 
+              src={project.images[currentImageIndex]} 
+              alt={`${project.title} ${currentImageIndex + 1}`} 
+              style={styles.modalImage}
+            />
+            <button 
+              style={styles.closeButton}
+              onClick={closeModal}
+            >
+              ×
+            </button>
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                prevImage();
+              }} 
+              style={{...styles.modalNavButton, ...styles.modalLeftButton}}
+            >
+              ←
+            </button>
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                nextImage();
+              }} 
+              style={{...styles.modalNavButton, ...styles.modalRightButton}}
+            >
+              →
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -298,19 +341,14 @@ const styles = {
       color: 'var(--primary-color)',
     }
   },
-  headerSection: {
-    marginTop: '80px',
-    marginBottom: '20px',
-    '@media (min-width: 768px)': {
-      marginTop: '100px',
-    }
-  },
+ 
   backButton: {
     display: 'inline-flex',
     alignItems: 'center',
     color: 'var(--primary-color)',
     textDecoration: 'none',
     fontSize: '1rem',
+    fontWeight: '500',
     transition: 'all 0.3s ease',
     ':hover': {
       transform: 'translateX(-5px)',
@@ -332,6 +370,7 @@ const styles = {
   },
   imageSection: {
     position: 'relative',
+    width: '100%',
     '@media (min-width: 1024px)': {
       position: 'sticky',
       top: '100px',
@@ -344,20 +383,19 @@ const styles = {
     padding: '15px',
     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)',
     '@media (min-width: 768px)': {
-      padding: '30px',
+      padding: '20px',
       borderRadius: '20px',
     }
   },
   mainImageWrapper: {
     position: 'relative',
     width: '100%',
-    height: '300px',
+    height: '300px',  // Mobilde daha büyük
     backgroundColor: 'var(--bg-primary)',
     borderRadius: '8px',
     overflow: 'hidden',
     '@media (min-width: 768px)': {
-      height: '600px',
-      borderRadius: '10px',
+      height: '500px',  // Tablet ve masaüstünde daha büyük
     }
   },
   mainImage: {
@@ -365,8 +403,13 @@ const styles = {
     height: '100%',
     objectFit: 'contain',
     padding: '10px',
+    cursor: 'pointer',
+    transition: 'transform 0.3s ease',
+    ':hover': {
+      transform: 'scale(1.02)',
+    },
     '@media (min-width: 768px)': {
-      padding: '20px',
+      padding: '15px',
     }
   },
   navButton: {
@@ -572,6 +615,89 @@ const styles = {
     ':hover': {
       transform: 'translateY(-2px)',
     }
+  },
+  modal: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1100,
+    cursor: 'zoom-out',
+  },
+  modalContent: {
+    position: 'relative',
+    maxWidth: '90vw',
+    maxHeight: '90vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalImage: {
+    maxWidth: '100%',
+    maxHeight: '90vh',
+    objectFit: 'contain',
+    cursor: 'default',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: '-40px',
+    right: '-40px',
+    width: '40px',
+    height: '40px',
+    backgroundColor: 'transparent',
+    border: 'none',
+    color: 'white',
+    fontSize: '36px',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'transform 0.2s ease',
+    ':hover': {
+      transform: 'scale(1.1)',
+    },
+    '@media (max-width: 768px)': {
+      top: '-50px',
+      right: '0',
+    },
+  },
+  modalNavButton: {
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    color: 'white',
+    width: '50px',
+    height: '50px',
+    border: 'none',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    fontSize: '24px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'all 0.3s ease',
+    ':hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      transform: 'translateY(-50%) scale(1.1)',
+    },
+  },
+  modalLeftButton: {
+    left: '-70px',
+    '@media (max-width: 768px)': {
+      left: '10px',
+    },
+  },
+  modalRightButton: {
+    right: '-70px',
+    '@media (max-width: 768px)': {
+      right: '10px',
+    },
   },
 };
 
