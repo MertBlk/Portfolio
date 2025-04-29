@@ -56,13 +56,13 @@ const styles = {
     textAlign: 'left', // Sola hizala
   },
   content: {
-    maxWidth: '1000px',
-    margin: '0 auto',
+    width: '100%', // Tam genişlik
+    // maxWidth ve margin kaldırıldı
     display: 'flex',
     gap: '50px',
     alignItems: 'center',
     flexDirection: 'column',
-    textAlign: 'left', // Sola hizala
+    textAlign: 'left',
     '@media (max-width: 768px)': {
       flexDirection: 'column',
       position: 'relative',
@@ -92,8 +92,8 @@ const styles = {
     }
   },
   descriptionContainer: {
-    maxWidth: '800px',
-    margin: 0, // Ortalamayı kaldır
+    width: '100%', // Tam genişlik
+    // maxWidth ve margin kaldırıldı
     textAlign: 'left',
     hyphens: 'auto',
     WebkitHyphens: 'auto',
@@ -108,8 +108,8 @@ const styles = {
     lineHeight: '1.8',
     color: 'var(--text-color)',
     marginBottom: '20px',
-    padding: '0 20px',
-    textAlign: 'left', // Sola hizala
+    textAlign: 'left',
+    padding: '0 0 0 0', // padding kaldırıldı
     '@media (max-width: 768px)': {
       fontSize: '1.1rem',
       lineHeight: '1.6',

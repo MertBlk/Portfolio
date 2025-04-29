@@ -66,9 +66,8 @@ const styles = {
     textAlign: 'left', // Sola hizala
   },
   content: {
-    maxWidth: '900px',
-    margin: '0 auto',
-    textAlign: 'left', // Sola hizala
+    width: '100%', // Tam genişlik
+    textAlign: 'left',
   },
   title: {
     color: 'var(--primary-color)',
@@ -80,9 +79,9 @@ const styles = {
     fontSize: '1.2rem',
     lineHeight: '1.8',
     color: 'var(--text-color)',
-    textAlign: 'left', // Sola hizala
     marginBottom: '40px',
-    maxWidth: '700px',
+    textAlign: 'left',
+    padding: '0 0 0 0', // padding kaldırıldı
   },
   contactInfo: {
     display: 'flex',
