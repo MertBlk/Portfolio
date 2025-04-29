@@ -1,13 +1,15 @@
 import React from 'react';
+import { useLanguage } from '../Context/LanguageContext';
 
 const Contact = () => {
+  const { language, translations } = useLanguage();
+  
   return (
     <section id="iletisim" style={styles.container}>
-      <h2 style={styles.title}>İletişim</h2>
+      <h2 style={styles.title}>{translations[language].contact.title}</h2>
       <div style={styles.content}>
         <p style={styles.description}>
-          Projeleriniz için benimle iletişime geçebilir veya sorularınızı sorabilirsiniz. 
-          Aşağıdaki kanallardan bana ulaşabilirsiniz.
+          {translations[language].contact.description}
         </p>
         
         <div style={styles.contactInfo}>
@@ -17,7 +19,7 @@ const Contact = () => {
               <span style={styles.icon}>📧</span>
             </div>
             <div style={styles.contactText}>
-              <h3 style={styles.contactTitle}>E-posta</h3>
+              <h3 style={styles.contactTitle}>{translations[language].contact.email}</h3>
               <p style={styles.contactValue}>mert54bolukbasi@gmail.com</p>
             </div>
           </a>
@@ -40,16 +42,16 @@ const Contact = () => {
             </div>
             <div style={styles.contactText}>
               <h3 style={styles.contactTitle}>GitHub</h3>
-              <p style={styles.contactValue}>https://github.com/MertBlk</p>
+              <p style={styles.contactValue}>github.com/MertBlk</p>
             </div>
           </a>
         </div>
-        
-        
       </div>
       
       <footer style={styles.footer}>
-        <p style={styles.copyright}>© {new Date().getFullYear()} Tüm Hakları Saklıdır.</p>
+        <p style={styles.copyright}>
+          © {new Date().getFullYear()} {translations[language].contact.copyright}
+        </p>
       </footer>
     </section>
   );
@@ -61,14 +63,16 @@ const styles = {
     backgroundColor: 'transparent',
     position: 'relative',
     zIndex: 1,
+    textAlign: 'left', // Sola hizala
   },
   content: {
     maxWidth: '900px',
     margin: '0 auto',
+    textAlign: 'left', // Sola hizala
   },
   title: {
     color: 'var(--primary-color)',
-    textAlign: 'center',
+    textAlign: 'left', // Sola hizala
     marginBottom: '50px',
     fontSize: 'var(--heading-medium, 2.5rem)',
   },
@@ -76,15 +80,14 @@ const styles = {
     fontSize: '1.2rem',
     lineHeight: '1.8',
     color: 'var(--text-color)',
-    textAlign: 'center',
+    textAlign: 'left', // Sola hizala
     marginBottom: '40px',
     maxWidth: '700px',
-    margin: '0 auto 50px',
   },
   contactInfo: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Sola hizala
     gap: '30px',
     marginBottom: '60px',
   },
@@ -121,16 +124,19 @@ const styles = {
   },
   contactText: {
     flex: 1,
+    textAlign: 'left', // Sola hizala
   },
   contactTitle: {
     margin: '0 0 5px 0',
     color: 'var(--text-color)',
     fontSize: '1.1rem',
+    textAlign: 'left', // Sola hizala
   },
   contactValue: {
     margin: 0,
     color: 'var(--text-secondary)',
     fontSize: '0.9rem',
+    textAlign: 'left', // Sola hizala
   },
   formContainer: {
     backgroundColor: 'var(--bg-secondary)',
@@ -201,13 +207,14 @@ const styles = {
   },
   footer: {
     marginTop: '80px',
-    textAlign: 'center',
+    textAlign: 'left', // Sola hizala
     padding: '20px 0',
     
   },
   copyright: {
     color: 'var(--text-secondary)',
     fontSize: '0.9rem',
+    textAlign: 'left', // Sola hizala
   }
 };
 

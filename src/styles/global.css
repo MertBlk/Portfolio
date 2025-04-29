@@ -54,3 +54,35 @@ input, textarea {
   }
 }
 
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+    padding: 10px;
+  }
+  #root {
+    margin: 0 auto;
+    width: 100%;
+  }
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .project-card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+

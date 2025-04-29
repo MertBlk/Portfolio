@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useLanguage } from '../Context/LanguageContext';
 
 const MenuItem = ({ item, path, setMenuOpen }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -37,6 +38,7 @@ const MenuItem = ({ item, path, setMenuOpen }) => {
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { language, translations, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,10 +51,10 @@ const Navbar = () => {
   }, []);
 
   const menuItems = [
-    { name: 'Ana Sayfa', path: '#anasayfa' },
-    { name: 'Hakkımda', path: '#hakkimda' },
-    { name: 'Projeler', path: '#projeler' },
-    { name: 'İletişim', path: '#iletisim' }
+    { name: translations[language].nav.home, path: '#anasayfa' },
+    { name: translations[language].nav.about, path: '#hakkimda' },
+    { name: translations[language].nav.projects, path: '#projeler' },
+    { name: translations[language].nav.contact, path: '#iletisim' }
   ];
 
   return (
@@ -85,6 +87,26 @@ const Navbar = () => {
               setMenuOpen={setMenuOpen} 
             />
           ))}
+          <li style={styles.menuItem}>
+            <button
+              onClick={toggleLanguage}
+              style={{
+                ...styles.langButton,
+                color: 'var(--text-color)',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '0.95rem',
+                fontWeight: '500',
+                padding: '5px 10px',
+                transition: 'color 0.3s ease',
+              }}
+              onMouseEnter={(e) => e.target.style.color = 'var(--primary-color)'}
+              onMouseLeave={(e) => e.target.style.color = 'var(--text-color)'}
+            >
+              {language === 'tr' ? 'EN' : 'TR'}
+            </button>
+          </li>
         </ul>
       </div>
     </nav>
@@ -228,6 +250,11 @@ const styles = {
       transform: 'translateX(-50%) translateY(0)', // Değişiklik: translateX(-50%) ekledik
     }
   },
+  langButton: {
+    ':hover': {
+      color: 'var(--primary-color)',
+    }
+  }
 };
 
 export default Navbar;

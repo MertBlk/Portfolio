@@ -1,44 +1,53 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-const projects = [
-  {
-    id: "esya-hatirlatici",
-    title: "Eşya Hatırlatıcı App",
-    description: "React Native ile yapılmış eşya hatırlatıcı uygulaması.",
-    image: "/Portfolio/images/esyaHatirla.png",
-    tags: ["React Native", "İos"]
-  },
-  {
-    id: "e-ticaret",
-    title: "E-ticaret Tasarımı",
-    description: "Responsive e-ticaret ön yüz tasarımı. Ürün listeleme, sepet işlemleri ve kullanıcı hesap yönetimi.",
-    image: "/Portfolio/images/ruvido.jpeg",
-    tags: ["HTML", "CSS", "JavaScript","React", "UI/UX", "Node.js","Firebase"]
-  },
-  {
-    id: "arac-satis",
-    title: "Araç Satış Sitesi",
-    description: "Araç satış sitesi tasarımı. Kullanıcı arayüzü ve deneyimi odaklı.",
-    image: "/Portfolio/images/aracSatis.png",
-    tags: ["HTML", "CSS", "JavaScript", "UI/UX","Node.js"]
-  },
- 
-  {
-    id: "otel-tanitim",
-    title:"Otel Tanıtım Sitesi",
-    description: "Otel tanıtım sitesi tasarımı. Kullanıcı arayüzü ve deneyimi odaklı.",
-    image: "/Portfolio/images/otel.jpeg",
-    tags: ["HTML", "CSS", "JavaScript","Bootstrap5", "UI/UX"]
-  }
-];
+import { useLanguage } from '../Context/LanguageContext';
 
 const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const { language, translations } = useLanguage();
   
+  const projects = [
+    {
+      id: "esya-hatirlatici",
+      titleTR: "Eşya Hatırlatıcı App",
+      titleEN: "Item Reminder App",
+      descriptionTR: "React Native ile yapılmış eşya hatırlatıcı uygulaması.",
+      descriptionEN: "Item reminder application built with React Native.",
+      image: "/Portfolio/images/esyaHatirla.png",
+      tags: ["React Native", "iOS"]
+    },
+    {
+      id: "e-ticaret",
+      titleTR: "E-ticaret Tasarımı",
+      titleEN: "E-commerce Design",
+      descriptionTR: "Responsive e-ticaret ön yüz tasarımı. Ürün listeleme, sepet işlemleri ve kullanıcı hesap yönetimi.",
+      descriptionEN: "Responsive e-commerce frontend design. Product listing, cart operations and user account management.",
+      image: "/Portfolio/images/ruvido.jpeg",
+      tags: ["HTML", "CSS", "JavaScript", "React", "UI/UX", "Node.js", "Firebase"]
+    },
+    {
+      id: "arac-satis",
+      titleTR: "Araç Satış Sitesi",
+      titleEN: "Vehicle Sales Website",
+      descriptionTR: "Araç satış sitesi tasarımı. Kullanıcı arayüzü ve deneyimi odaklı.",
+      descriptionEN: "Vehicle sales website design. Focused on user interface and experience.",
+      image: "/Portfolio/images/aracSatis.png",
+      tags: ["HTML", "CSS", "JavaScript", "UI/UX", "Node.js"]
+    },
+    {
+      id: "otel-tanitim",
+      titleTR: "Otel Tanıtım Sitesi",
+      titleEN: "Hotel Promotion Website",
+      descriptionTR: "Otel tanıtım sitesi tasarımı. Kullanıcı arayüzü ve deneyimi odaklı.",
+      descriptionEN: "Hotel promotion website design. Focused on user interface and experience.",
+      image: "/Portfolio/images/otel.jpeg",
+      tags: ["HTML", "CSS", "JavaScript", "Bootstrap5", "UI/UX"]
+    }
+  ];
+
   return (
     <section id="projeler" style={styles.container}>
-      <h2 style={styles.title}>Projelerim</h2>
+      <h2 style={styles.title}>{translations[language].projects.title}</h2>
       <div style={styles.grid}>
         {projects.map((project, index) => (
           <Link 
@@ -57,14 +66,18 @@ const Projects = () => {
               <div style={styles.imageContainer}>
                 <img 
                   src={project.image} 
-                  alt={project.title} 
+                  alt={language === 'tr' ? project.titleTR : project.titleEN} 
                   style={styles.projectImage} 
                 />
               </div>
               
               <div style={styles.cardContent}>
-                <h3 style={styles.projectTitle}>{project.title}</h3>
-                <p style={styles.description}>{project.description}</p>
+                <h3 style={styles.projectTitle}>
+                  {language === 'tr' ? project.titleTR : project.titleEN}
+                </h3>
+                <p style={styles.description}>
+                  {language === 'tr' ? project.descriptionTR : project.descriptionEN}
+                </p>
                 
                 <div style={styles.tags}>
                   {project.tags.map((tag, i) => (
@@ -91,9 +104,9 @@ const styles = {
   },
   title: {
     color: 'var(--primary-color)',
-    textAlign: 'center',
-    marginBottom: '30px', // Mobilde daha az margin
-    fontSize: '2rem', // Mobilde daha küçük başlık
+    textAlign: 'left', // Sola hizala
+    marginBottom: '30px',
+    fontSize: '2rem',
     '@media (min-width: 768px)': {
       marginBottom: '50px',
       fontSize: 'var(--heading-medium, 2.5rem)',
@@ -118,6 +131,7 @@ const styles = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
+    textAlign: 'left', // Sola hizala
   },
   cardHovered: {
     transform: 'translateY(-10px)',
@@ -151,14 +165,16 @@ const styles = {
     flexDirection: 'column',
     flex: 1,
     justifyContent: 'space-between',
+    textAlign: 'left', // Sola hizala
     '@media (min-width: 768px)': {
       padding: '25px', // Tablet ve üstünde daha fazla padding
     },
   },
   projectTitle: {
     color: 'var(--text-color)',
-    fontSize: '1.25rem', // Mobilde daha küçük başlık
+    fontSize: '1.25rem',
     marginBottom: '10px',
+    textAlign: 'left', // Sola hizala
     '@media (min-width: 768px)': {
       fontSize: '1.5rem',
     },
@@ -167,7 +183,8 @@ const styles = {
     color: 'var(--text-secondary)',
     marginBottom: '15px',
     lineHeight: '1.5',
-    fontSize: '0.9rem', // Mobilde daha küçük yazı
+    fontSize: '0.9rem',
+    textAlign: 'left', // Sola hizala
     '@media (min-width: 768px)': {
       fontSize: '1rem',
       marginBottom: '20px',
@@ -178,6 +195,7 @@ const styles = {
     flexWrap: 'wrap',
     gap: '8px', // Mobilde daha az boşluk
     marginBottom: '20px',
+    justifyContent: 'flex-start', // Sola hizala
     '@media (min-width: 768px)': {
       gap: '10px',
     },
@@ -196,7 +214,7 @@ const styles = {
   },
   links: {
     display: 'flex',
-    justifyContent: 'center', // Düğmeyi ortala
+    justifyContent: 'flex-start', // Sola hizala
     marginTop: 'auto',
   },
   projectButton: {

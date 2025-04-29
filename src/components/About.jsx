@@ -1,33 +1,30 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../Context/LanguageContext';
 
 const About = () => {
+  const { language, translations } = useLanguage();
   const skills = [
-    "JavaScript", "React", "React Native", "HTML5", "CSS", "Python", "Git", "Responsive Design"
+    "JavaScript", "React", "React Native", "NodeJs", "C#", "HTML5", "CSS", "Python", "Git", "Responsive Design", "UI/UX", "Figma", "Firebase", "MySQL", "Bootstrap5"
   ];
 
-  // Hover durumunu takip etmek için bir state oluşturalım
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
   return (
     <section id="hakkimda" style={styles.container}>
-      <h2 style={styles.title}>Hakkımda</h2>
+      <h2 style={styles.title}>{translations[language].about.title}</h2>
       <div className="blur-bg" style={styles.content}>
         <div style={styles.textContent}>
           <div style={styles.descriptionContainer}>
             <p style={styles.description}>
-              Merhaba! Ben modern web uygulamaları ve mobil uygulamalar geliştiren bir yazılımcıyım.
-              React, React Native, JavaScript ve UI/UX konularında deneyimliyim.
-              Aynı zamanda Python ve temel seviye C# bilgisine sahibim.
+              {translations[language].about.description}
             </p>
-            <p style={styles.description}>
-              Performans odaklı, mobil uyumlu ve kullanıcı dostu arayüzler geliştiriyorum.
-              Her projede yeni teknolojiler öğrenmeye ve kendimi geliştirmeye devam ediyorum.
-              Sürekli öğrenme ve gelişim odaklı çalışıyorum.
+            <p style={{...styles.description, marginTop: '20px'}}>
+              {translations[language].about.description2}
             </p>
           </div>
           
           <div style={styles.skills}>
-            <h3 style={styles.skillsTitle}>Yeteneklerim</h3>
+            <h3 style={styles.skillsTitle}>{translations[language].about.skills}</h3>
             <div style={styles.skillTags}>
               {skills.map((skill, index) => (
                 <span 
@@ -45,8 +42,6 @@ const About = () => {
             </div>
           </div>
         </div>
-        
-        
       </div>
     </section>
   );
@@ -58,6 +53,7 @@ const styles = {
     backgroundColor: 'transparent',
     position: 'relative',
     zIndex: 1,
+    textAlign: 'left', // Sola hizala
   },
   content: {
     maxWidth: '1000px',
@@ -66,6 +62,7 @@ const styles = {
     gap: '50px',
     alignItems: 'center',
     flexDirection: 'column',
+    textAlign: 'left', // Sola hizala
     '@media (max-width: 768px)': {
       flexDirection: 'column',
       position: 'relative',
@@ -89,14 +86,15 @@ const styles = {
   },
   textContent: {
     flex: 1,
+    textAlign: 'left', // Sola hizala
     '@media (max-width: 768px)': {
       padding: '10px',
     }
   },
   descriptionContainer: {
     maxWidth: '800px',
-    margin: '0 auto',
-    textAlign: 'justify',
+    margin: 0, // Ortalamayı kaldır
+    textAlign: 'left',
     hyphens: 'auto',
     WebkitHyphens: 'auto',
     msHyphens: 'auto',
@@ -111,6 +109,7 @@ const styles = {
     color: 'var(--text-color)',
     marginBottom: '20px',
     padding: '0 20px',
+    textAlign: 'left', // Sola hizala
     '@media (max-width: 768px)': {
       fontSize: '1.1rem',
       lineHeight: '1.6',
@@ -118,20 +117,20 @@ const styles = {
   },
   skills: {
     marginTop: '30px',
-    textAlign: 'center', // Eklendi
+    textAlign: 'left', // Sola hizala
   },
   skillsTitle: {
     color: 'var(--primary-color)',
     fontSize: '1.5rem',
     marginBottom: '20px',
-    textAlign: 'center', // Eklendi
+    textAlign: 'left', // Sola hizala
   },
   skillTags: {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '12px',
-    justifyContent: 'center', // Eklendi
-    alignItems: 'center', // Eklendi
+    justifyContent: 'flex-start', // Sola hizala
+    alignItems: 'center',
   },
   skillTag: {
     backgroundColor: 'var(--bg-secondary)',

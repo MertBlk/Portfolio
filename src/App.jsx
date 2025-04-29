@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { LanguageProvider } from './Context/LanguageContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -24,7 +25,7 @@ function App() {
   }, [location]);
 
   return (
-    <>
+    <LanguageProvider>
       <StarBackground />
       <div className="App">
         <Routes>
@@ -40,7 +41,7 @@ function App() {
           <Route path="project/:id" element={<ProjectDetail />} />
         </Routes>
       </div>
-    </>
+    </LanguageProvider>
   );
 }
 

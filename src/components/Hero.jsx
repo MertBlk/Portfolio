@@ -1,15 +1,17 @@
 import React from 'react';
+import { useLanguage } from '../Context/LanguageContext';
 
 const Hero = () => {
+  const { language, translations } = useLanguage();
+
   return (
     <section id="anasayfa" style={styles.container}>
       <div style={styles.content}>
-      <h1 style={styles.title}>
-  Selam! Ben <span style={styles.name}>Mert Bölükbaşı</span>
-</h1>
-<p style={styles.subtitle}>Hayallerini koda döken bir geliştirici.</p>
-<p style={styles.subtitle2}>Full Stack | Mobil Geliştirme</p>
-
+        <h1 style={styles.title}>
+          {translations[language].greeting} <span style={styles.name}>Mert Bölükbaşı</span>
+        </h1>
+        <p style={styles.subtitle}>{translations[language].description}</p>
+        <p style={styles.subtitle2}>{translations[language].role}</p>
       </div>
     </section>
   );
@@ -21,7 +23,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    textAlign: 'center',
+    textAlign: 'left', // Sola hizala
     padding: 'var(--section-padding)',
     background: 'transparent',
     position: 'relative',
@@ -31,11 +33,13 @@ const styles = {
     maxWidth: '800px',
     width: '100%',
     padding: '0 20px',
+    textAlign: 'left', // Sola hizala
   },
   title: {
     fontSize: 'clamp(2.5rem, 10vw, 6rem)',
     marginBottom: '35px',
     lineHeight: 1.2,
+    textAlign: 'left', // Sola hizala
   },
   name: {
     color: 'var(--primary-color)',
@@ -45,16 +49,18 @@ const styles = {
     fontSize: 'clamp(1rem, 4vw, 1.5rem)',
     color: 'var(--text-secondary)',
     marginBottom: '40px',
+    textAlign: 'left', // Sola hizala
   },
   subtitle2: {
     fontSize: 'clamp(1rem, 4vw, 1.5rem)',
-    color: 'var(--primary-color)', // Sarı renk
+    color: 'var(--primary-color)',
     marginBottom: '40px',
+    textAlign: 'left', // Sola hizala
   },
   cta: {
     display: 'flex',
     gap: '20px',
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Sola hizala
     flexWrap: 'wrap',
   },
   button: {

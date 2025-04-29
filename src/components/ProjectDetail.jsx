@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useLanguage } from '../Context/LanguageContext';
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const { language, translations } = useLanguage();
 
   const handleNavigation = (e, sectionId) => {
     e.preventDefault();
@@ -15,9 +17,6 @@ const ProjectDetail = () => {
   const projects = [
     {
       id: "esya-hatirlatici",
-      title: "Eşya Hatırlatıcı App",
-      description: "React Native ile yapılmış eşya hatırlatıcı uygulaması.",
-      fullDescription: "Bu uygulama, kullanıcıların eşyalarını ve konumlarını kaydetmelerini ve hatırlamalarını sağlar. Kullanıcılar eşyalarının fotoğraflarını çekebilir, konum bilgilerini kaydedebilir ve bildirimler alabilirler.",
       images: [
         "/Portfolio/images/esyaHatirla.png", 
         "/Portfolio/images/esyaAyar.png", 
@@ -25,85 +24,47 @@ const ProjectDetail = () => {
         "/Portfolio/images/esyaKonum.png"
       ],
       technologies: ["React Native", "iOS", "Expo", "JavaScript"],
-      features: [
-        "Eşya fotoğrafı ve konum kaydetme",
-        "Bildirim sistemi",
-        "Konum bazlı hatırlatmalar",
-        "Kategori yönetimi"
-      ],
       githubLink: "https://github.com/username/esya-hatirlatici"
     },
     {
       id: "arac-satis",
-      title: "Araç Satış Sitesi",
-      description: "Araç satış sitesi tasarımı.",
-      fullDescription: "Modern ve kullanıcı dostu bir araç satış platformu. Kullanıcılar araçlarını listeleyebilir, detaylı arama yapabilir ve favorilerine ekleyebilirler.",
       images: [
         "/Portfolio/images/aracSatis.png", 
         "/Portfolio/images/aracAraclar.png",
         "/Portfolio/images/aracIlan.png", 
-         "/Portfolio/images/aracHesap.png"
+        "/Portfolio/images/aracHesap.png"
       ],
       technologies: ["HTML", "CSS", "JavaScript", "Node.js"],
-      features: [
-        "Detaylı araç listeleme",
-        "Gelişmiş arama filtreleri",
-        "Favori araç kaydetme",
-        "İlan yönetim sistemi"
-      ],
       githubLink: "https://github.com/username/arac-satis"
     },
     {
       id: "e-ticaret",
-      title: "E-ticaret Tasarımı",
-      description: "Modern ve kullanıcı dostu e-ticaret platformu",
-      fullDescription: "Responsive tasarıma sahip modern bir e-ticaret platformu. Kullanıcılar ürünleri kategorilere göre filtreleyebilir, sepete ekleyebilir ve satın alma işlemlerini gerçekleştirebilirler. Admin paneli üzerinden ürün ve kategori yönetimi yapılabilir.",
       images: [
         "/Portfolio/images/ruvido.jpeg",
         "/Portfolio/images/ruvido2.jpeg",
         "/Portfolio/images/ruvido3.jpeg",
       ],
-      technologies: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Firebase","Sanal POS"],
-      features: [
-        "Responsive tasarım",
-        "Ürün filtreleme ve arama",
-        "Sepet yönetimi",
-        "Kullanıcı hesap sistemi",
-        "Admin paneli",
-        "Ödeme entegrasyonu"
-      ],
+      technologies: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Firebase", "Sanal POS"],
       githubLink: "https://github.com/username/e-commerce"
     },
     {
       id: "otel-tanitim",
-      title: "Otel Tanıtım Sitesi",
-      description: "Lüks otel tanıtım ve rezervasyon platformu",
-      fullDescription: "Modern ve şık tasarıma sahip otel tanıtım sitesi. Kullanıcılar odaları inceleyebilir, fiyatları görebilir ve online rezervasyon yapabilirler. Ayrıca otelin sunduğu hizmetler, restoranlar ve aktiviteler hakkında detaylı bilgi edinebilirler.",
       images: [
         "/Portfolio/images/otel.jpeg",
         "/Portfolio/images/otel4.jpg",
         "/Portfolio/images/otel2.jpeg",
         "/Portfolio/images/otel3.jpeg",
-        
       ],
       technologies: ["HTML", "CSS", "JavaScript", "Bootstrap 5", "PHP", "MySQL"],
-      features: [
-        "Responsive tasarım",
-        "Online rezervasyon sistemi",
-        "Oda kategorileri ve detayları",
-        "Fiyat karşılaştırma",
-        "Otel hizmetleri tanıtımı",
-        "Müşteri yorumları",
-        "İletişim formu"
-      ],
       githubLink: "https://github.com/username/hotel-website"
     }
   ];
 
   const project = projects.find(p => p.id === id);
+  const projectTranslations = translations[language].projectDetail.projects[id];
 
-  if (!project) {
-    return <div>Proje bulunamadı</div>;
+  if (!project || !projectTranslations) {
+    return <div>{translations[language].projectDetail.notFound}</div>;
   }
 
   const nextImage = () => {
@@ -134,22 +95,22 @@ const ProjectDetail = () => {
             <ul style={styles.navList}>
               <li style={styles.navItem}>
                 <a href="#anasayfa" onClick={(e) => handleNavigation(e, 'anasayfa')} style={styles.navLink}>
-                  Ana Sayfa
+                  {translations[language].nav.home}
                 </a>
               </li>
               <li style={styles.navItem}>
                 <a href="#hakkimda" onClick={(e) => handleNavigation(e, 'hakkimda')} style={styles.navLink}>
-                  Hakkımda
+                  {translations[language].nav.about}
                 </a>
               </li>
               <li style={styles.navItem}>
                 <a href="#projeler" onClick={(e) => handleNavigation(e, 'projeler')} style={styles.navLink}>
-                  Projeler
+                  {translations[language].nav.projects}
                 </a>
               </li>
               <li style={styles.navItem}>
                 <a href="#iletisim" onClick={(e) => handleNavigation(e, 'iletisim')} style={styles.navLink}>
-                  İletişim
+                  {translations[language].nav.contact}
                 </a>
               </li>
             </ul>
@@ -157,14 +118,13 @@ const ProjectDetail = () => {
         </nav>
       </div>
 
-      
       <div style={styles.contentWrapper}>
         <div style={styles.imageSection}>
           <div style={styles.imageContainer}>
             <div style={styles.mainImageWrapper}>
               <img 
                 src={project.images[currentImageIndex]} 
-                alt={`${project.title} ${currentImageIndex + 1}`} 
+                alt={`${projectTranslations.title} ${currentImageIndex + 1}`} 
                 style={styles.mainImage}
                 onClick={handleImageClick}
               />
@@ -198,11 +158,11 @@ const ProjectDetail = () => {
         </div>
 
         <div style={styles.infoSection}>
-          <h1 style={styles.title}>{project.title}</h1>
-          <p style={styles.description}>{project.fullDescription}</p>
+          <h1 style={styles.title}>{projectTranslations.title}</h1>
+          <p style={styles.description}>{projectTranslations.fullDescription}</p>
 
           <div style={styles.section}>
-            <h2 style={styles.sectionTitle}>Teknolojiler</h2>
+            <h2 style={styles.sectionTitle}>{translations[language].projectDetail.technologiesTitle}</h2>
             <div style={styles.tags}>
               {project.technologies.map((tech, index) => (
                 <span key={index} style={styles.tag}>{tech}</span>
@@ -211,9 +171,9 @@ const ProjectDetail = () => {
           </div>
 
           <div style={styles.section}>
-            <h2 style={styles.sectionTitle}>Özellikler</h2>
+            <h2 style={styles.sectionTitle}>{translations[language].projectDetail.featuresTitle}</h2>
             <ul style={styles.featureList}>
-              {project.features.map((feature, index) => (
+              {projectTranslations.features.map((feature, index) => (
                 <li key={index} style={styles.feature}>{feature}</li>
               ))}
             </ul>
@@ -225,7 +185,7 @@ const ProjectDetail = () => {
             rel="noopener noreferrer"
             style={styles.githubButton}
           >
-            GitHub'da İncele
+            {translations[language].projectDetail.viewOnGithub}
           </a>
         </div>
       </div>
@@ -235,7 +195,7 @@ const ProjectDetail = () => {
           <div style={styles.modalContent}>
             <img 
               src={project.images[currentImageIndex]} 
-              alt={`${project.title} ${currentImageIndex + 1}`} 
+              alt={`${projectTranslations.title} ${currentImageIndex + 1}`} 
               style={styles.modalImage}
             />
             <button 
@@ -275,6 +235,7 @@ const styles = {
     margin: '0 auto',
     padding: '20px 15px',
     position: 'relative',
+    textAlign: 'left', // Sola hizala
     '@media (min-width: 768px)': {
       padding: '40px 15px',
     }
@@ -362,6 +323,7 @@ const styles = {
     gridTemplateColumns: '1fr',
     gap: '30px',
     marginTop: '40px',
+    textAlign: 'left', // Sola hizala
     '@media (min-width: 1024px)': {
       gridTemplateColumns: '1.2fr 0.8fr',
       gap: '40px',
@@ -452,7 +414,7 @@ const styles = {
     }
   },
   imageInfo: {
-    textAlign: 'center',
+    textAlign: 'left', // Sola hizala
     marginTop: '10px',
     color: 'var(--text-secondary)',
     fontSize: '0.9rem',
@@ -510,6 +472,7 @@ const styles = {
   },
   infoSection: {
     padding: '0',
+    textAlign: 'left', // Sola hizala
     '@media (min-width: 768px)': {
       padding: '0 20px',
     }
@@ -518,6 +481,7 @@ const styles = {
     fontSize: '1.8rem',
     color: 'var(--text-color)',
     marginBottom: '15px',
+    textAlign: 'left', // Sola hizala
     '@media (min-width: 768px)': {
       fontSize: '2.5rem',
       marginBottom: '20px',
@@ -528,6 +492,7 @@ const styles = {
     color: 'var(--text-secondary)',
     lineHeight: '1.6',
     marginBottom: '30px',
+    textAlign: 'left', // Sola hizala
     '@media (min-width: 768px)': {
       fontSize: '1.2rem',
       marginBottom: '40px',
@@ -543,6 +508,7 @@ const styles = {
     fontSize: '1.4rem',
     color: 'var(--text-color)',
     marginBottom: '15px',
+    textAlign: 'left', // Sola hizala
     '@media (min-width: 768px)': {
       fontSize: '1.8rem',
       marginBottom: '20px',
@@ -552,7 +518,7 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '8px',
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Sola hizala
     '@media (min-width: 768px)': {
       gap: '10px',
     }
@@ -575,6 +541,7 @@ const styles = {
   featureList: {
     listStyle: 'none',
     padding: '0 15px',
+    textAlign: 'left', // Sola hizala
     '@media (min-width: 768px)': {
       padding: '0 20px',
     }
@@ -585,6 +552,7 @@ const styles = {
     marginBottom: '8px',
     position: 'relative',
     paddingLeft: '15px',
+    textAlign: 'left', // Sola hizala
     '@media (min-width: 768px)': {
       fontSize: '1.1rem',
       marginBottom: '10px',
