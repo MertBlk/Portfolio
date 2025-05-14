@@ -97,6 +97,12 @@ export const LanguageProvider = ({ children }) => {
               "Müşteri yorumları",
               "İletişim formu"
             ]
+          },
+          "ruvidoTekstil": {
+            title: "Ruvido Tekstil Web Sitesi",
+            description: "Ruvido Tekstil için modern ve şık bir web sitesi.",
+            fullDescription: "Ruvido Tekstil için geliştirilen bu web sitesi, şirketin ürünlerini ve hizmetlerini sergilemek amacıyla modern bir tasarıma ve kullanıcı dostu bir arayüze sahiptir. Responsive tasarımı sayesinde tüm cihazlarda sorunsuz bir deneyim sunar.",
+            features: ["Modern ve şık tasarım", "Responsive arayüz", "Ürün ve hizmet tanıtımı", "İletişim formu entegrasyonu"]
           }
         }
       }
@@ -192,6 +198,12 @@ export const LanguageProvider = ({ children }) => {
               "Customer reviews",
               "Contact form"
             ]
+          },
+          "ruvidoTekstil": {
+            title: "Ruvido Tekstil Website",
+            description: "A modern and stylish website for Ruvido Tekstil.",
+            fullDescription: "This website, developed for Ruvido Tekstil, features a modern design and a user-friendly interface to showcase the company's products and services. Its responsive design ensures a seamless experience across all devices.",
+            features: ["Modern and stylish design", "Responsive interface", "Product and service showcase", "Contact form integration"]
           }
         }
       }

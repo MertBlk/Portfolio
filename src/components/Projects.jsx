@@ -16,15 +16,7 @@ const Projects = () => {
       image: "/Portfolio/images/esyaHatirla.png",
       tags: ["React Native", "iOS"]
     },
-    {
-      id: "e-ticaret",
-      titleTR: "E-ticaret Tasarımı",
-      titleEN: "E-commerce Design",
-      descriptionTR: "Responsive e-ticaret ön yüz tasarımı. Ürün listeleme, sepet işlemleri ve kullanıcı hesap yönetimi.",
-      descriptionEN: "Responsive e-commerce frontend design. Product listing, cart operations and user account management.",
-      image: "/Portfolio/images/ruvido.jpeg",
-      tags: ["HTML", "CSS", "JavaScript", "React", "UI/UX", "Node.js", "Firebase"]
-    },
+
     {
       id: "arac-satis",
       titleTR: "Araç Satış Sitesi",
@@ -42,7 +34,17 @@ const Projects = () => {
       descriptionEN: "Hotel promotion website design. Focused on user interface and experience.",
       image: "/Portfolio/images/otel.jpeg",
       tags: ["HTML", "CSS", "JavaScript", "Bootstrap5", "UI/UX"]
-    }
+    },
+    {
+      id: "ruvidoTekstil",
+      titleTR: "Ruvido Tekstil",
+      titleEN: "Ruvido Textile",
+      descriptionTR: "Ruvido Tekstil için responsive web tasarımı. Ürün listeleme, Firma tanıtımı ve iletişim bilgileri.",
+      descriptionEN: "Responsive web design for Ruvido Textile. Product listing, company introduction and contact information.",
+      image: "/Portfolio/images/ruvidoTekstil.png",
+      tags: ["React","Responsive Design","UI/UX"]
+
+    },
   ];
 
   return (

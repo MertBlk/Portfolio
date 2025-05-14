@@ -37,16 +37,7 @@ const ProjectDetail = () => {
       technologies: ["HTML", "CSS", "JavaScript", "Node.js"],
       githubLink: "https://github.com/username/arac-satis"
     },
-    {
-      id: "e-ticaret",
-      images: [
-        "/Portfolio/images/ruvido.jpeg",
-        "/Portfolio/images/ruvido2.jpeg",
-        "/Portfolio/images/ruvido3.jpeg",
-      ],
-      technologies: ["HTML", "CSS", "JavaScript", "React", "Node.js", "Firebase", "Sanal POS"],
-      githubLink: "https://github.com/username/e-commerce"
-    },
+  
     {
       id: "otel-tanitim",
       images: [
@@ -57,6 +48,18 @@ const ProjectDetail = () => {
       ],
       technologies: ["HTML", "CSS", "JavaScript", "Bootstrap 5", "PHP", "MySQL"],
       githubLink: "https://github.com/username/hotel-website"
+    },
+    {
+      id: "ruvidoTekstil",
+      images: [
+        "/Portfolio/images/ruvidoTekstil.png",
+        "/Portfolio/images/ruvido2.png",
+        "/Portfolio/images/ruvido3.png",
+        "/Portfolio/images/ruvido4.png",
+        "/Portfolio/images/ruvido5.png",
+      ],
+      technologies: ["React","Responsive Design","UI/UX"],
+      githubLink: "https://github.com/MertBlk/ruvidoTekstil"
     }
   ];
 
