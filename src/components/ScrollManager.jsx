@@ -5,6 +5,7 @@ import useSwipe from '../hooks/useSwipe';
 const ScrollManager = ({ sections }) => {
   const [activeSection, setActiveSection] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isMobile, setIsMobile] = useState(false); // Mobil cihaz kontrolü için
   
   // Zamanlayıcı referansları
   const scrollTimeoutRef = useRef(null);
@@ -13,6 +14,23 @@ const ScrollManager = ({ sections }) => {
   // Tüm animasyon sürelerini tek bir yerden yönetmek için sabit değerler
   const ANIMATION_DURATION = 800; // millisaniye cinsinden - responsive ve hızlı
   const DEBOUNCE_DELAY = 50; // millisaniye cinsinden
+  
+  // Ekran boyutunu kontrol et ve mobil durumunu ayarla
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    // İlk yükleme
+    checkMobile();
+    
+    // Pencere boyutu değiştiğinde de kontrol et
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
   
   // Swipe hook'unu kullan - mobil deneyim iyileştirmesi
   const { direction, swiping, handlers } = useSwipe({
@@ -315,8 +333,17 @@ const ScrollManager = ({ sections }) => {
     }, ANIMATION_DURATION);
   };
   
+  // Mobil cihazlarda daha iyi görünüm için className belirle
+  const dotsClassName = isMobile ? "navigation-dots mobile" : "navigation-dots";
+
   return (
-    <div className="navigation-dots">
+    <div className={dotsClassName} style={{
+      // Mobilde aktif bölüme göre pozisyon değişsin
+      // Bu mobilin her section tipinde dots'u düzgün konumlandırmayı sağlar
+      ...(isMobile && {
+        zIndex: 1000, // Her zaman önde görünsün
+      })
+    }}>
       {sections.map((section, index) => (
         <div 
           key={index} 

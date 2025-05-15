@@ -31,6 +31,12 @@
   opacity: 1;
   transform: translateY(0);
   transition: opacity var(--content-transition-duration) ease, transform var(--content-transition-duration) ease;
+  
+  /* Mobil görünümde içeriğin taşmasını önlemek için */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Her bölüm görünür olmadığında içerik hafifçe yukarıdan gelsin */
@@ -89,15 +95,37 @@
     top: unset;
     bottom: 20px;
     right: 50%;
+    width: auto;
     transform: translateX(50%);
     flex-direction: row; /* Yatay düzenleme */
     padding: 8px 12px; /* Yatay alan için padding değiştir */
-    gap: 12px; /* Mobilde daha kolay tıklamak için daha fazla boşluk */
+    gap: 8px; /* Mobilde dots arası boşluk */
+    background-color: rgba(0, 0, 0, 0.3); /* Daha koyu arka plan */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Daha belirgin gölge */
+    border-radius: 30px; /* Daha yuvarlak kenarlar */
+    position: fixed; /* Mutlaka sabitlenmiş olsun */
   }
   
-  /* Mobilde dot'ların görünüşünü ayarla */
+  /* Mobilde dot'ların görünüşünü ayarla - sıkışmalarını önleyin */
   .navigation-dots .dot {
-    margin: 0 5px; /* Yatay düzende kenar boşlukları */
+    margin: 0; /* Margin'i kaldır, gap ile boşluk ver */
+    width: 10px; /* Daha küçük noktalar */
+    height: 10px;
+    flex-shrink: 0; /* Dots'ların büzülmesini engelle */
+  }
+  
+  .section-content {
+    padding: 0 15px;
+    width: 100%;
+    max-height: 85vh; /* Yüksekliği sınırla */
+    overflow-y: auto; /* Gerekirse içeriğin kaydırılabilir olmasına izin ver */
+    scrollbar-width: none; /* Firefox için kaydırma çubuğunu gizle */
+    -ms-overflow-style: none; /* IE ve Edge için kaydırma çubuğunu gizle */
+  }
+  
+  /* Webkit tarayıcılar için kaydırma çubuğunu gizle */
+  .section-content::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -152,11 +180,17 @@
 @media (max-width: 768px) {
   .navigation-dots {
     right: 10px;
+    /* Dot'ların liste olarak görünmemesi için */
+    max-height: 70vh; /* Maksimum yükseklik */
+    overflow-y: visible; /* Taşma olmasın */
   }
   
   .dot {
-    width: 12px; /* Dokunmatik için biraz daha büyük */
+    width: 12px; /* Dokunmatik için uygun boyut */
     height: 12px;
+    margin: 12px 0; /* Yeterli boşluk */
+    position: relative;
+    flex-shrink: 0; /* Dots'ların küçülmesini engelle */
   }
   
   /* Mobil cihazlarda noktalara tıklama alanını artır */
@@ -169,8 +203,26 @@
   
   /* Noktalar aktif olduğunda daha belirgin olsun */
   .dot.active {
-    transform: scale(1.5);
-    box-shadow: 0 0 20px var(--primary-color);
+    transform: scale(1.3); /* Çok büyük olmasın */
+    box-shadow: 0 0 15px var(--primary-color);
+    background-color: var(--primary-color);
+  }
+  
+  /* Section-container için daha iyi scroll davranışı */
+  .section-container {
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch; /* iOS cihazlarda daha iyi scroll */
+  }
+  
+  /* Mobil cihazlarda section içeriğini daha iyi yerleştir */
+  .section {
+    padding: 0 10px; /* İçeriğin kenarlara çok yakın olmasını önle */
+  }
+  
+  /* Mobilde kaydırma oku daha belirgin görünsün */
+  .scroll-arrow {
+    bottom: 40px; /* Navigation dots'larla çakışmasın */
+    opacity: 0.9;
   }
 }
 
@@ -201,4 +253,101 @@
   60% {
     transform: translateX(-50%) translateY(-10px);
   }
+}
+
+/* Farklı ekran boyutları için ek medya sorguları */
+/* iPhone SE gibi çok küçük ekranlar için */
+@media (max-width: 375px) {
+  .navigation-dots {
+    bottom: 15px;
+    padding: 6px 8px;
+    gap: 6px;
+  }
+  
+  .navigation-dots .dot {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .section-content {
+    padding: 0 10px;
+  }
+  
+  .scroll-arrow {
+    bottom: 50px;
+  }
+}
+
+/* Çok uzun ekranlı telefonlar için (iPhone 12 Pro Max gibi) */
+@media (max-height: 900px) and (max-width: 480px) {
+  .navigation-dots {
+    bottom: 15px;
+  }
+  
+  .section {
+    justify-content: flex-start;
+    padding-top: 70px; /* Navbar'ın altında yeterli alan bırak */
+  }
+}
+
+/* Çok geniş fakat kısa ekranlar için (Landscape mod) */
+@media (max-height: 500px) and (orientation: landscape) {
+  .navigation-dots {
+    top: 50%;
+    right: 10px;
+    bottom: unset;
+    transform: translateY(-50%);
+    flex-direction: column;
+    padding: 8px;
+    gap: 8px;
+  }
+  
+  .dot {
+    width: 8px;
+    height: 8px;
+    margin: 5px 0;
+  }
+  
+  .section {
+    padding-top: 30px;
+  }
+  
+  .scroll-arrow {
+    display: none; /* Yatay modda ok gösterme */
+  }
+}
+
+/* Navigation dots mobil sınıfı için özel stillendirme */
+.navigation-dots.mobile {
+  /* Sabit bir konumda olması yerine, taşınabilir olması için */
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  right: auto;
+  top: auto;
+  
+  /* Daha iyi görünüm */
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.5);
+  
+  /* Yatay düzen */
+  flex-direction: row;
+  justify-content: center;
+  padding: 8px 15px;
+  
+  /* Kenarları daha yuvarlak */
+  border-radius: 50px;
+  
+  /* Daha iyi gölge */
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  
+  /* Z-indeksini yüksek tut */
+  z-index: 2000;
+}
+
+.navigation-dots.mobile .dot {
+  width: 10px;
+  height: 10px;
+  margin: 0 6px;
 }
