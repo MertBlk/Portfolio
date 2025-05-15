@@ -10,9 +10,38 @@ const MenuItem = ({ item, path, setMenuOpen }) => {
     setMenuOpen(false);
     if (path.startsWith('#')) {
       e.preventDefault();
-      const element = document.getElementById(path.substring(1));
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      const sectionId = path.substring(1);
+      const sectionContainer = document.querySelector('.section-container');
+      if (sectionContainer) {
+        // Bölüm indeksini belirle
+        let sectionIndex = 0;
+        if (sectionId === 'hero') sectionIndex = 0;
+        else if (sectionId === 'about') sectionIndex = 1;
+        else if (sectionId === 'projects') sectionIndex = 2;
+        else if (sectionId === 'contact') sectionIndex = 3;
+
+        // Önce mevcut kaydırma durumunu temizle
+        const dots = document.querySelectorAll('.navigation-dots .dot');
+        if (dots && dots[sectionIndex]) {
+          // Dot'a otomatik olarak tıkla (önceden oluşturduğumuz mantığı kullan)
+          const clickEvent = new Event('click', { bubbles: true });
+          dots[sectionIndex].dispatchEvent(clickEvent);
+        } else {
+          // Yedek yöntem: doğrudan kaydırma
+          // Önce smooth olmadan hızlı konumla
+          sectionContainer.style.scrollBehavior = 'auto';
+          
+          // Kısa bir gecikmeyle smooth davranışına geç
+          setTimeout(() => {
+            sectionContainer.style.scrollBehavior = 'smooth';
+            
+            // İlgili bölüme kaydır
+            sectionContainer.scrollTo({
+              top: sectionIndex * window.innerHeight,
+              behavior: 'smooth'
+            });
+          }, 10);
+        }
       }
     }
   };
@@ -51,10 +80,10 @@ const Navbar = () => {
   }, []);
 
   const menuItems = [
-    { name: translations[language].nav.home, path: '#anasayfa' },
-    { name: translations[language].nav.about, path: '#hakkimda' },
-    { name: translations[language].nav.projects, path: '#projeler' },
-    { name: translations[language].nav.contact, path: '#iletisim' }
+    { name: translations[language].nav.home, path: '#hero' },
+    { name: translations[language].nav.about, path: '#about' },
+    { name: translations[language].nav.projects, path: '#projects' },
+    { name: translations[language].nav.contact, path: '#contact' }
   ];
 
   return (

@@ -17,7 +17,9 @@ a {
 }
 
 section {
-  padding: 60px 20px;
+  padding: 0; /* Tam ekran scroll için padding'leri kaldırıyoruz */
+  box-sizing: border-box;
+  position: relative;
 }
 input, textarea {
     padding: 12px;

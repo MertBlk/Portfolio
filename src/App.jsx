@@ -24,10 +24,28 @@ function App() {
           // Hedef bölümün indeksini bulma
           const index = sections.findIndex(section => section === location.state.scrollTo);
           if (index !== -1) {
-            sectionContainer.scrollTo({
-              top: index * window.innerHeight,
-              behavior: 'smooth'
-            });
+            // Önce mevcut stil durumunu kaydet
+            const currentScrollBehavior = sectionContainer.style.scrollBehavior;
+            
+            // İlk önce her zaman otomatik mod ayarla (kaydırma sorunlarını önler)
+            sectionContainer.style.scrollBehavior = 'auto';
+            
+            // Küçük bir gecikme ile kaydırma gerçekleştir
+            setTimeout(() => {
+              // Yavaş ve tutarlı kaydırma için smooth olarak değiştir
+              sectionContainer.style.scrollBehavior = 'smooth';
+              
+              // Şimdi kaydır
+              sectionContainer.scrollTo({
+                top: index * window.innerHeight,
+                behavior: 'smooth'
+              });
+              
+              // Bir süre sonra eski duruma geri dön
+              setTimeout(() => {
+                sectionContainer.style.scrollBehavior = currentScrollBehavior;
+              }, 1000);
+            }, 10);
           }
         }
       }
@@ -42,7 +60,7 @@ function App() {
           <Route path="/" element={
             <>
               <Navbar />
-              <div className="section-container">
+              <div className="section-container" id="fullpage-container">
                 <section id="hero" className="section">
                   <div className="section-content">
                     <Hero />

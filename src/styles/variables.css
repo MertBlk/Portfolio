@@ -11,6 +11,10 @@
   --star-color: rgba(255, 255, 255, 0.8);
   --star-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
 
+  /* Animasyon süreleri */
+  --scroll-transition-duration: 1.5s; /* Kaydırma animasyon süresi */
+  --content-transition-duration: 1s; /* İçerik geçiş animasyon süresi */
+  
   /* Responsive değişkenler */
   --heading-large: clamp(2.5rem, 8vw, 6rem);
   --heading-medium: clamp(1.8rem, 5vw, 2.5rem);

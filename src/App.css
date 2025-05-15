@@ -12,6 +12,18 @@
   width: 100%;
   height: 100%;
   position: relative;
+  --animation-speed: 1.5s; /* Tüm animasyonlar için standart bir hız */
+}
+
+/* Kaydırma animasyon süresi için özel stil */
+.section-container {
+  scroll-behavior: smooth;
+  transition-duration: var(--animation-speed);
+}
+
+/* Tüm geçiş animasyonları için */
+.transition-element {
+  transition-duration: var(--animation-speed);
 }
 
 @media (max-width: 600px) {

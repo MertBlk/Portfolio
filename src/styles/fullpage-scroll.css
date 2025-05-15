@@ -4,8 +4,9 @@
   overflow: hidden;
   position: relative;
   scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* Bu özelliğin süresi browser tarafından belirlenir */
   overflow-y: scroll;
+  scroll-timeline: --sectionScroll block;
 }
 
 .section {
@@ -27,6 +28,15 @@
   box-sizing: border-box;
   position: relative;
   z-index: 10;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--content-transition-duration) ease, transform var(--content-transition-duration) ease;
+}
+
+/* Her bölüm görünür olmadığında içerik hafifçe yukarıdan gelsin */
+.section:not(.active) .section-content {
+  opacity: 0.8;
+  transform: translateY(20px);
 }
 
 /* Özel kaydırma çubuğu */
@@ -57,25 +67,85 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.2); /* Daha görünür arka plan */
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Daha belirgin gölge */
+  backdrop-filter: blur(5px); /* Daha belirgin bulanıklık */
+  pointer-events: auto; /* Tıklamaların düzgün çalışmasını sağlar */
+  transition: all 0.3s ease; /* Hover efekti için geçiş */
+}
+
+/* Hover halinde daha belirgin görünüm */
+.navigation-dots:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Çok küçük ekranlarda görünümü değiştir */
+@media (max-width: 480px) {
+  .navigation-dots {
+    /* Ekranın altına yerleştir */
+    top: unset;
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%);
+    flex-direction: row; /* Yatay düzenleme */
+    padding: 8px 12px; /* Yatay alan için padding değiştir */
+    gap: 12px; /* Mobilde daha kolay tıklamak için daha fazla boşluk */
+  }
+  
+  /* Mobilde dot'ların görünüşünü ayarla */
+  .navigation-dots .dot {
+    margin: 0 5px; /* Yatay düzende kenar boşlukları */
+  }
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
+  width: 16px; /* Daha büyük nokta */
+  height: 16px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /* Sabit, kısa animasyon süresi */
+  display: block; /* Blok element, güvenilir tıklama için */
+  margin: 10px 0; /* Noktalar arası daha fazla boşluk */
+  position: relative;
+}
+
+/* Görünür "itme" efekti ekle */
+.dot:active {
+  transform: scale(0.9); /* Basılı tutulduğunda küçülme efekti */
+  background-color: var(--primary-color);
+}
+
+.dot:hover {
+  background-color: rgba(255, 255, 255, 0.7); /* Daha belirgin hover durumu */
+  transform: scale(1.2); /* Hover durumunda büyüme efekti */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); /* Hafif parıltı efekti */
 }
 
 .dot.active {
   background-color: var(--primary-color);
-  transform: scale(1.3);
+  transform: scale(1.4);
+  box-shadow: 0 0 15px var(--primary-color); /* Daha belirgin aktif durum */
+  transition: all 0.3s ease;
+}
+
+/* Daha büyük tıklama alanı için */
+.dot::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  z-index: -1; /* Ana noktanın altında */
 }
 
 /* Geçiş animasyonu */
 .section {
-  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  transition: transform var(--scroll-transition-duration) cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 /* Mobil uyumluluk */
@@ -85,8 +155,22 @@
   }
   
   .dot {
-    width: 8px;
-    height: 8px;
+    width: 12px; /* Dokunmatik için biraz daha büyük */
+    height: 12px;
+  }
+  
+  /* Mobil cihazlarda noktalara tıklama alanını artır */
+  .dot::before {
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+  }
+  
+  /* Noktalar aktif olduğunda daha belirgin olsun */
+  .dot.active {
+    transform: scale(1.5);
+    box-shadow: 0 0 20px var(--primary-color);
   }
 }
 
@@ -96,9 +180,15 @@
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
-  animation: bounce 2s infinite;
+  animation: bounce 3s infinite;
   cursor: pointer;
   z-index: 100;
+  opacity: 0.7;
+  transition: opacity var(--content-transition-duration) ease;
+}
+
+.scroll-arrow:hover {
+  opacity: 1;
 }
 
 @keyframes bounce {
