@@ -5,7 +5,7 @@ const Contact = () => {
   const { language, translations } = useLanguage();
   
   return (
-    <section id="iletisim" style={styles.container}>
+    <>
       <h2 style={styles.title}>{translations[language].contact.title}</h2>
       <div style={styles.content}>
         <p style={styles.description}>
@@ -53,7 +53,7 @@ const Contact = () => {
           © {new Date().getFullYear()} {translations[language].contact.copyright}
         </p>
       </footer>
-    </section>
+    </>
   );
 };
 

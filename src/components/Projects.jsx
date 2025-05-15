@@ -48,7 +48,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projeler" style={styles.container}>
+    <>
       <h2 style={styles.title}>{translations[language].projects.title}</h2>
       <div style={styles.grid}>
         {projects.map((project, index) => (
@@ -91,7 +91,7 @@ const Projects = () => {
           </Link>
         ))}
       </div>
-    </section>
+    </>
   );
 };
 

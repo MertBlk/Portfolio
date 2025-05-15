@@ -10,7 +10,7 @@ const About = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
   return (
-    <section id="hakkimda" style={styles.container}>
+    <>
       <h2 style={styles.title}>{translations[language].about.title}</h2>
       <div className="blur-bg" style={styles.content}>
         <div style={styles.textContent}>
@@ -43,7 +43,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

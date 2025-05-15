@@ -5,15 +5,13 @@ const Hero = () => {
   const { language, translations } = useLanguage();
 
   return (
-    <section id="anasayfa" style={styles.container}>
-      <div style={styles.content}>
-        <h1 style={styles.title}>
-          {translations[language].greeting} <span style={styles.name}>Mert Bölükbaşı</span>
-        </h1>
-        <p style={styles.subtitle}>{translations[language].description}</p>
-        <p style={styles.subtitle2}>{translations[language].role}</p>
-      </div>
-    </section>
+    <div style={styles.content}>
+      <h1 style={styles.title}>
+        {translations[language].greeting} <span style={styles.name}>Mert Bölükbaşı</span>
+      </h1>
+      <p style={styles.subtitle}>{translations[language].description}</p>
+      <p style={styles.subtitle2}>{translations[language].role}</p>
+    </div>
   );
 };
 
