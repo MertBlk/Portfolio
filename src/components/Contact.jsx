@@ -59,36 +59,46 @@ const Contact = () => {
 
 const styles = {
   container: {
+    display: 'flex', // Eklendi
+    flexDirection: 'column', // Eklendi
+    alignItems: 'center', // Eklendi
+    justifyContent: 'center', // Eklendi
+    minHeight: '100vh', // Eklendi - Sayfanın tamamını kaplaması için
     padding: 'var(--section-padding)',
     backgroundColor: 'transparent',
     position: 'relative',
     zIndex: 1,
-    textAlign: 'left', // Sola hizala
+    textAlign: 'center', // Değiştirildi - genel metin hizalaması
   },
   content: {
-    width: '100%', // Tam genişlik
-    textAlign: 'left',
+    width: '100%',
+    maxWidth: '800px', // Eklendi - İçeriğin maksimum genişliği
+    textAlign: 'center', // Değiştirildi
+    display: 'flex', // Eklendi
+    flexDirection: 'column', // Eklendi
+    alignItems: 'center', // Eklendi
   },
   title: {
     color: 'var(--primary-color)',
-    textAlign: 'left', // Sola hizala
-    marginBottom: '50px',
+    textAlign: 'center', // Değiştirildi
+    marginBottom: '30px', // Değiştirildi
     fontSize: 'var(--heading-medium, 2.5rem)',
   },
   description: {
-    fontSize: '1.2rem',
-    lineHeight: '1.8',
+    fontSize: '1.1rem', // Değiştirildi
+    lineHeight: '1.7', // Değiştirildi
     color: 'var(--text-color)',
     marginBottom: '40px',
-    textAlign: 'left',
-    padding: '0 0 0 0', // padding kaldırıldı
+    textAlign: 'center', // Değiştirildi
+    maxWidth: '700px', // Eklendi
   },
   contactInfo: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'flex-start', // Sola hizala
-    gap: '30px',
-    marginBottom: '60px',
+    justifyContent: 'center', // Değiştirildi - Kartları ortalamak için
+    gap: '20px', // Değiştirildi
+    marginBottom: '50px', // Değiştirildi
+    width: '100%', // Eklendi
   },
   contactItem: {
     display: 'flex',
@@ -97,7 +107,9 @@ const styles = {
     backgroundColor: 'var(--bg-secondary)',
     padding: '20px',
     borderRadius: '15px',
-    minWidth: '250px',
+    minWidth: '280px', // Değiştirildi - Daha tutarlı genişlik
+    flex: '1 1 280px', // Eklendi - Esnek büyüme ve küçülme
+    maxWidth: '350px', // Eklendi - Maksimum genişlik
     boxShadow: '0 8px 20px rgba(0,0,0,0.1)',
     transition: 'var(--transition)',
     textDecoration: 'none',
@@ -109,33 +121,34 @@ const styles = {
     }
   },
   iconWrapper: {
-    width: '50px',
-    height: '50px',
+    width: '45px', // Değiştirildi
+    height: '45px', // Değiştirildi
     borderRadius: '50%',
-    backgroundColor: 'rgba(241, 196, 15, 0.1)',
+    backgroundColor: 'rgba(var(--primary-color-rgb), 0.1)', // Değiştirildi
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '1.5rem',
+    fontSize: '1.4rem', // Değiştirildi
   },
   icon: {
     color: 'var(--primary-color)',
   },
   contactText: {
     flex: 1,
-    textAlign: 'left', // Sola hizala
+    textAlign: 'left',
   },
   contactTitle: {
     margin: '0 0 5px 0',
     color: 'var(--text-color)',
-    fontSize: '1.1rem',
-    textAlign: 'left', // Sola hizala
+    fontSize: '1rem', // Değiştirildi
+    textAlign: 'left',
   },
   contactValue: {
     margin: 0,
     color: 'var(--text-secondary)',
-    fontSize: '0.9rem',
-    textAlign: 'left', // Sola hizala
+    fontSize: '0.85rem', // Değiştirildi
+    textAlign: 'left',
+    wordBreak: 'break-all', // Eklendi - Uzun e-postaların taşmasını engelle
   },
   formContainer: {
     backgroundColor: 'var(--bg-secondary)',
@@ -143,6 +156,9 @@ const styles = {
     borderRadius: '15px',
     border: '1px solid rgba(255, 255, 255, 0.05)',
     boxShadow: 'var(--card-shadow)',
+    width: '100%', // Eklendi
+    maxWidth: '600px', // Eklendi
+    marginBottom: '40px', // Eklendi
   },
   formTitle: {
     color: 'var(--primary-color)',
@@ -205,15 +221,77 @@ const styles = {
     }
   },
   footer: {
-    marginTop: '80px',
-    textAlign: 'left', // Sola hizala
+    width: '100%',
     padding: '20px 0',
-    
+    textAlign: 'center',
+    borderTop: '1px solid rgba(255, 255, 255, 0.1)', // Eklendi - Ayırıcı çizgi
+    marginTop: 'auto', // Eklendi - İçerik azsa bile en altta kalması için
   },
   copyright: {
     color: 'var(--text-secondary)',
     fontSize: '0.9rem',
-    textAlign: 'left', // Sola hizala
+  },
+  // Mobil için ek stiller
+  '@media (max-width: 768px)': {
+    title: {
+      fontSize: 'var(--heading-small, 2rem)', // Mobil için başlık boyutu
+      marginBottom: '20px',
+    },
+    description: {
+      fontSize: '1rem',
+      marginBottom: '30px',
+    },
+    contactInfo: {
+      gap: '15px',
+      marginBottom: '40px',
+    },
+    contactItem: {
+      minWidth: '100%', // Mobilde tam genişlik
+      flexBasis: '100%',
+    },
+    formContainer: {
+      padding: '20px',
+    },
+  },
+  '@media (max-width: 480px)': {
+    container: {
+      padding: 'var(--section-padding-mobile, 20px)', // Mobil için padding
+    },
+    title: {
+      fontSize: '1.8rem',
+    },
+    description: {
+      fontSize: '0.95rem',
+    },
+    iconWrapper: {
+      width: '40px',
+      height: '40px',
+      fontSize: '1.3rem',
+    },
+    contactTitle: {
+      fontSize: '0.95rem',
+    },
+    contactValue: {
+      fontSize: '0.8rem',
+    },
+    input: {
+      padding: '12px',
+      fontSize: '0.95rem',
+    },
+    textarea: {
+      padding: '12px',
+      fontSize: '0.95rem',
+    },
+    submitButton: {
+      padding: '12px',
+      fontSize: '0.95rem',
+    },
+    footer: {
+      padding: '15px 0',
+    },
+    copyright: {
+      fontSize: '0.8rem',
+    }
   }
 };
 
