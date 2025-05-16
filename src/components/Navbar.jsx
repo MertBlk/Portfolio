@@ -80,7 +80,7 @@ const Navbar = () => {
   }, []);
 
   const menuItems = [
-    { name: translations[language].nav.home, path: '#hero' },
+   
     { name: translations[language].nav.about, path: '#about' },
     { name: translations[language].nav.projects, path: '#projects' },
     { name: translations[language].nav.contact, path: '#contact' }
@@ -229,21 +229,8 @@ const styles = {
   },
   
   
-  hamburger: {
-    display: 'none',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    width: '24px',
-    height: '20px',
-    cursor: 'pointer',
-    zIndex: 1001,
-    position: 'absolute', // Ekleme: Hamburger menüsü konumu için
-    right: '20px', // Ekleme: Sağ kenardan 20px içeride
-    
-    '@media (max-width: 768px)': {
-      display: 'flex',
-    }
-  },
+  
+  
   
   bar: {
     height: '2px',

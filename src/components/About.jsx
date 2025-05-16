@@ -10,7 +10,7 @@ const About = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
   return (
-    <>
+    <div style={styles.container}> {/* Ana sarmalayıcı eklendi ve stil uygulandı */}
       <h2 style={styles.title}>{translations[language].about.title}</h2>
       <div className="blur-bg" style={styles.content}>
         <div style={styles.textContent}>
@@ -43,158 +43,144 @@ const About = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 const styles = {
   container: {
-    padding: 'var(--section-padding)',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    minHeight: '100vh',
+    paddingTop: '120px', // Navbar için daha fazla boşluk bırakıldı (önceki 80px yerine)
+    paddingBottom: 'var(--section-padding, 20px)',
+    paddingLeft: 'var(--section-padding, 20px)',
+    paddingRight: 'var(--section-padding, 20px)',
     backgroundColor: 'transparent',
     position: 'relative',
     zIndex: 1,
-    textAlign: 'left', // Sola hizala
+    overflowY: 'auto',
+    WebkitOverflowScrolling: 'touch',
+  },
+  title: { 
+    color: 'var(--primary-color)',
+    fontSize: 'var(--heading-medium, 2.5rem)',
+    textAlign: 'center',
+    marginBottom: '30px',
+    width: '100%', 
+    position: 'relative',
+    zIndex: 2,
+    marginTop: '0px', // Başlığın üstten boşluğu sıfırlandı
+    '@media (max-width: 768px)': {
+      fontSize: 'var(--heading-small, 2rem)',
+      marginBottom: '20px',
+    },
+    '@media (max-width: 480px)': {
+      fontSize: '1.8rem',
+    }
   },
   content: {
-    width: '100%', // Tam genişlik
-    // maxWidth ve margin kaldırıldı
+    width: '100%',
+    maxWidth: '900px', // Eklendi - İçerik genişliği
     display: 'flex',
-    gap: '50px',
-    alignItems: 'center',
-    flexDirection: 'column',
-    textAlign: 'left',
-    '@media (max-width: 768px)': {
-      flexDirection: 'column',
-      position: 'relative',
-      padding: '20px',
-      WebkitBackdropFilter: 'blur(10px)',
-      backdropFilter: 'blur(10px)',
-      backgroundColor: 'rgba(15, 23, 42, 0.7)',
-      borderRadius: '20px',
-      border: '1px solid rgba(255, 255, 255, 0.1)',
-      boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
-      WebkitTransform: 'translate3d(0, 0, 0)',
-      transform: 'translate3d(0, 0, 0)',
-      WebkitPerspective: '1000',
-      perspective: '1000',
-      WebkitBackfaceVisibility: 'hidden',
-      backfaceVisibility: 'hidden'
-    },
-    '@media (min-width: 768px)': {
+    flexDirection: 'column', // Değiştirildi - Mobil öncelikli
+    alignItems: 'center', // Eklendi
+    textAlign: 'center', // Değiştirildi
+    padding: '20px', // Eklendi - Mobil için genel padding
+    '@media (min-width: 768px)': { // Masaüstü için düzenlemeler
       flexDirection: 'row',
+      textAlign: 'left',
+      gap: '50px',
+      alignItems: 'flex-start', // Hizalamayı başa al
     }
   },
   textContent: {
     flex: 1,
-    textAlign: 'left', // Sola hizala
-    '@media (max-width: 768px)': {
-      padding: '10px',
+    textAlign: 'center', // Mobil için merkezde
+    '@media (min-width: 768px)': { // Masaüstü için sola hizalı
+      textAlign: 'left',
     }
   },
   descriptionContainer: {
-    width: '100%', // Tam genişlik
-    // maxWidth ve margin kaldırıldı
-    textAlign: 'left',
+    width: '100%',
+    textAlign: 'center', // Mobil için merkezde
     hyphens: 'auto',
     WebkitHyphens: 'auto',
     msHyphens: 'auto',
-    '@media (max-width: 768px)': {
-      padding: '15px',
-      borderRadius: '15px',
+    marginBottom: '30px', // Eklendi - Yetenekler bölümüyle araya boşluk
+    '@media (min-width: 768px)': { // Masaüstü için sola hizalı
+      textAlign: 'left',
     }
   },
   description: {
-    fontSize: '1.2rem',
-    lineHeight: '1.8',
+    fontSize: '1.1rem', // Değiştirildi - Mobil için daha uygun
+    lineHeight: '1.7', // Değiştirildi
     color: 'var(--text-color)',
-    marginBottom: '20px',
-    textAlign: 'left',
-    padding: '0 0 0 0', // padding kaldırıldı
-    '@media (max-width: 768px)': {
-      fontSize: '1.1rem',
-      lineHeight: '1.6',
+    marginBottom: '15px', // Değiştirildi
+    textAlign: 'center', // Mobil için merkezde
+    '@media (min-width: 768px)': { // Masaüstü için sola hizalı
+      fontSize: '1.2rem',
+      lineHeight: '1.8',
+      textAlign: 'left',
     },
   },
   skills: {
-    marginTop: '30px',
-    textAlign: 'left', // Sola hizala
+    marginTop: '0', // Değiştirildi
+    textAlign: 'center', // Mobil için merkezde
+    width: '100%', // Eklendi - Tam genişlik kaplaması için
+    '@media (min-width: 768px)': { // Masaüstü için sola hizalı
+      textAlign: 'left',
+      marginTop: '30px',
+    }
   },
   skillsTitle: {
     color: 'var(--primary-color)',
-    fontSize: '1.5rem',
-    marginBottom: '20px',
-    textAlign: 'left', // Sola hizala
+    fontSize: '1.3rem', // Değiştirildi - Mobil için
+    marginBottom: '15px', // Değiştirildi
+    textAlign: 'center', // Mobil için merkezde
+    '@media (min-width: 768px)': { // Masaüstü için sola hizalı
+      fontSize: '1.5rem',
+      textAlign: 'left',
+      marginBottom: '20px',
+    }
   },
   skillTags: {
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '12px',
-    justifyContent: 'flex-start', // Sola hizala
+    gap: '10px', // Değiştirildi - Mobil için daha az boşluk
+    justifyContent: 'center', // Mobil için merkezde
     alignItems: 'center',
+    '@media (min-width: 768px)': { // Masaüstü için sola hizalı
+      justifyContent: 'flex-start',
+      gap: '12px',
+    }
   },
   skillTag: {
     backgroundColor: 'var(--bg-secondary)',
     color: 'var(--text-color)',
-    padding: '8px 16px',
+    padding: '8px 12px', // Değiştirildi - Mobil için daha kompakt
     borderRadius: '20px',
-    fontSize: '1rem',
+    fontSize: '0.9rem', // Değiştirildi - Mobil için
     boxShadow: 'var(--card-shadow)',
     transition: 'var(--transition)',
     border: '1px solid rgba(255, 255, 255, 0.05)',
     cursor: 'pointer',
-    display: 'inline-flex', // Eklendi
-    alignItems: 'center', // Eklendi
-    justifyContent: 'center', // Eklendi
-  },
-  skillTagHovered: {
-    backgroundColor: 'rgba(241, 196, 15, 0.1)', // Sarı rengin hafif arkaplanı
-    color: 'var(--primary-color)', // Sarı renk
-    borderColor: 'var(--primary-color)', // Sarı kenarlık
-    transform: 'translateY(-3px)', // Hafif yukarı kalkma efekti
-    boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)', // Daha belirgin gölge
-  },
-  imageContainer: {
-    position: 'relative',
-    width: '300px',
-    height: '300px',
-    flexShrink: 0,
-  },
-  imageFrame: {
-    width: '100%',
-    height: '100%',
-    borderRadius: '50%',
-    overflow: 'hidden',
-    boxShadow: 'var(--card-shadow)',
-  },
-  imagePlaceholder: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
+    display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'var(--bg-secondary)',
+    '@media (min-width: 768px)': { // Masaüstü için orijinal boyutlar
+      padding: '8px 16px',
+      fontSize: '1rem',
+    }
   },
-  imagePlaceholderText: {
-    color: 'var(--text-color)',
-    fontSize: '1.2rem',
-  },
-  experienceBox: {
-    position: 'absolute',
-    bottom: '-20px',
-    right: '-20px',
-    backgroundColor: 'var(--primary-color)',
-    color: 'white',
-    padding: '10px 20px',
-    borderRadius: '10px',
-    boxShadow: 'var(--card-shadow)',
-    textAlign: 'center',
-  },
-  experienceNumber: {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-  },
-  experienceText: {
-    fontSize: '1rem',
+  skillTagHovered: {
+    backgroundColor: 'rgba(var(--primary-color-rgb), 0.1)',
+    color: 'var(--primary-color)',
+    borderColor: 'var(--primary-color)',
+    transform: 'translateY(-3px)',
+    boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)',
   },
 };
 
