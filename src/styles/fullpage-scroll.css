@@ -42,7 +42,7 @@
 /* Her bölüm görünür olmadığında içerik hafifçe yukarıdan gelsin */
 .section:not(.active) .section-content {
   opacity: 0.8;
-  transform: translateY(20px);
+  transform: translateY(10px);
 }
 
 /* Özel kaydırma çubuğu */

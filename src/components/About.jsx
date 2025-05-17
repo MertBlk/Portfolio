@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../Context/LanguageContext';
 
 const About = () => {
@@ -8,9 +8,34 @@ const About = () => {
   ];
 
   const [hoveredSkill, setHoveredSkill] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // Ekran genişliğini izlemek için useEffect
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Ekran genişliğine göre paddingTop değerini belirleme
+  const getPaddingTop = () => {
+    if (windowWidth <= 480) return '450px'; // Daha fazla padding
+    if (windowWidth <= 768) return '500px'; // Daha fazla padding
+    return '60rem !important'; // Daha fazla padding - Büyük ekranlar için
+  };
+
+  // Container için dinamik stil
+  const containerStyle = {
+    ...styles.container,
+    paddingTop: getPaddingTop(),
+    justifyContent: 'center', // İçeriği dikey olarak ortalamak için değiştirildi
+  };
 
   return (
-    <div style={styles.container}> {/* Ana sarmalayıcı eklendi ve stil uygulandı */}
+    <div style={containerStyle}>
       <h2 style={styles.title}>{translations[language].about.title}</h2>
       <div className="blur-bg" style={styles.content}>
         <div style={styles.textContent}>
@@ -52,9 +77,9 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     minHeight: '100vh',
-    paddingTop: '120px', // Navbar için daha fazla boşluk bırakıldı (önceki 80px yerine)
+    // paddingTop artık dinamik olarak atanacak
     paddingBottom: 'var(--section-padding, 20px)',
     paddingLeft: 'var(--section-padding, 20px)',
     paddingRight: 'var(--section-padding, 20px)',
@@ -67,102 +92,66 @@ const styles = {
   title: { 
     color: 'var(--primary-color)',
     fontSize: 'var(--heading-medium, 2.5rem)',
-    textAlign: 'center',
+    textAlign: 'left', // "center"den "left"e değiştirildi
     marginBottom: '30px',
     width: '100%', 
     position: 'relative',
     zIndex: 2,
-    marginTop: '0px', // Başlığın üstten boşluğu sıfırlandı
-    '@media (max-width: 768px)': {
-      fontSize: 'var(--heading-small, 2rem)',
-      marginBottom: '20px',
-    },
-    '@media (max-width: 480px)': {
-      fontSize: '1.8rem',
-    }
+    marginTop: '0px',
   },
   content: {
     width: '100%',
-    maxWidth: '900px', // Eklendi - İçerik genişliği
+    maxWidth: '900px',
     display: 'flex',
-    flexDirection: 'column', // Değiştirildi - Mobil öncelikli
-    alignItems: 'center', // Eklendi
-    textAlign: 'center', // Değiştirildi
-    padding: '20px', // Eklendi - Mobil için genel padding
-    '@media (min-width: 768px)': { // Masaüstü için düzenlemeler
-      flexDirection: 'row',
-      textAlign: 'left',
-      gap: '50px',
-      alignItems: 'flex-start', // Hizalamayı başa al
-    }
+    flexDirection: 'column',
+    alignItems: 'flex-start', // "center"den "flex-start"a değiştirildi
+    textAlign: 'left', // "center"den "left"e değiştirildi
+    padding: '20px',
   },
   textContent: {
     flex: 1,
-    textAlign: 'center', // Mobil için merkezde
-    '@media (min-width: 768px)': { // Masaüstü için sola hizalı
-      textAlign: 'left',
-    }
+    textAlign: 'left', // "center"den "left"e değiştirildi
+    width: '100%',
   },
   descriptionContainer: {
     width: '100%',
-    textAlign: 'center', // Mobil için merkezde
+    textAlign: 'left', // "center"den "left"e değiştirildi
     hyphens: 'auto',
     WebkitHyphens: 'auto',
     msHyphens: 'auto',
-    marginBottom: '30px', // Eklendi - Yetenekler bölümüyle araya boşluk
-    '@media (min-width: 768px)': { // Masaüstü için sola hizalı
-      textAlign: 'left',
-    }
+    marginBottom: '30px',
   },
   description: {
-    fontSize: '1.1rem', // Değiştirildi - Mobil için daha uygun
-    lineHeight: '1.7', // Değiştirildi
+    fontSize: '1.1rem',
+    lineHeight: '1.7',
     color: 'var(--text-color)',
-    marginBottom: '15px', // Değiştirildi
-    textAlign: 'center', // Mobil için merkezde
-    '@media (min-width: 768px)': { // Masaüstü için sola hizalı
-      fontSize: '1.2rem',
-      lineHeight: '1.8',
-      textAlign: 'left',
-    },
+    marginBottom: '15px',
+    textAlign: 'left', // "center"den "left"e değiştirildi
   },
   skills: {
-    marginTop: '0', // Değiştirildi
-    textAlign: 'center', // Mobil için merkezde
-    width: '100%', // Eklendi - Tam genişlik kaplaması için
-    '@media (min-width: 768px)': { // Masaüstü için sola hizalı
-      textAlign: 'left',
-      marginTop: '30px',
-    }
+    marginTop: '0',
+    textAlign: 'left', // "center"den "left"e değiştirildi
+    width: '100%',
   },
   skillsTitle: {
     color: 'var(--primary-color)',
-    fontSize: '1.3rem', // Değiştirildi - Mobil için
-    marginBottom: '15px', // Değiştirildi
-    textAlign: 'center', // Mobil için merkezde
-    '@media (min-width: 768px)': { // Masaüstü için sola hizalı
-      fontSize: '1.5rem',
-      textAlign: 'left',
-      marginBottom: '20px',
-    }
+    fontSize: '1.3rem',
+    marginBottom: '15px',
+    textAlign: 'left', // "center"den "left"e değiştirildi
   },
   skillTags: {
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '10px', // Değiştirildi - Mobil için daha az boşluk
-    justifyContent: 'center', // Mobil için merkezde
+    gap: '10px',
+    justifyContent: 'flex-start', // "center"den "flex-start"a değiştirildi
     alignItems: 'center',
-    '@media (min-width: 768px)': { // Masaüstü için sola hizalı
-      justifyContent: 'flex-start',
-      gap: '12px',
-    }
   },
   skillTag: {
     backgroundColor: 'var(--bg-secondary)',
     color: 'var(--text-color)',
-    padding: '8px 12px', // Değiştirildi - Mobil için daha kompakt
+    padding: '8px 12px',
     borderRadius: '20px',
-    fontSize: '0.9rem', // Değiştirildi - Mobil için
+    fontSize: '0.9rem',
     boxShadow: 'var(--card-shadow)',
     transition: 'var(--transition)',
     border: '1px solid rgba(255, 255, 255, 0.05)',
@@ -170,10 +159,6 @@ const styles = {
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    '@media (min-width: 768px)': { // Masaüstü için orijinal boyutlar
-      padding: '8px 16px',
-      fontSize: '1rem',
-    }
   },
   skillTagHovered: {
     backgroundColor: 'rgba(var(--primary-color-rgb), 0.1)',
