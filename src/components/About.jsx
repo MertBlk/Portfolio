@@ -70,7 +70,7 @@ const styles = {
   title: { 
     color: 'var(--primary-color)',
     fontSize: 'var(--heading-medium, 2.5rem)',
-    textAlign: 'left', // "center"den "left"e değiştirildi
+    textAlign: 'left', // "center"dan "left"e değiştirildi
     marginBottom: '30px',
     width: '100%', 
     position: 'relative',
@@ -82,18 +82,18 @@ const styles = {
     maxWidth: '900px',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-start', // "center"den "flex-start"a değiştirildi
-    textAlign: 'left', // "center"den "left"e değiştirildi
+    alignItems: 'flex-start', // "center"dan "flex-start"a değiştirildi
+    textAlign: 'left', // "center"dan "left"e değiştirildi
     padding: '20px',
   },
   textContent: {
     flex: 1,
-    textAlign: 'left', // "center"den "left"e değiştirildi
+    textAlign: 'left', // "center"dan "left"e değiştirildi
     width: '100%',
   },
   descriptionContainer: {
     width: '100%',
-    textAlign: 'left', // "center"den "left"e değiştirildi
+    textAlign: 'left', // "center"dan "left"e değiştirildi
     hyphens: 'auto',
     WebkitHyphens: 'auto',
     msHyphens: 'auto',
@@ -104,24 +104,24 @@ const styles = {
     lineHeight: '1.7',
     color: 'var(--text-color)',
     marginBottom: '15px',
-    textAlign: 'left', // "center"den "left"e değiştirildi
+    textAlign: 'left', // "center"dan "left"e değiştirildi
   },
   skills: {
     marginTop: '0',
-    textAlign: 'left', // "center"den "left"e değiştirildi
+    textAlign: 'left', // "center"dan "left"e değiştirildi
     width: '100%',
   },
   skillsTitle: {
     color: 'var(--primary-color)',
     fontSize: '1.3rem',
     marginBottom: '15px',
-    textAlign: 'left', // "center"den "left"e değiştirildi
+    textAlign: 'left', // "center"dan "left"e değiştirildi
   },
   skillTags: {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '10px',
-    justifyContent: 'flex-start', // "center"den "flex-start"a değiştirildi
+    justifyContent: 'flex-start', // "center"dan "flex-start"a değiştirildi
     alignItems: 'center',
   },
   skillTag: {
