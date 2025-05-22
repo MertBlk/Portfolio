@@ -1,42 +1,46 @@
-/* Fullpage Scroll Styles */
+/* Fullpage Scroll Styles - Optimize edilmiş ve sorunlar giderilmiş */
 .section-container {
   height: 100vh;
-  overflow: hidden;
   position: relative;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth; /* Bu özelliğin süresi browser tarafından belirlenir */
-  overflow-y: scroll;
-  scroll-timeline: --sectionScroll block;
+  scroll-snap-type: y mandatory; /* proximity yerine mandatory ile daha kesin kaydırma */
+  scroll-behavior: smooth;
+  overflow-y: auto; /* scroll yerine auto kullanarak gereksiz kaydırma çubuklarını engelle */
+  overscroll-behavior: contain; /* Mobil safari ve chrome için taşmanın önlenmesi */
+  -webkit-overflow-scrolling: touch;
 }
 
 .section {
-  height: 100vh;
+  min-height: 100% !important; /* 100vh yerine 100% kullanarak gereksiz yükseklikleri engelleyelim */
+  height: auto !important;
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* İçeriğin yukarıdan başlamasını sağla */
   align-items: center;
   position: relative;
   scroll-snap-align: start;
-  overflow: hidden;
+  overflow: visible; /* İçeriğin taşmasına izin ver */
+  padding-top: 100px; /* Navbar için alan bırak */
+  padding-bottom: 20px !important; /* Alt boşluğu azaltalım */
+  box-sizing: border-box;
 }
 
 .section-content {
   width: 100%;
-  max-width: 1400px;
-  padding: 0 15px;
+  max-width: 1200px; /* Daha dar bir maksimum genişlik */
+  padding: 20px 15px; /* Daha fazla dikey boşluk */
   box-sizing: border-box;
   position: relative;
   z-index: 10;
   opacity: 1;
   transform: translateY(0);
-  transition: opacity var(--content-transition-duration) ease, transform var(--content-transition-duration) ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
   
   /* Mobil görünümde içeriğin taşmasını önlemek için */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  overflow-x: hidden; /* Yatay taşmayı engelle */
 }
 
 /* Her bölüm görünür olmadığında içerik hafifçe yukarıdan gelsin */
@@ -45,46 +49,42 @@
   transform: translateY(10px);
 }
 
-/* Özel kaydırma çubuğu */
+/* Özel kaydırma çubuğu - daha ince ve daha az göze çarpan */
 .section-container::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 .section-container::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .section-container::-webkit-scrollbar-thumb {
   background: var(--primary-color);
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
-.section-container::-webkit-scrollbar-thumb:hover {
-  background: rgba(158, 79, 196, 0.8);
-}
-
-/* Gezinme noktaları */
+/* Gezinme noktaları - mobil cihazlarda daha iyi konumlanmış */
 .navigation-dots {
   position: fixed;
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 100;
+  z-index: 1000; /* Öncelik arttırıldı */
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.2); /* Daha görünür arka plan */
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Daha belirgin gölge */
-  backdrop-filter: blur(5px); /* Daha belirgin bulanıklık */
-  pointer-events: auto; /* Tıklamaların düzgün çalışmasını sağlar */
-  transition: all 0.3s ease; /* Hover efekti için geçiş */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  pointer-events: auto;
+  transition: all 0.3s ease;
 }
 
 /* Hover halinde daha belirgin görünüm */
 .navigation-dots:hover {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
@@ -100,7 +100,7 @@
     flex-direction: row; /* Yatay düzenleme */
     padding: 8px 12px; /* Yatay alan için padding değiştir */
     gap: 8px; /* Mobilde dots arası boşluk */
-    background-color: rgba(0, 0, 0, 0.3); /* Daha koyu arka plan */
+    background-color: rgba(0, 0, 0, 0.4); /* Daha koyu arka plan */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Daha belirgin gölge */
     border-radius: 30px; /* Daha yuvarlak kenarlar */
     position: fixed; /* Mutlaka sabitlenmiş olsun */
@@ -171,76 +171,109 @@
   z-index: -1; /* Ana noktanın altında */
 }
 
-/* Geçiş animasyonu */
-.section {
-  transition: transform var(--scroll-transition-duration) cubic-bezier(0.25, 0.1, 0.25, 1);
+/* Hero section için daha fazla aşağıda görünmesini sağlayacak stil */
+.section.hero-section {
+  justify-content: center !important;
+  align-items: center !important;
+  padding-top: 0 !important;
+  display: flex !important;
+  min-height: 100vh !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 
-/* Mobil uyumluluk */
+/* Hero içeriği için daha fazla margin ekleyelim (çok aşağıda görünmesi için) */
+.hero-section .section-content {
+  margin-top: 60px !important; /* Önemli ölçüde artırıldı */
+}
+
+/* About bölümü için padding'i daha da azaltalım */
+.about-section, 
+div[id="about"],
+section[id="about"] {
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  padding-top: 20px !important; /* 80px'den 20px'e düşürdük */
+  margin-top: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Mobil düzenlemeler - daha spesifik */
 @media (max-width: 768px) {
+  /* Hero mobil düzeltme */
+  .hero-section .section-content {
+    margin-top: 90px !important; /* Telefonda daha aşağıda görünsün */
+    margin-bottom: 0 !important;
+  }
+  
+  /* About mobil düzeltme */
+  .section.about-section,
+  div[id="about"].section,
+  section[id="about"].section {
+    padding-top: 10px !important; /* 60px'den 10px'e düşürüldü */
+    margin-top: 0 !important;
+  }
+  
+  /* Navigation dots'un konumunu ayarla */
   .navigation-dots {
-    right: 10px;
-    /* Dot'ların liste olarak görünmemesi için */
-    max-height: 70vh; /* Maksimum yükseklik */
-    overflow-y: visible; /* Taşma olmasın */
+    bottom: 5px !important;
+  }
+}
+
+/* Çok küçük ekranlar için */
+@media (max-width: 480px) {
+  /* Hero mobil düzeltme */
+  .hero-section .section-content {
+    margin-top: 100px !important; /* Daha da aşağı */
+  }
+  
+  /* About mobil düzeltme */
+  .section.about-section,
+  div[id="about"].section,
+  section[id="about"].section {
+    padding-top: 50px !important; /* 100px'den 50px'e düşürüldü */
+  }
+}
+
+/* iPhone SE gibi çok küçük ekranlar için daha fazla optimizasyon */
+@media (max-width: 375px) {
+  .section {
+    padding-top: 60px;
+  }
+  
+  .navigation-dots {
+    bottom: 10px;
+    padding: 5px 8px;
+    gap: 5px;
   }
   
   .dot {
-    width: 12px; /* Dokunmatik için uygun boyut */
-    height: 12px;
-    margin: 12px 0; /* Yeterli boşluk */
-    position: relative;
-    flex-shrink: 0; /* Dots'ların küçülmesini engelle */
+    width: 6px;
+    height: 6px;
   }
-  
-  /* Mobil cihazlarda noktalara tıklama alanını artır */
-  .dot::before {
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-  }
-  
-  /* Noktalar aktif olduğunda daha belirgin olsun */
-  .dot.active {
-    transform: scale(1.3); /* Çok büyük olmasın */
-    box-shadow: 0 0 15px var(--primary-color);
-    background-color: var(--primary-color);
-  }
-  
-  /* Section-container için daha iyi scroll davranışı */
-  .section-container {
-    scroll-snap-type: y mandatory;
-    -webkit-overflow-scrolling: touch; /* iOS cihazlarda daha iyi scroll */
-  }
-  
-  /* Mobil cihazlarda section içeriğini daha iyi yerleştir */
+}
+
+/* Yatay mod için özel ayarlar */
+@media (max-height: 500px) and (orientation: landscape) {
   .section {
-    padding: 0 10px; /* İçeriğin kenarlara çok yakın olmasını önle */
+    padding-top: 50px;
+    min-height: 120vh; /* Yatay modda daha fazla alan */
   }
   
-  /* Mobilde kaydırma oku daha belirgin görünsün */
-  .scroll-arrow {
-    bottom: 40px; /* Navigation dots'larla çakışmasın */
-    opacity: 0.9;
+  .navigation-dots {
+    top: 50%;
+    right: 10px;
+    bottom: auto;
+    left: auto;
+    transform: translateY(-50%);
+    flex-direction: column;
   }
 }
 
-/* Scroll arrow animation */
+/* Scroll arrow animation - daha az dikkat dağıtan animasyon */
 .scroll-arrow {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: bounce 3s infinite;
-  cursor: pointer;
-  z-index: 100;
-  opacity: 0.7;
-  transition: opacity var(--content-transition-duration) ease;
-}
-
-.scroll-arrow:hover {
-  opacity: 1;
+  display: none !important; /* Okun görünmesini engelleyelim */
 }
 
 @keyframes bounce {
@@ -248,106 +281,20 @@
     transform: translateX(-50%) translateY(0);
   }
   40% {
-    transform: translateX(-50%) translateY(-20px);
+    transform: translateX(-50%) translateY(-15px);
   }
   60% {
-    transform: translateX(-50%) translateY(-10px);
+    transform: translateX(-50%) translateY(-7px);
   }
 }
 
-/* Farklı ekran boyutları için ek medya sorguları */
-/* iPhone SE gibi çok küçük ekranlar için */
-@media (max-width: 375px) {
-  .navigation-dots {
-    bottom: 15px;
-    padding: 6px 8px;
-    gap: 6px;
-  }
-  
-  .navigation-dots .dot {
-    width: 8px;
-    height: 8px;
-  }
-  
-  .section-content {
-    padding: 0 10px;
-  }
-  
-  .scroll-arrow {
-    bottom: 50px;
-  }
-}
-
-/* Çok uzun ekranlı telefonlar için (iPhone 12 Pro Max gibi) */
-@media (max-height: 900px) and (max-width: 480px) {
-  .navigation-dots {
-    bottom: 15px;
+/* iOS ve Safari için ek düzeltmeler */
+@supports (-webkit-touch-callout: none) {
+  .section-container {
+    height: -webkit-fill-available; /* iOS'ta 100vh sorununu çözmek için */
   }
   
   .section {
-    justify-content: flex-start;
-    padding-top: 70px; /* Navbar'ın altında yeterli alan bırak */
+    min-height: -webkit-fill-available;
   }
-}
-
-/* Çok geniş fakat kısa ekranlar için (Landscape mod) */
-@media (max-height: 500px) and (orientation: landscape) {
-  .navigation-dots {
-    top: 50%;
-    right: 10px;
-    bottom: unset;
-    transform: translateY(-50%);
-    flex-direction: column;
-    padding: 8px;
-    gap: 8px;
-  }
-  
-  .dot {
-    width: 8px;
-    height: 8px;
-    margin: 5px 0;
-  }
-  
-  .section {
-    padding-top: 30px;
-  }
-  
-  .scroll-arrow {
-    display: none; /* Yatay modda ok gösterme */
-  }
-}
-
-/* Navigation dots mobil sınıfı için özel stillendirme */
-.navigation-dots.mobile {
-  /* Sabit bir konumda olması yerine, taşınabilir olması için */
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  right: auto;
-  top: auto;
-  
-  /* Daha iyi görünüm */
-  backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 0, 0.5);
-  
-  /* Yatay düzen */
-  flex-direction: row;
-  justify-content: center;
-  padding: 8px 15px;
-  
-  /* Kenarları daha yuvarlak */
-  border-radius: 50px;
-  
-  /* Daha iyi gölge */
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
-  
-  /* Z-indeksini yüksek tut */
-  z-index: 2000;
-}
-
-.navigation-dots.mobile .dot {
-  width: 10px;
-  height: 10px;
-  margin: 0 6px;
 }

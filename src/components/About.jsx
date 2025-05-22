@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '../Context/LanguageContext';
 
 const About = () => {
@@ -8,31 +8,9 @@ const About = () => {
   ];
 
   const [hoveredSkill, setHoveredSkill] = useState(null);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  // Ekran genişliğini izlemek için useEffect
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Ekran genişliğine göre paddingTop değerini belirleme
-  const getPaddingTop = () => {
-    if (windowWidth <= 480) return '450px'; // Daha fazla padding
-    if (windowWidth <= 768) return '500px'; // Daha fazla padding
-    return '60rem !important'; // Daha fazla padding - Büyük ekranlar için
-  };
 
   // Container için dinamik stil
-  const containerStyle = {
-    ...styles.container,
-    paddingTop: getPaddingTop(),
-    justifyContent: 'center', // İçeriği dikey olarak ortalamak için değiştirildi
-  };
+  const containerStyle = styles.container;
 
   return (
     <div style={containerStyle}>
