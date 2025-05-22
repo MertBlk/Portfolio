@@ -75,7 +75,7 @@ const styles = {
     width: '100%', 
     position: 'relative',
     zIndex: 2,
-    marginTop: '0px',
+    marginTop: '120px', // 0px'den 20px'e değiştirildi
   },
   content: {
     width: '100%',

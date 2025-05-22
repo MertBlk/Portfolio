@@ -211,7 +211,7 @@ section[id="about"] {
   .section.about-section,
   div[id="about"].section,
   section[id="about"].section {
-    padding-top: 10px !important; /* Bu değer zaten oldukça düşük, şimdilik değiştirilmedi. Sorun devam ederse tekrar değerlendirilir. */
+    padding-top: 30px !important; /* 10px'den 30px'e artırıldı */
     margin-top: 0 !important;
   }
   
@@ -232,7 +232,7 @@ section[id="about"] {
   .section.about-section,
   div[id="about"].section,
   section[id="about"].section {
-    padding-top: 20px !important; /* 50px'den 20px'e düşürüldü */
+    padding-top: 40px !important; /* 20px'den 40px'e artırıldı */
   }
 }
 
