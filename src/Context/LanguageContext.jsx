@@ -31,7 +31,10 @@ export const LanguageProvider = ({ children }) => {
       // Projects bölümü
       projects: {
         title: "Projeler",
-        viewProject: "Projeyi İncele"
+        viewProject: "Projeyi İncele",
+        viewCode: "Kodu Görüntüle",
+        features: "Özellikler",
+        description: "Tamamladığım veya üzerinde çalıştığım bazı projeleri görebilirsiniz."
       },
       
       // Contact bölümü
@@ -132,7 +135,10 @@ export const LanguageProvider = ({ children }) => {
       // Projects section
       projects: {
         title: "Projects",
-        viewProject: "View Project"
+        viewProject: "View Project",
+        viewCode: "View Code",
+        features: "Features",
+        description: "You can see some of the projects I have completed or worked on."
       },
       
       // Contact section

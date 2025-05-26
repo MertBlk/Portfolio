@@ -42,7 +42,7 @@ function App() {
                   </div>
                 </section>
                 <section id="projects" className="section">
-                  <div className="section-content">
+                  <div className="section-content" style={{padding: '20px 0 60px 0'}}>
                     <Projects />
                   </div>
                 </section>

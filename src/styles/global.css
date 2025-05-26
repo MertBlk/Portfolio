@@ -81,6 +81,72 @@ input, textarea {
   }
 }
 
+/* Görsel yükleme optimizasyonları */
+img {
+  transition: opacity 0.3s ease, transform 0.5s ease;
+}
+
+img.loading {
+  opacity: 0.3;
+  filter: blur(5px);
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-image {
+  opacity: 0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Proje bileşenleri için özel stillemeler */
+.section#projects .section-content {
+  max-width: 1500px; /* Projects için daha dengeli maksimum genişlik */
+  padding: 0 20px; /* İçeriğe ekstra yatay boşluk */
+}
+
+/* Proje galerisi içindeki görsellerin tam görünmesi için */
+.gallery-image {
+  max-height: 100%;
+  width: auto !important;
+  margin: 0 auto;
+  object-fit: contain !important;
+  display: block;
+}
+
+.image-loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Safari için özel düzenleme */
 @media not all and (min-resolution:.001dpcm) { 
   @supports (-webkit-appearance:none) {
@@ -95,7 +161,16 @@ input, textarea {
   .section {
     padding: 60px 15px 15px 15px;
   }
-  /* .section-content için mobil özel ayarı gerekirse buraya eklenebilir */
+  
+  /* Projeler bölümü için mobil ayarlar */
+  .section#projects .section-content {
+    padding: 0 10px;
+  }
+  
+  /* Galeri görüntülerinin daha iyi görünmesi için */
+  .gallery-image {
+    max-height: 350px;
+  }
 }
 
 @media (max-width: 480px) {
