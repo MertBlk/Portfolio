@@ -56,17 +56,9 @@
 
 /* Mobile için sağa kaydırma ipucu (scroll hint) */
 .project-list::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 30px;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0), var(--bg-color, rgba(0, 0, 0, 0.3)) 90%);
-  pointer-events: none;
-  opacity: 0.8;
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
+  display: none !important;
+  content: none !important;
+  background: none !important;
 }
 
 .project-tab {

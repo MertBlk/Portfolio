@@ -9,120 +9,150 @@ const About = () => {
 
   const [hoveredSkill, setHoveredSkill] = useState(null);
 
-  // Container için dinamik stil
-  const containerStyle = styles.container;
-
   return (
-    <div style={containerStyle}>
-      <h2 style={styles.title}>{translations[language].about.title}</h2>
-      <div className="blur-bg" style={styles.content}>
-        <div style={styles.textContent}>
-          <div style={styles.descriptionContainer}>
-            <p style={styles.description}>
-              {translations[language].about.description}
-            </p>
-            <p style={{...styles.description, marginTop: '20px'}}>
-              {translations[language].about.description2}
-            </p>
-          </div>
-          
-          <div style={styles.skills}>
-            <h3 style={styles.skillsTitle}>{translations[language].about.skills}</h3>
-            <div style={styles.skillTags}>
-              {skills.map((skill, index) => (
-                <span 
-                  key={index} 
-                  style={{
-                    ...styles.skillTag,
-                    ...(hoveredSkill === index ? styles.skillTagHovered : {})
-                  }}
-                  onMouseEnter={() => setHoveredSkill(index)}
-                  onMouseLeave={() => setHoveredSkill(null)}
-                >
-                  {skill}
-                </span>
+    <section id="about" className="section">
+      <div className="section-content" style={styles.customSectionContent}> {/* .section-content ve özel stiller */}
+        <div style={styles.mainLayout}> 
+          <div style={styles.leftPanel}> 
+            <h2 style={styles.verticalTitle}>
+              {translations[language].about.title.split('').map((char, index) => (
+                <span key={index} style={styles.verticalChar}>{char}</span>
               ))}
+            </h2>
+          </div>
+
+          <div style={styles.rightPanel}> 
+            <div className="blur-bg" style={styles.content}>
+              <div style={styles.textContent}>
+                <div style={styles.descriptionContainer}>
+                  <p style={styles.description}>
+                    {translations[language].about.description}
+                  </p>
+                  <p style={{...styles.description, marginTop: '20px'}}>
+                    {translations[language].about.description2}
+                  </p>
+                </div>
+                
+                <div style={styles.skills}>
+                  <h3 style={styles.skillsTitle}>{translations[language].about.skills}</h3>
+                  <div style={styles.skillTags}>
+                    {skills.map((skill, index) => (
+                      <span 
+                        key={index} 
+                        style={styles.skillTag}>
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
 const styles = {
-  container: {
+  customSectionContent: { // .section-content için özel stil
+    display: 'flex', // mainLayout'un düzgün çalışması için
+    alignItems: 'stretch', // mainLayout'un tüm yüksekliği kullanması için
+    padding: '0', // global.css'teki padding'i sıfırla, mainLayout yönetecek
+    margin: '0 auto', // Ortalamayı koru
+    maxWidth: '1200px' // About için özel maksimum genişlik
+  },
+  mainLayout: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'flex-start', 
+    gap: '40px', 
+    padding: '20px', // İçerik için padding
+  },
+  leftPanel: {
+    display: 'flex',
+    justifyContent: 'center',
+    paddingTop: '20px', // Başlığın biraz aşağıdan başlaması için
+  },
+  verticalTitle: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '100vh',
-    // paddingTop artık dinamik olarak atanacak
-    paddingBottom: 'var(--section-padding, 20px)',
-    paddingLeft: 'var(--section-padding, 20px)',
-    paddingRight: 'var(--section-padding, 20px)',
-    backgroundColor: 'transparent',
-    position: 'relative',
-    zIndex: 1,
-    overflowY: 'auto',
-    WebkitOverflowScrolling: 'touch',
-  },
-  title: { 
+    justifyContent: 'flex-start',
     color: 'var(--primary-color)',
-    fontSize: 'var(--heading-medium, 2.5rem)',
-    textAlign: 'left', // "center"dan "left"e değiştirildi
-    marginBottom: '30px',
-    width: '100%', 
-    position: 'relative',
-    zIndex: 2,
-    marginTop: '120px', // 0px'den 20px'e değiştirildi
+    fontSize: '3.5rem',
+    fontWeight: "light",
+    letterSpacing: '0.1em',
+    margin: 0,
+    padding: 0,
+    lineHeight: 1,
+    textAlign: 'center',
+    background: 'none',
+    border: 'none',
+    boxShadow: 'none',
+  },
+  verticalChar: {
+    display: 'block',
+    padding: 0,
+    margin: 0,
+    lineHeight: 1,
+  },
+  rightPanel: {
+    flex: 1, // Kalan alanı kaplasın
+    display: 'flex',
+    flexDirection: 'column',
+    paddingTop: '20px', // İçeriğin başlıkla hizalanması için
   },
   content: {
     width: '100%',
-    maxWidth: '900px',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-start', // "center"dan "flex-start"a değiştirildi
-    textAlign: 'left', // "center"dan "left"e değiştirildi
-    padding: '20px',
+    alignItems: 'flex-start',
+    textAlign: 'left',
+    padding: '0px', // Padding rightPanel'den geliyor
   },
   textContent: {
     flex: 1,
-    textAlign: 'left', // "center"dan "left"e değiştirildi
+    textAlign: 'left',
     width: '100%',
   },
   descriptionContainer: {
     width: '100%',
-    textAlign: 'left', // "center"dan "left"e değiştirildi
+    textAlign: 'left',
     hyphens: 'auto',
     WebkitHyphens: 'auto',
     msHyphens: 'auto',
     marginBottom: '30px',
   },
   description: {
-    fontSize: '1.1rem',
+    fontSize: '1.4rem',
     lineHeight: '1.7',
     color: 'var(--text-color)',
     marginBottom: '15px',
-    textAlign: 'left', // "center"dan "left"e değiştirildi
+    textAlign: 'left',
   },
   skills: {
     marginTop: '0',
-    textAlign: 'left', // "center"dan "left"e değiştirildi
+    textAlign: 'left',
     width: '100%',
   },
   skillsTitle: {
     color: 'var(--primary-color)',
     fontSize: '1.3rem',
     marginBottom: '15px',
-    textAlign: 'left', // "center"dan "left"e değiştirildi
+    textAlign: 'left',
   },
   skillTags: {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '10px',
-    justifyContent: 'flex-start', // "center"dan "flex-start"a değiştirildi
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    overflowX: 'hidden',
+    maxWidth: '100%',
+    minWidth: 0,
+    boxSizing: 'border-box',
   },
   skillTag: {
     backgroundColor: 'var(--bg-secondary)',
@@ -131,19 +161,18 @@ const styles = {
     borderRadius: '20px',
     fontSize: '0.9rem',
     boxShadow: 'var(--card-shadow)',
-    transition: 'var(--transition)',
     border: '1px solid rgba(255, 255, 255, 0.05)',
-    cursor: 'pointer',
+    cursor: 'default', // El işareti olmasın
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  skillTagHovered: {
-    backgroundColor: 'rgba(var(--primary-color-rgb), 0.1)',
-    color: 'var(--primary-color)',
-    borderColor: 'var(--primary-color)',
-    transform: 'translateY(-3px)',
-    boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)',
+    minWidth: 0,
+    maxWidth: '100%',
+    whiteSpace: 'normal',
+    wordBreak: 'break-word',
+    overflowX: 'hidden',
+    boxSizing: 'border-box',
+    transition: 'none', // Geçiş efekti olmasın
   },
 };
 

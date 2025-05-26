@@ -5,70 +5,66 @@ const Contact = () => {
   const { language, translations } = useLanguage();
   
   return (
-    <>
-      <h2 style={styles.title}>{translations[language].contact.title}</h2>
-      <div style={styles.content}>
-        <p style={styles.description}>
-          {translations[language].contact.description}
-        </p>
-        
-        <div style={styles.contactInfo}>
-          {/* E-posta */}
-          <a href="mailto:mert54bolukbasi@gmail.com" style={styles.contactItem}>
-            <div style={styles.iconWrapper}>
-              <span style={styles.icon}>📧</span>
-            </div>
-            <div style={styles.contactText}>
-              <h3 style={styles.contactTitle}>{translations[language].contact.email}</h3>
-              <p style={styles.contactValue}>mert54bolukbasi@gmail.com</p>
-            </div>
-          </a>
+    <section id="contact" className="section">
+      <div className="section-content" style={styles.customSectionContent}>
+        <h2 style={styles.title}>{translations[language].contact.title}</h2>
+        <div style={styles.content}>
+          <p style={styles.description}>
+            {translations[language].contact.description}
+          </p>
           
-          {/* LinkedIn */}
-          <a href="https://www.linkedin.com/in/mert-bölükbaşı-1b34592a7/" target="_blank" rel="noopener noreferrer" style={styles.contactItem}>
-            <div style={styles.iconWrapper}>
-              <span style={styles.icon}>🔗</span>
-            </div>
-            <div style={styles.contactText}>
-              <h3 style={styles.contactTitle}>LinkedIn</h3>
-              <p style={styles.contactValue}></p>
-            </div>
-          </a>
-          
-          {/* GitHub */}
-          <a href="https://github.com/MertBlk" target="_blank" rel="noopener noreferrer" style={styles.contactItem}>
-            <div style={styles.iconWrapper}>
-              <span style={styles.icon}>💻</span>
-            </div>
-            <div style={styles.contactText}>
-              <h3 style={styles.contactTitle}>GitHub</h3>
-              <p style={styles.contactValue}>github.com/MertBlk</p>
-            </div>
-          </a>
+          <div style={styles.contactInfo}>
+            {/* E-posta */}
+            <a href="mailto:mert54bolukbasi@gmail.com" style={styles.contactItem}>
+              <div style={styles.iconWrapper}>
+                <span style={styles.icon}>📧</span>
+              </div>
+              <div style={styles.contactText}>
+                <h3 style={styles.contactTitle}>{translations[language].contact.email}</h3>
+                <p style={styles.contactValue}>mert54bolukbasi@gmail.com</p>
+              </div>
+            </a>
+            
+            {/* LinkedIn */}
+            <a href="https://www.linkedin.com/in/mert-bölükbaşı-1b34592a7/" target="_blank" rel="noopener noreferrer" style={styles.contactItem}>
+              <div style={styles.iconWrapper}>
+                <span style={styles.icon}>🔗</span>
+              </div>
+              <div style={styles.contactText}>
+                <h3 style={styles.contactTitle}>LinkedIn</h3>
+                <p style={styles.contactValue}></p>
+              </div>
+            </a>
+            
+            {/* GitHub */}
+            <a href="https://github.com/MertBlk" target="_blank" rel="noopener noreferrer" style={styles.contactItem}>
+              <div style={styles.iconWrapper}>
+                <span style={styles.icon}>💻</span>
+              </div>
+              <div style={styles.contactText}>
+                <h3 style={styles.contactTitle}>GitHub</h3>
+                <p style={styles.contactValue}>github.com/MertBlk</p>
+              </div>
+            </a>
+          </div>
         </div>
+        
+        <footer style={styles.footer}>
+          <p style={styles.copyright}>
+            © {new Date().getFullYear()} {translations[language].contact.copyright}
+          </p>
+        </footer>
       </div>
-      
-      <footer style={styles.footer}>
-        <p style={styles.copyright}>
-          © {new Date().getFullYear()} {translations[language].contact.copyright}
-        </p>
-      </footer>
-    </>
+    </section>
   );
 };
 
 const styles = {
-  container: {
-    display: 'flex', // Eklendi
-    flexDirection: 'column', // Eklendi
-    alignItems: 'center', // Eklendi
-    justifyContent: 'center', // Eklendi
-    minHeight: '100vh', // Eklendi - Sayfanın tamamını kaplaması için
-    padding: 'var(--section-padding)',
-    backgroundColor: 'transparent',
-    position: 'relative',
-    zIndex: 1,
-    textAlign: 'center', // Değiştirildi - genel metin hizalaması
+  customSectionContent: { // .section-content için özel stil
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center'
   },
   content: {
     width: '100%',
@@ -254,9 +250,6 @@ const styles = {
     },
   },
   '@media (max-width: 480px)': {
-    container: {
-      padding: 'var(--section-padding-mobile, 20px)', // Mobil için padding
-    },
     title: {
       fontSize: '1.8rem',
     },

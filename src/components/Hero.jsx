@@ -5,39 +5,28 @@ const Hero = () => {
   const { language, translations } = useLanguage();
 
   return (
-    <div style={styles.content}>
-      <h1 style={styles.title}>
-        {translations[language].greeting} <span style={styles.name}>Mert Bölükbaşı</span>
-      </h1>
-      <p style={styles.subtitle}>{translations[language].description}</p>
-      <p style={styles.subtitle2}>{translations[language].role}</p>
-    </div>
+    <section id="hero" className="section">
+      <div className="section-content" style={styles.content}>
+        <h1 style={styles.title}>
+          {translations[language].greeting} <span style={styles.name}>Mert Bölükbaşı</span>
+        </h1>
+        <p style={styles.subtitle}>{translations[language].description}</p>
+        <p style={styles.subtitle2}>{translations[language].role}</p>
+      </div>
+    </section>
   );
 };
 
 const styles = {
-  container: {
-    minHeight: '80vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'left', // Sola hizala
-    padding: 'var(--section-padding)',
-    background: 'transparent',
-    position: 'relative',
-    zIndex: 1,
-  },
   content: {
-    maxWidth: '800px',
-    width: '100%',
-    padding: '0 20px',
-    textAlign: 'left', // Sola hizala
+    padding: '0 20px', // Gerekirse ek padding kalabilir veya .section-content'e taşınabilir
+    textAlign: 'left',
   },
   title: {
     fontSize: 'clamp(2.5rem, 10vw, 6rem)',
     marginBottom: '35px',
     lineHeight: 1.2,
-    textAlign: 'left', // Sola hizala
+    textAlign: 'left',
   },
   name: {
     color: 'var(--primary-color)',
@@ -47,13 +36,13 @@ const styles = {
     fontSize: 'clamp(1rem, 4vw, 1.5rem)',
     color: 'var(--text-secondary)',
     marginBottom: '40px',
-    textAlign: 'left', // Sola hizala
+    textAlign: 'left',
   },
   subtitle2: {
     fontSize: 'clamp(1rem, 4vw, 1.5rem)',
     color: 'var(--primary-color)',
     marginBottom: '40px',
-    textAlign: 'left', // Sola hizala
+    textAlign: 'left',
   },
   cta: {
     display: 'flex',

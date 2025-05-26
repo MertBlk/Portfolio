@@ -1,6 +1,6 @@
 @import './variables.css';
 
-body, html, #root, section {
+body, html, #root { /* section buradan kaldırıldı */
   box-sizing: border-box;
 }
 
@@ -9,6 +9,7 @@ body {
   font-family: 'Poppins', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
+  overflow-x: hidden; /* Yatay kaydırmayı genel olarak engelle */
 }
 
 a {
@@ -16,11 +17,41 @@ a {
   color: inherit;
 }
 
-section {
-  padding: 0; /* Tam ekran scroll için padding'leri kaldırıyoruz */
+/* Genel Bölüm Stilleri */
+.section {
+  width: 100%;
+  min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  padding: 70px 20px 20px 20px; /* Navbar için üst boşluk, diğerleri için genel boşluk */
   box-sizing: border-box;
-  position: relative;
+  position: relative; 
 }
+
+/* Genel Bölüm İçeriği Stilleri */
+.section-content {
+  width: 100%;
+  max-width: 1200px; /* İçeriğin maksimum genişliği */
+  margin: 0 auto; /* İçeriği ortala */
+  text-align: left; /* Varsayılan metin hizalaması */
+  position: relative; 
+  z-index: 10; 
+}
+
+/* About sayfası için özel .section-content ayarları ARTIK GEREKLİ DEĞİL, About.jsx içinde yönetiliyor. */
+/*
+section#about > div.section-content { 
+  align-items: stretch; 
+  text-align: left;
+  max-width: none; 
+  padding: 0; 
+  margin: 0; 
+}
+*/
+
+
 input, textarea {
     padding: 12px;
     border-radius: 5px;
@@ -60,21 +91,30 @@ input, textarea {
   }
 }
 
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 15px 15px 15px;
+  }
+  /* .section-content için mobil özel ayarı gerekirse buraya eklenebilir */
+}
+
 @media (max-width: 480px) {
   body {
     font-size: 14px;
-    padding: 10px;
+    /* padding: 10px; Bu padding genel section padding'i ile çakışabilir, kaldırıldı */
   }
   #root {
     margin: 0 auto;
     width: 100%;
   }
-  .container {
+  /* .container sınıfı genel olarak kullanılmıyorsa kaldırılabilir veya düzenlenebilir */
+  /* .container {
     flex-direction: column;
     align-items: center;
-  }
+  } */
 }
 
+/* Bu medya sorgusu yukarıdaki ile birleştirilebilir veya spesifikse kalabilir */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
