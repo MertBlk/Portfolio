@@ -390,31 +390,32 @@ const Projects = () => {
     projectsContainer: {
       display: 'flex',
       flexDirection: 'column',
-      gap: '150px', // Daha büyük boşluk
+      gap: isMobile ? '80px' : (isTablet ? '100px' : '120px'),
       width: '100%',
-      maxWidth: '1600px', // Genişliği daha da artırdık
-      margin: '0 auto', // Ortala
+      maxWidth: isMobile ? '100%' : (isTablet ? '1000px' : '1400px'),
+      margin: '0 auto',
+      padding: isMobile ? '0 10px' : (isTablet ? '0 20px' : '0 40px'),
     },
     projectsTitle: {
-      fontSize: '3.5rem', // Başlık daha da büyütüldü
+      fontSize: isMobile ? '2rem' : (isTablet ? '2.5rem' : '3.5rem'),
       fontWeight: '700',
       color: 'var(--primary-color, #9c27b0)',
-      marginBottom: '80px', // Daha büyük margin
+      marginBottom: isMobile ? '40px' : (isTablet ? '60px' : '80px'),
       textAlign: 'center',
-      textShadow: '0 2px 10px rgba(156, 39, 176, 0.3)', // Işıltılı efekt
+      textShadow: '0 2px 10px rgba(156, 39, 176, 0.3)',
     },
     projectSection: {
       width: '100%',
       backgroundColor: 'rgba(30, 30, 30, 0.6)',
-      borderRadius: '24px',
-      padding: '50px 60px', // Yanlarda daha fazla boşluk
+      borderRadius: isMobile ? '16px' : '24px',
+      padding: isMobile ? '20px' : (isTablet ? '30px 40px' : '50px 60px'),
       boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(156, 39, 176, 0.15)',
       opacity: 0,
       transform: 'translateY(40px)',
       transition: 'opacity 0.8s ease, transform 0.8s ease',
       border: '1px solid rgba(156, 39, 176, 0.15)',
-      marginBottom: '30px', // Bölümler arası ek boşluk
-      minHeight: '500px', // Minimum yükseklik garantisi
+      marginBottom: '20px',
+      minHeight: isMobile ? 'auto' : (isTablet ? '400px' : '500px'),
     },
     projectSectionVisible: {
       opacity: 1,
@@ -423,22 +424,25 @@ const Projects = () => {
     projectHeader: {
       display: 'flex',
       alignItems: 'center',
-      marginBottom: '20px', // Daha büyük margin
+      marginBottom: isMobile ? '15px' : '20px',
+      flexDirection: isMobile ? 'column' : 'row',
+      textAlign: isMobile ? 'center' : 'left',
     },
     projectNumber: {
-      fontSize: '1.6rem', // Daha büyük
+      fontSize: isMobile ? '1.2rem' : (isTablet ? '1.4rem' : '1.6rem'),
       fontWeight: 'bold',
       color: 'var(--primary-color, #9c27b0)',
-      marginRight: '18px', // Daha büyük margin
+      marginRight: isMobile ? '0' : '18px',
+      marginBottom: isMobile ? '8px' : '0',
       opacity: 0.85,
-      textShadow: '0 0 8px rgba(156, 39, 176, 0.4)', // Işıltılı efekt
+      textShadow: '0 0 8px rgba(156, 39, 176, 0.4)',
     },
     projectTitle: {
-      fontSize: '2.6rem', // Daha büyük başlık
+      fontSize: isMobile ? '1.5rem' : (isTablet ? '2rem' : '2.6rem'),
       margin: 0,
       fontWeight: '700',
-      letterSpacing: '-0.5px', // Daha modern görünüm için karakter aralığı
-      background: 'linear-gradient(135deg, #fff 0%, #c5c5c5 100%)', // Gradyan efekti
+      letterSpacing: '-0.5px',
+      background: 'linear-gradient(135deg, #fff 0%, #c5c5c5 100%)',
       backgroundClip: 'text',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
@@ -446,36 +450,38 @@ const Projects = () => {
     projectTags: {
       display: 'flex',
       flexWrap: 'wrap',
-      gap: '10px', // Daha büyük gap
-      marginBottom: '25px', // Daha büyük margin
+      gap: isMobile ? '6px' : '10px',
+      marginBottom: isMobile ? '20px' : '25px',
+      justifyContent: isMobile ? 'center' : 'flex-start',
     },
     projectTag: {
       backgroundColor: 'rgba(255, 255, 255, 0.1)',
       color: 'var(--text-color, #fff)',
-      padding: '8px 16px', // Daha büyük padding
-      borderRadius: '25px', // Daha büyük border radius
-      fontSize: '1rem', // Büyütüldü
+      padding: isMobile ? '6px 12px' : '8px 16px',
+      borderRadius: '25px',
+      fontSize: isMobile ? '0.85rem' : '1rem',
       fontWeight: '500',
     },
     projectContent: {
       display: 'flex',
-      flexDirection: 'row', // Desktop'ta yan yana
+      flexDirection: 'row',
       gap: '20px',
-      alignItems: 'flex-start', // İçeriği üstten hizala
-      justifyContent: 'space-between', // İçerik arası boşluk dengeli dağıtılsın
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
     },
     galleryContainer: {
-      width: '55%', // Daha dengeli bir genişlik
+      width: isMobile ? '100%' : (isTablet ? '50%' : '55%'),
       position: 'relative',
       borderRadius: '16px',
       overflow: 'hidden',
       boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3), 0 0 10px rgba(156, 39, 176, 0.2)',
-      aspectRatio: '4/3', // Daha fazla yükseklik için 16/9 yerine 4/3 oranı
+      aspectRatio: isMobile ? '16/10' : '4/3',
       backgroundColor: '#1a1a1a',
       border: '1px solid rgba(255, 255, 255, 0.05)',
       transform: 'translateZ(0)',
       transition: 'transform 0.3s ease',
-      marginRight: '25px', // Sağa doğru fazla genişlemeyi önlemek için
+      marginRight: isMobile ? '0' : '25px',
+      marginBottom: isMobile ? '20px' : '0',
     },
     galleryLoadingOverlay: {
       position: 'absolute',
@@ -590,23 +596,24 @@ const Projects = () => {
     projectDetails: {
       display: 'flex',
       flexDirection: 'column',
-      gap: '20px',
-      width: '42%', // Metin kısmı için daha dengeli genişlik
-      maxWidth: '500px', // Maksimum genişlik sınırlaması
-      height: '100%', // Yüksekliği ayarla
-      justifyContent: 'flex-start', // İçeriği üstten başlat
+      gap: isMobile ? '15px' : '20px',
+      width: isMobile ? '100%' : (isTablet ? '48%' : '42%'),
+      maxWidth: isMobile ? 'none' : '500px',
+      height: '100%',
+      justifyContent: 'flex-start',
       flex: '1',
     },
     projectDescription: {
-      fontSize: '1.1rem',
+      fontSize: isMobile ? '1rem' : '1.1rem',
       lineHeight: 1.6,
       color: 'var(--text-color, #fff)',
+      marginBottom: isMobile ? '15px' : '20px',
     },
     projectFeatures: {
-      marginTop: '10px',
+      marginTop: isMobile ? '15px' : '20px',
     },
     featuresTitle: {
-      fontSize: '1.3rem',
+      fontSize: isMobile ? '1.1rem' : '1.3rem',
       marginBottom: '10px',
       color: 'var(--primary-color, #9c27b0)',
     },
@@ -619,6 +626,7 @@ const Projects = () => {
       paddingLeft: '25px',
       marginBottom: '8px',
       lineHeight: 1.5,
+      fontSize: isMobile ? '0.9rem' : '1rem',
     },
     featureIcon: {
       marginRight: '8px',
@@ -733,7 +741,7 @@ const Projects = () => {
       <div className="section-content">
         <h2 style={styles.projectsTitle}>{text.title}</h2>
         
-        <div style={styles.projectsContainer}>
+        <div className="projects-container" style={styles.projectsContainer}>
           {projectsData.map((project, index) => {
             const images = project.images || [];
             const currentImageIndex = activeImageIndices[project.id] || 0;
@@ -762,23 +770,23 @@ const Projects = () => {
                 </div>
                 
                 <div 
-                  className="projectContent"
+                  className="project-content"
                   style={{
                     ...styles.projectContent,
                     flexDirection: isMobile ? 'column' : 'row',
                     alignItems: isMobile ? 'center' : 'flex-start',
                     minHeight: isMobile ? 'auto' : (isTablet ? '400px' : '450px'),
-                    flexWrap: isTablet ? 'wrap' : 'nowrap' // Tablet görünümünde sarmalama
+                    gap: isMobile ? '20px' : (isTablet ? '20px' : '30px')
                   }}
                 >
                   {/* Proje görsel galerisi */}
                   <div 
-                    className="galleryContainer"
+                    className="gallery-container"
                     style={{
                       ...styles.galleryContainer,
-                      width: isMobile ? '100%' : '55%',
-                      height: isMobile ? 'auto' : '400px', // Sabit yükseklik
-                      marginBottom: isMobile ? '30px' : 0
+                      width: isMobile ? '100%' : (isTablet ? '50%' : '55%'),
+                      height: isMobile ? 'auto' : '400px',
+                      marginBottom: isMobile ? '20px' : 0
                     }}
                   >
                     {images.length > 0 && !hasError ? (
@@ -925,11 +933,11 @@ const Projects = () => {
 
                   {/* Proje detayları */}
                   <div 
-                    className="projectDetails"
+                    className="project-details"
                     style={{
                       ...styles.projectDetails,
-                      width: isMobile ? '100%' : '42%',
-                      minHeight: isMobile ? 'auto' : '400px', // Minimum yükseklik
+                      width: isMobile ? '100%' : (isTablet ? '48%' : '42%'),
+                      minHeight: isMobile ? 'auto' : '400px',
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between'
@@ -982,34 +990,7 @@ const Projects = () => {
                         {text.contactButton}
                       </a>
                       
-                      <a
-                        href="#"
-                        className="viewProjectButton"
-                        style={{
-                          ...styles.viewProjectButton,
-                          backgroundColor: 'transparent',
-                          color: 'var(--primary-color, #9c27b0)',
-                          padding: '12px 24px',
-                          borderRadius: '30px',
-                          fontSize: '1rem',
-                          fontWeight: '600',
-                          textDecoration: 'none',
-                          display: 'inline-block',
-                          transition: 'all 0.3s ease',
-                          border: '2px solid var(--primary-color, #9c27b0)',
-                          boxShadow: '0 4px 12px rgba(156, 39, 176, 0.2)',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.target.style.backgroundColor = 'transparent';
-                          e.target.style.color = 'var(--primary-color, #9c27b0)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.target.style.backgroundColor = 'transparent';
-                          e.target.style.color = 'var(--primary-color, #9c27b0)';
-                        }}
-                      >
-                        {text.viewProjectButton}
-                      </a>
+{/* View Project butonunu kaldırdık */}
                     </div>
                   </div>
                 </div>

@@ -81,8 +81,8 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'flex-start',
     color: 'var(--primary-color)',
-    fontSize: '3.5rem',
-    fontWeight: "light",
+    fontSize: '4.5rem', // Daha büyük başlık
+    fontWeight: "bold", // Daha kalın yazı
     letterSpacing: '0.1em',
     margin: 0,
     padding: 0,
@@ -91,6 +91,7 @@ const styles = {
     background: 'none',
     border: 'none',
     boxShadow: 'none',
+    textShadow: '0 0 15px rgba(156, 39, 176, 0.3)', // Işıltılı efekt
   },
   verticalChar: {
     display: 'block',

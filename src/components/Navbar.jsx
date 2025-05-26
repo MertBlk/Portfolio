@@ -111,6 +111,7 @@ const Navbar = () => {
           </a>
           
           <button 
+            className="mobile-menu-button"
             style={styles.mobileMenuButton} 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
@@ -123,7 +124,7 @@ const Navbar = () => {
                 borderRadius: '2px',
                 position: 'relative',
                 transition: 'all 0.3s ease',
-                marginTop: '15px'
+                marginTop: '12px'
               }}
             >
               <div style={{
@@ -134,8 +135,8 @@ const Navbar = () => {
                 backgroundColor: 'var(--text-color)',
                 borderRadius: '2px',
                 transition: 'all 0.3s ease',
-                top: '-10px',
-                transform: isMobileMenuOpen ? 'rotate(45deg) translate(7px, 7px)' : 'none',
+                top: isMobileMenuOpen ? '0px' : '-8px',
+                transform: isMobileMenuOpen ? 'rotate(45deg)' : 'none',
               }}></div>
               
               <div style={{
@@ -146,8 +147,8 @@ const Navbar = () => {
                 backgroundColor: 'var(--text-color)',
                 borderRadius: '2px',
                 transition: 'all 0.3s ease',
-                top: '10px',
-                transform: isMobileMenuOpen ? 'rotate(-45deg) translate(7px, -7px)' : 'none',
+                top: isMobileMenuOpen ? '0px' : '8px',
+                transform: isMobileMenuOpen ? 'rotate(-45deg)' : 'none',
               }}></div>
             </div>
           </button>
@@ -258,7 +259,7 @@ const Navbar = () => {
 const styles = {
   navbarContainer: {
     position: 'fixed',
-    top: '20px', // Üstten biraz boşluk bırak
+    top: '20px',
     left: 0,
     width: '100%',
     display: 'flex',
@@ -266,25 +267,25 @@ const styles = {
     zIndex: 1000,
   },
   navbar: {
-    padding: '8px 10px', // Daha kompakt padding
-    backgroundColor: 'rgba(25, 25, 25, 0.8)', // Biraz daha koyu arka plan
+    padding: '8px 16px',
+    backgroundColor: 'rgba(25, 25, 25, 0.8)',
     backdropFilter: 'blur(8px)',
     boxShadow: '0 4px 30px rgba(0, 0, 0, 0.15)',
-    borderRadius: '50px', // Tam oval/tüp şekli
-    maxWidth: 'fit-content', // İçeriğe göre genişlik
+    borderRadius: '50px',
+    maxWidth: 'fit-content',
     transition: 'all 0.3s ease',
   },
   navbarScrolled: {
-    backgroundColor: 'rgba(17, 17, 17, 0.9)', // Scroll edilince daha koyu
-    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.3)', // Daha belirgin gölge
-    padding: '6px 10px', // Biraz daha küçült
+    backgroundColor: 'rgba(17, 17, 17, 0.9)',
+    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.3)',
+    padding: '6px 16px',
   },
   navbarContent: {
     display: 'flex',
-    justifyContent: 'center', // Ortala
+    justifyContent: 'space-between',
     alignItems: 'center',
-    margin: '0 auto',
     padding: '0 20px',
+    position: 'relative',
   },
   logo: {
     textDecoration: 'none',
@@ -361,6 +362,11 @@ const styles = {
     border: 'none',
     cursor: 'pointer',
     zIndex: 1001,
+    position: 'relative',
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    transition: 'background-color 0.3s ease',
   },
   closeButton: {
     position: 'absolute',
@@ -371,41 +377,6 @@ const styles = {
     fontSize: '24px',
     color: 'var(--text-color)',
     cursor: 'pointer',
-  },
-  
-  '@media (max-width: 768px)': {
-    navbarContainer: {
-      top: '15px', // Mobilde üstten daha az boşluk
-    },
-    navbar: {
-      width: 'calc(100% - 30px)', // Kenarlarda biraz boşluk bırak
-      maxWidth: 'none',
-    },
-    navLinks: {
-      display: 'none',
-    },
-    mobileMenuButton: {
-      display: 'block',
-    },
-    navItem: {
-      margin: '15px 0',
-    },
-    navLink: {
-      fontSize: '1.2rem',
-      padding: '12px 20px',
-    },
-    languageButton: {
-      padding: '10px 20px',
-      fontSize: '1.1rem',
-      marginTop: '20px',
-      marginLeft: 0,
-    },
-    closeButton: {
-      display: 'block',
-    },
-    logoText: {
-      fontSize: '1.3rem',
-    }
   }
 };
 
