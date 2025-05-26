@@ -1,274 +1,410 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../Context/LanguageContext';
 
-const MenuItem = ({ item, path, setMenuOpen }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const location = useLocation();
+const Navbar = () => {
+  const { language, toggleLanguage, translations } = useLanguage();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState('home');
   
-  const handleClick = (e) => {
-    setMenuOpen(false);
-    if (path.startsWith('#')) {
-      e.preventDefault();
-      const sectionId = path.substring(1);
-      const sectionContainer = document.querySelector('.section-container');
-      if (sectionContainer) {
-        // Bölüm indeksini belirle
-        let sectionIndex = 0;
-        if (sectionId === 'hero') sectionIndex = 0;
-        else if (sectionId === 'about') sectionIndex = 1;
-        else if (sectionId === 'projects') sectionIndex = 2;
-        else if (sectionId === 'contact') sectionIndex = 3;
-
-        // Önce mevcut kaydırma durumunu temizle
-        const dots = document.querySelectorAll('.navigation-dots .dot');
-        if (dots && dots[sectionIndex]) {
-          // Dot'a otomatik olarak tıkla (önceden oluşturduğumuz mantığı kullan)
-          const clickEvent = new Event('click', { bubbles: true });
-          dots[sectionIndex].dispatchEvent(clickEvent);
+  // Çeviriler için güvenlik kontrolü
+  const getTranslation = (path, defaultText) => {
+    try {
+      // path örneği: "navbar.home"
+      const keys = path.split('.');
+      let value = translations[language];
+      
+      for (const key of keys) {
+        if (value && value[key] !== undefined) {
+          value = value[key];
         } else {
-          // Yedek yöntem: doğrudan kaydırma
-          // Önce smooth olmadan hızlı konumla
-          sectionContainer.style.scrollBehavior = 'auto';
-          
-          // Kısa bir gecikmeyle smooth davranışına geç
-          setTimeout(() => {
-            sectionContainer.style.scrollBehavior = 'smooth';
-            
-            // İlgili bölüme kaydır
-            sectionContainer.scrollTo({
-              top: sectionIndex * window.innerHeight,
-              behavior: 'smooth'
-            });
-          }, 10);
+          console.warn(`Translation key not found: ${path}`);
+          return defaultText;
         }
       }
+      
+      return value;
+    } catch (error) {
+      console.error('Error getting translation:', error);
+      return defaultText;
+    }
+  };
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      // Scroll pozisyonuna göre navbar'ı güncelle
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+      
+      // Aktif bölümü belirle
+      const scrollPosition = window.scrollY + 100; // Offset ekleyebilirsiniz
+      
+      // Bölümleri ID'lerine göre alıp kontrol et
+      const sections = ['home', 'about', 'projects', 'contact'].map(id => 
+        document.getElementById(id)
+      ).filter(el => el != null);
+      
+      // Home için özel kontrol (en üstte)
+      if (scrollPosition < 200) {
+        setActiveItem('home');
+        return;
+      }
+      
+      // Diğer bölümler için kontrol
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveItem(section.id);
+          break;
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  
+  const scrollToSection = (sectionId) => {
+    setIsMobileMenuOpen(false);
+    setActiveItem(sectionId);
+    
+    // Ana sayfa için özel işlem
+    if (sectionId === 'home') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      return;
+    }
+    
+    // Diğer bölümler için
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   };
   
   return (
-    <li style={styles.menuItem}>
-      <a 
-        href={path}
-        style={{
-          ...styles.menuLink,
-          color: isHovered ? 'var(--primary-color)' : 'var(--text-color)',
-        }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onClick={handleClick}
-      >
-        {item}
-      </a>
-    </li>
-  );
-};
-
-const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { language, translations, toggleLanguage } = useLanguage();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      setScrolled(offset > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const menuItems = [
-   
-    { name: translations[language].nav.about, path: '#about' },
-    { name: translations[language].nav.projects, path: '#projects' },
-    { name: translations[language].nav.contact, path: '#contact' }
-  ];
-
-  return (
-    <nav style={{
-      ...styles.nav,
-      ...(scrolled ? styles.navScrolled : {})
-    }}>
-      <div style={{
-        ...styles.navContainer,
-        ...(scrolled ? styles.navContainerScrolled : {})
+    <div className="nav-container" style={styles.navbarContainer}>
+      <nav className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`} style={{
+        ...styles.navbar,
+        ...(isScrolled ? styles.navbarScrolled : {}),
       }}>
-        <div 
-          style={styles.hamburger} 
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <div style={{...styles.bar, ...(menuOpen && styles.bar1)}}></div>
-          <div style={{...styles.bar, ...(menuOpen && styles.bar2)}}></div>
-          <div style={{...styles.bar, ...(menuOpen && styles.bar3)}}></div>
-        </div>
-        
-        <ul style={{
-          ...styles.menu,
-          ...(menuOpen ? styles.menuOpen : styles.menuClosed)
-        }}>
-          {menuItems.map((item) => (
-            <MenuItem 
-              key={item.name} 
-              item={item.name} 
-              path={item.path}
-              setMenuOpen={setMenuOpen} 
-            />
-          ))}
-          <li style={styles.menuItem}>
-            <button
-              onClick={toggleLanguage}
+        <div style={styles.navbarContent}>
+          <a 
+            href="#" 
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection('home');
+            }}
+            style={styles.logo}
+          >
+            <span style={styles.logoText}></span>
+          </a>
+          
+          <button 
+            style={styles.mobileMenuButton} 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <div 
               style={{
-                ...styles.langButton,
-                color: 'var(--text-color)',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '0.95rem',
-                fontWeight: '500',
-                padding: '5px 10px',
-                transition: 'color 0.3s ease',
+                width: '24px',
+                height: '3px',
+                backgroundColor: isMobileMenuOpen ? 'transparent' : 'var(--text-color)',
+                borderRadius: '2px',
+                position: 'relative',
+                transition: 'all 0.3s ease',
+                marginTop: '15px'
               }}
-              onMouseEnter={(e) => e.target.style.color = 'var(--primary-color)'}
-              onMouseLeave={(e) => e.target.style.color = 'var(--text-color)'}
             >
-              {language === 'tr' ? 'EN' : 'TR'}
-            </button>
-          </li>
-        </ul>
-      </div>
-    </nav>
+              <div style={{
+                content: '',
+                position: 'absolute',
+                width: '24px',
+                height: '3px',
+                backgroundColor: 'var(--text-color)',
+                borderRadius: '2px',
+                transition: 'all 0.3s ease',
+                top: '-10px',
+                transform: isMobileMenuOpen ? 'rotate(45deg) translate(7px, 7px)' : 'none',
+              }}></div>
+              
+              <div style={{
+                content: '',
+                position: 'absolute',
+                width: '24px',
+                height: '3px',
+                backgroundColor: 'var(--text-color)',
+                borderRadius: '2px',
+                transition: 'all 0.3s ease',
+                top: '10px',
+                transform: isMobileMenuOpen ? 'rotate(-45deg) translate(7px, -7px)' : 'none',
+              }}></div>
+            </div>
+          </button>
+          
+          <ul className={`nav-links ${isMobileMenuOpen ? 'nav-links-mobile' : ''}`} style={{
+            ...styles.navLinks,
+            ...(isMobileMenuOpen ? styles.navLinksMobile : {})
+          }}>
+            {/* Ana Sayfa */}
+            <li className={isMobileMenuOpen ? 'mobile-nav-item' : ''} style={styles.navItem}>
+              <a
+                href="#home"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('home');
+                }}
+                className={`nav-link ${activeItem === 'home' ? 'nav-link-active' : ''}`}
+                style={{
+                  ...styles.navLink,
+                  ...(activeItem === 'home' ? styles.navLinkActive : {})
+                }}
+              >
+                {getTranslation('navbar.home', language === 'tr' ? 'Ana Sayfa' : 'Home')}
+              </a>
+            </li>
+            
+            {/* Hakkımda */}
+            <li className={isMobileMenuOpen ? 'mobile-nav-item' : ''} style={styles.navItem}>
+              <a
+                href="#about"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('about');
+                }}
+                className={`nav-link ${activeItem === 'about' ? 'nav-link-active' : ''}`}
+                style={{
+                  ...styles.navLink,
+                  ...(activeItem === 'about' ? styles.navLinkActive : {})
+                }}
+              >
+                {getTranslation('navbar.about', language === 'tr' ? 'Hakkımda' : 'About')}
+              </a>
+            </li>
+            
+            {/* Projeler */}
+            <li className={isMobileMenuOpen ? 'mobile-nav-item' : ''} style={styles.navItem}>
+              <a
+                href="#projects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('projects');
+                }}
+                className={`nav-link ${activeItem === 'projects' ? 'nav-link-active' : ''}`}
+                style={{
+                  ...styles.navLink,
+                  ...(activeItem === 'projects' ? styles.navLinkActive : {})
+                }}
+              >
+                {getTranslation('navbar.projects', language === 'tr' ? 'Projelerim' : 'Projects')}
+              </a>
+            </li>
+            
+            {/* İletişim */}
+            <li className={isMobileMenuOpen ? 'mobile-nav-item' : ''} style={styles.navItem}>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection('contact');
+                }}
+                className={`nav-link ${activeItem === 'contact' ? 'nav-link-active' : ''}`}
+                style={{
+                  ...styles.navLink,
+                  ...(activeItem === 'contact' ? styles.navLinkActive : {})
+                }}
+              >
+                {getTranslation('navbar.contact', language === 'tr' ? 'İletişim' : 'Contact')}
+              </a>
+            </li>
+            
+            {/* Dil değiştirme */}
+            <li style={styles.navItem}>
+              <button 
+                onClick={toggleLanguage} 
+                style={styles.languageButton}
+              >
+                {language === 'tr' ? '🇬🇧 EN' : '🇹🇷 TR'}
+              </button>
+            </li>
+            
+            {/* Mobil menü kapat butonu */}
+            {isMobileMenuOpen && (
+              <button 
+                style={styles.closeButton}
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                ✕
+              </button>
+            )}
+          </ul>
+        </div>
+      </nav>
+    </div>
   );
 };
 
 const styles = {
-  nav: {
+  navbarContainer: {
+    position: 'fixed',
+    top: '20px', // Üstten biraz boşluk bırak
+    left: 0,
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
-    padding: '20px 0',
-    position: 'fixed',
-    top: '20px',
-    left: 0,
-    right: 0,
     zIndex: 1000,
+  },
+  navbar: {
+    padding: '8px 10px', // Daha kompakt padding
+    backgroundColor: 'rgba(25, 25, 25, 0.8)', // Biraz daha koyu arka plan
+    backdropFilter: 'blur(8px)',
+    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.15)',
+    borderRadius: '50px', // Tam oval/tüp şekli
+    maxWidth: 'fit-content', // İçeriğe göre genişlik
     transition: 'all 0.3s ease',
   },
-  navScrolled: {
-    top: '10px',
-    padding: '10px 0',
+  navbarScrolled: {
+    backgroundColor: 'rgba(17, 17, 17, 0.9)', // Scroll edilince daha koyu
+    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.3)', // Daha belirgin gölge
+    padding: '6px 10px', // Biraz daha küçült
   },
-  navContainer: {
+  navbarContent: {
     display: 'flex',
-    justifyContent: 'center', // Değişiklik: space-between yerine center
+    justifyContent: 'center', // Ortala
     alignItems: 'center',
-    backgroundColor: 'rgba(26, 26, 26, 0.8)',
-    backdropFilter: 'blur(7px)',
-    borderRadius: '50px',
-    padding: '10px 30px',
-    maxWidth: '800px',
-    width: '90%',
-    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
-    border: '1px solid rgba(255, 255, 255, 0.05)',
-    transition: 'all 0.3s ease',
+    margin: '0 auto',
+    padding: '0 20px',
   },
-  navContainerScrolled: {
-    backgroundColor: 'rgba(26, 26, 26, 0.95)',
-    padding: '8px 25px',
-  },
-  // Logo stili kaldırıldı veya gizlendi
-  menu: {
+  logo: {
+    textDecoration: 'none',
     display: 'flex',
+    alignItems: 'center',
+    zIndex: 1001,
+    marginRight: '10px', // Logo ile menü arasında biraz boşluk
+  },
+  logoText: {
+    fontSize: '1.5rem', // Biraz daha küçük logo
+    fontWeight: 'bold',
+    color: 'var(--primary-color)',
+    letterSpacing: '1px',
+  },
+  navLinks: {
+    display: 'flex',
+    alignItems: 'center',
     listStyle: 'none',
-    gap: '25px',
     margin: 0,
     padding: 0,
-    
-    '@media (max-width: 768px)': {
-      position: 'absolute',
-      flexDirection: 'column',
-      backgroundColor: 'rgba(26, 26, 26, 0.95)',
-      backdropFilter: 'blur(7px)',
-      top: 'calc(100% + 10px)',
-      right: 'auto', // Değişiklik: right: 0 yerine auto
-      left: '50%', // Ekleme: mobilde ortada olması için
-      transform: 'translateX(-50%)', // Ekleme: mobilde tam ortada olması için
-      borderRadius: '15px',
-      padding: '20px',
-      boxShadow: 'var(--card-shadow)',
-      transition: 'var(--transition)',
-    }
+    transition: 'all 0.3s ease',
+    gap: '5px', // Öğeler arasında az boşluk
   },
-  menuItem: {
+  navLinksMobile: {
+    position: 'fixed',
+    top: 0,
+    right: 0,
+    width: '100%',
+    height: '100vh',
+    backgroundColor: 'var(--bg-color)',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 999,
+    padding: '50px 20px',
+    display: 'flex',
+    borderRadius: 0, // Mobil menüde kenar yuvarlaklığı yok
+  },
+  navItem: {
+    margin: '0 3px', // Daha az margin
     position: 'relative',
-    transition: 'var(--transition)',
   },
-  menuLink: {
+  navLink: {
+    display: 'inline-block',
     color: 'var(--text-color)',
     textDecoration: 'none',
-    fontSize: '0.95rem',
-    fontWeight: '500',
+    fontSize: '0.9rem', // Daha küçük font
+    fontWeight: 500,
+    padding: '6px 14px', // Daha kompakt padding
+    borderRadius: '30px',
     transition: 'all 0.3s ease',
-    padding: '5px 0',
-    position: 'relative',
-    // Hover stilini burada ekliyoruz
-    ':after': {
-      content: '""',
-      position: 'absolute',
-      bottom: '-2px',
-      left: '0',
-      width: '0%',
-      height: '2px',
-      backgroundColor: 'var(--primary-color)',
-      transition: 'all 0.3s ease',
+    backgroundColor: 'transparent',
+  },
+  navLinkActive: {
+    backgroundColor: 'var(--bg-secondary)',
+    color: 'var(--primary-color)',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+  },
+  languageButton: {
+    backgroundColor: 'transparent',
+    border: '1px solid var(--primary-color)',
+    color: 'var(--primary-color)',
+    padding: '5px 12px', // Daha kompakt padding
+    borderRadius: '30px',
+    cursor: 'pointer',
+    fontSize: '0.8rem', // Daha küçük font
+    fontWeight: 500,
+    transition: 'all 0.3s ease',
+    marginLeft: '5px', // Soldaki öğeden biraz ayır
+  },
+  mobileMenuButton: {
+    display: 'none',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    zIndex: 1001,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: '20px',
+    right: '20px',
+    background: 'none',
+    border: 'none',
+    fontSize: '24px',
+    color: 'var(--text-color)',
+    cursor: 'pointer',
+  },
+  
+  '@media (max-width: 768px)': {
+    navbarContainer: {
+      top: '15px', // Mobilde üstten daha az boşluk
     },
-    ':hover:after': {
-      width: '100%',
+    navbar: {
+      width: 'calc(100% - 30px)', // Kenarlarda biraz boşluk bırak
+      maxWidth: 'none',
     },
-  },
-  
-  
-  
-  
-  
-  bar: {
-    height: '2px',
-    width: '100%',
-    backgroundColor: 'var(--text-color)',
-    transition: 'var(--transition)',
-  },
-  
-  bar1: {
-    transform: 'rotate(-45deg) translate(-5px, 6px)',
-  },
-  
-  bar2: {
-    opacity: 0,
-  },
-  
-  bar3: {
-    transform: 'rotate(45deg) translate(-5px, -6px)',
-  },
-  
-  menuClosed: {
-    '@media (max-width: 768px)': {
-      opacity: 0,
-      visibility: 'hidden',
-      transform: 'translateX(-50%) translateY(-20px)', // Değişiklik: translateX(-50%) ekledik
-    }
-  },
-  
-  menuOpen: {
-    '@media (max-width: 768px)': {
-      opacity: 1,
-      visibility: 'visible',
-      transform: 'translateX(-50%) translateY(0)', // Değişiklik: translateX(-50%) ekledik
-    }
-  },
-  langButton: {
-    ':hover': {
-      color: 'var(--primary-color)',
+    navLinks: {
+      display: 'none',
+    },
+    mobileMenuButton: {
+      display: 'block',
+    },
+    navItem: {
+      margin: '15px 0',
+    },
+    navLink: {
+      fontSize: '1.2rem',
+      padding: '12px 20px',
+    },
+    languageButton: {
+      padding: '10px 20px',
+      fontSize: '1.1rem',
+      marginTop: '20px',
+      marginLeft: 0,
+    },
+    closeButton: {
+      display: 'block',
+    },
+    logoText: {
+      fontSize: '1.3rem',
     }
   }
 };

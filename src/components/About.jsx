@@ -174,6 +174,50 @@ const styles = {
     boxSizing: 'border-box',
     transition: 'none', // Geçiş efekti olmasın
   },
+  '@media (max-width: 768px)': {
+    aboutContainer: {
+      flexDirection: 'column',
+    },
+    
+    aboutImage: {
+      width: '200px',
+      height: '200px',
+      marginRight: 0,
+      marginBottom: '20px',
+    },
+    
+    aboutContent: {
+      width: '100%',
+    },
+    
+    skillsContainer: {
+      marginTop: '30px',
+    },
+    
+    skillCategory: {
+      marginBottom: '20px',
+    },
+    
+    skillBar: {
+      height: '10px', // Daha küçük skill barları
+    }
+  },
+  
+  '@media (max-width: 480px)': {
+    aboutImage: {
+      width: '150px',
+      height: '150px',
+    },
+    
+    sectionTitle: {
+      fontSize: '1.5rem',
+      marginBottom: '15px',
+    },
+    
+    skillCategory: {
+      fontSize: '1rem',
+    }
+  }
 };
 
 export default About;

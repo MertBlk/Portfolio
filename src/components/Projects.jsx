@@ -19,19 +19,19 @@ const Projects = () => {
         const firstImage = project.images[0];
         const processedPath = getImagePath(firstImage);
         
-        console.log(`Project ${project.id} (${project.title}) test:`, { 
+        console.log(`Project ${project.id} (${project.title[language]}) test:`, { 
           originalPath: firstImage,
           processedPath: processedPath
         });
         
         // Test path
         const testImg = new Image();
-        testImg.onload = () => console.log(`✅ ${project.title} image loaded: ${processedPath}`);
-        testImg.onerror = () => console.log(`❌ ${project.title} image failed to load: ${processedPath}`);
+        testImg.onload = () => console.log(`✅ ${project.title[language]} image loaded: ${processedPath}`);
+        testImg.onerror = () => console.log(`❌ ${project.title[language]} image failed to load: ${processedPath}`);
         testImg.src = processedPath;
       }
     });
-  }, []);
+  }, [language]);
 
   // Image path helper function
   const getImagePath = (path) => {
@@ -79,17 +79,33 @@ const Projects = () => {
   const projectsData = [
     {
       id: 1,
-      title: "Item Reminder App",
-      description: "An application with a single purpose, developed to serve that purpose effectively. It provides location-based notifications and a user-friendly interface to help users remember their items.",
+      title: {
+        tr: "Eşya Hatırlatıcı Uygulaması",
+        en: "Item Reminder App"
+      },
+      description: {
+        tr: "Tek bir amaca hizmet eden ve bu amacı etkili bir şekilde yerine getiren bir uygulama. Konum tabanlı bildirimler ve kullanıcı dostu arayüz ile eşyalarınızı hatırlamanıza yardımcı olur.",
+        en: "An application with a single purpose, developed to serve that purpose effectively. It provides location-based notifications and a user-friendly interface to help users remember their items."
+      },
       technologies: ["React Native", "JavaScript"],
-      features: [
-        "Responsive design (works on all devices)",
-        "Dark/light theme support",
-        "Animated transitions",
-        "Location-based notifications",
-        "User-friendly interface",
-        "Item reminder and notification system"
-      ],
+      features: {
+        tr: [
+          "Duyarlı tasarım (tüm cihazlarda çalışır)",
+          "Koyu/açık tema desteği",
+          "Animasyonlu geçişler",
+          "Konum tabanlı bildirimler",
+          "Kullanıcı dostu arayüz",
+          "Eşya hatırlatma ve bildirim sistemi"
+        ],
+        en: [
+          "Responsive design (works on all devices)",
+          "Dark/light theme support",
+          "Animated transitions",
+          "Location-based notifications",
+          "User-friendly interface",
+          "Item reminder and notification system"
+        ]
+      },
       images: [
         'esyaHatirlatici.jpeg',
         'esyaHatirlatici2.jpeg',
@@ -97,18 +113,34 @@ const Projects = () => {
         "images/esyaKonum.png",
         "images/esyaAyar.png"
       ]
-    },    {
+    },    
+    {
       id: 2,
-      title: "E-Commerce Platform",
-      description: "A comprehensive e-commerce platform. Developed with React and Node.js, includes user authentication, product catalogs, cart management, and payment processing.",
+      title: {
+        tr: "E-Ticaret Platformu",
+        en: "E-Commerce Platform"
+      },
+      description: {
+        tr: "Kapsamlı bir e-ticaret platformu. React ve Node.js ile geliştirilmiş, kullanıcı kimlik doğrulama, ürün katalogları, sepet yönetimi ve ödeme işleme özellikleri içerir.",
+        en: "A comprehensive e-commerce platform. Developed with React and Node.js, includes user authentication, product catalogs, cart management, and payment processing."
+      },
       technologies: ["React", "Node.js", "Firebase", "Virtual-POS"],
-      features: [
-        "User registration and authentication",
-        "Product search and filtering",
-        "Cart and favorites management",
-        "Secure payment processing",
-        "Product management with admin panel"
-      ],
+      features: {
+        tr: [
+          "Kullanıcı kaydı ve kimlik doğrulama",
+          "Ürün arama ve filtreleme",
+          "Sepet ve favoriler yönetimi",
+          "Güvenli ödeme işleme",
+          "Admin paneli ile ürün yönetimi"
+        ],
+        en: [
+          "User registration and authentication",
+          "Product search and filtering",
+          "Cart and favorites management",
+          "Secure payment processing",
+          "Product management with admin panel"
+        ]
+      },
       images: [
         "images/ruvidoHome.png",
         "images/ruvidoNavbar.png", 
@@ -121,16 +153,31 @@ const Projects = () => {
     },
     {
       id: 3,
-      title: "Corporate Website",
-      description: "A website specially designed for corporate companies. Strengthens corporate communication with modern design and user-friendly interface.",
+      title: {
+        tr: "Kurumsal Web Sitesi",
+        en: "Corporate Website"
+      },
+      description: {
+        tr: "Kurumsal şirketler için özel olarak tasarlanmış bir web sitesi. Modern tasarım ve kullanıcı dostu arayüz ile kurumsal iletişimi güçlendirir.",
+        en: "A website specially designed for corporate companies. Strengthens corporate communication with modern design and user-friendly interface."
+      },
       technologies: ["React"],
-      features: [
-        "Corporate communication forms",
-        "Service presentations",
-        "Reference projects",
-        "Blog and news updates",
-        "Contact information and map"
-      ],
+      features: {
+        tr: [
+          "Kurumsal iletişim formları",
+          "Hizmet sunumları",
+          "Referans projeler",
+          "Blog ve haber güncellemeleri",
+          "İletişim bilgileri ve harita"
+        ],
+        en: [
+          "Corporate communication forms",
+          "Service presentations",
+          "Reference projects",
+          "Blog and news updates",
+          "Contact information and map"
+        ]
+      },
       images: [
         "images/ruvidoTekstil.png",
         "images/ruvido3.png",
@@ -140,15 +187,29 @@ const Projects = () => {
     },
     {
       id: 4,
-      title: "Vehicle Sales Platform",
-      description: "Comprehensive vehicle buying and selling platform. Users can post vehicle listings, search, and access detailed vehicle information.",
+      title: {
+        tr: "Araç Satış Platformu",
+        en: "Vehicle Sales Platform"
+      },
+      description: {
+        tr: "Kapsamlı araç alım ve satım platformu. Kullanıcılar araç ilanları oluşturabilir, arama yapabilir ve detaylı araç bilgilerine erişebilir.",
+        en: "Comprehensive vehicle buying and selling platform. Users can post vehicle listings, search, and access detailed vehicle information."
+      },
       technologies: ["React", "Node.js"],
-      features: [
-        "Vehicle listing creation and management",
-        "Advanced search and filtering options",
-        "User account management",
-        "Vehicle photo gallery"
-      ],
+      features: {
+        tr: [
+          "Araç ilanı oluşturma ve yönetimi",
+          "Gelişmiş arama ve filtreleme seçenekleri",
+          "Kullanıcı hesap yönetimi",
+          "Araç fotoğraf galerisi"
+        ],
+        en: [
+          "Vehicle listing creation and management",
+          "Advanced search and filtering options",
+          "User account management",
+          "Vehicle photo gallery"
+        ]
+      },
       images: [
         "images/aracSatis.png", 
         "images/aracIlan.png",
@@ -157,16 +218,31 @@ const Projects = () => {
     },
     {
       id: 5,
-      title: "Hotel Website",
-      description: "A website with a user-friendly interface containing all information about the hotel.",
+      title: {
+        tr: "Otel Web Sitesi",
+        en: "Hotel Website"
+      },
+      description: {
+        tr: "Otel hakkında tüm bilgileri içeren kullanıcı dostu arayüze sahip bir web sitesi.",
+        en: "A website with a user-friendly interface containing all information about the hotel."
+      },
       technologies: ["HTML", "CSS", "JavaScript", "Bootstrap"],
-      features: [
-        "Advanced hotel and room search filtering",
-        "Hotel visualization on interactive map",
-        "Multiple room reservation options",
-        "User reviews and ratings",
-        "Special offers and discount system"
-      ],
+      features: {
+        tr: [
+          "Gelişmiş otel ve oda arama filtresi",
+          "İnteraktif harita üzerinde otel görselleştirme",
+          "Çoklu oda rezervasyon seçenekleri",
+          "Kullanıcı yorumları ve puanlamaları",
+          "Özel teklifler ve indirim sistemi"
+        ],
+        en: [
+          "Advanced hotel and room search filtering",
+          "Hotel visualization on interactive map",
+          "Multiple room reservation options",
+          "User reviews and ratings",
+          "Special offers and discount system"
+        ]
+      },
       images: [
         "images/otel.jpeg", 
         "images/otel2.jpeg",
@@ -182,15 +258,26 @@ const Projects = () => {
   const projectRefs = useRef(projectsData.map(() => React.createRef()));
   
   useEffect(() => {
+    console.log('Setting up initial project states...');
     // Başlangıçta her proje için aktif görsel indeksini 0 olarak ayarla
-    // ve tüm görselleri yükleniyor olarak işaretle
-    const initialIndices = {};
+    // Mevcut active image indekslerini koruyarak yeni projeler için indeks ayarlama
+    setActiveImageIndices(prev => {
+      const initialIndices = {...prev};
+      projectsData.forEach((project) => {
+        // Eğer bu proje için daha önce bir indeks belirlenmemişse 0 olarak ayarla
+        if (initialIndices[project.id] === undefined) {
+          initialIndices[project.id] = 0;
+        }
+      });
+      console.log('Initial image indices:', initialIndices);
+      return initialIndices;
+    });
+    
+    // Yükleme durumlarını ayarla
     const initialLoadingState = {};
     projectsData.forEach((project) => {
-      initialIndices[project.id] = 0;
-      initialLoadingState[project.id] = true; // Başlangıçta tüm görseller yükleniyor
+      initialLoadingState[project.id] = false; // Yükleniyor animasyonu kapatıldı
     });
-    setActiveImageIndices(initialIndices);
     setLoadingImages(initialLoadingState);
     
     const observer = new IntersectionObserver((entries) => {
@@ -218,15 +305,24 @@ const Projects = () => {
         if (ref.current) observer.unobserve(ref.current);
       });
     };
-  }, []);
+  }, [projectsData]);
   
   // Switch between images
   const changeImage = (projectId, direction) => {
-    // Mark new image as starting to load
-    setLoadingImages(prev => ({
-      ...prev,
-      [projectId]: true
-    }));
+    // Önce görsel indeksini değiştirelim
+    const project = projectsData.find(p => p.id === projectId);
+    if (!project || !project.images || project.images.length === 0) return;
+    
+    const currentIndex = activeImageIndices[projectId] || 0;
+    let newIndex;
+    
+    if (direction === 'next') {
+      newIndex = (currentIndex + 1) % project.images.length;
+    } else {
+      newIndex = (currentIndex - 1 + project.images.length) % project.images.length;
+    }
+    
+    console.log(`Changing image for project ${projectId}: ${currentIndex} -> ${newIndex}`);
     
     // Clear error state
     setImageErrors(prev => {
@@ -240,24 +336,17 @@ const Projects = () => {
       return newErrors;
     });
     
-    setActiveImageIndices(prev => {
-      const project = projectsData.find(p => p.id === projectId);
-      if (!project || !project.images || project.images.length === 0) return prev;
-      
-      const currentIndex = prev[projectId] || 0;
-      let newIndex;
-      
-      if (direction === 'next') {
-        newIndex = (currentIndex + 1) % project.images.length;
-      } else {
-        newIndex = (currentIndex - 1 + project.images.length) % project.images.length;
-      }
-      
-      return {
-        ...prev,
-        [projectId]: newIndex
-      };
-    });
+    // Yükleme animasyonu devre dışı bırakıldı
+    setLoadingImages(prev => ({
+      ...prev,
+      [projectId]: false
+    }));
+    
+    // Set new index
+    setActiveImageIndices(prev => ({
+      ...prev,
+      [projectId]: newIndex
+    }));
   };
   
   // Handle image error state
@@ -370,8 +459,8 @@ const Projects = () => {
     },
     projectContent: {
       display: 'flex',
-      flexDirection: 'row',
-      gap: '20px', // Daha küçük boşluk, içeriğin daha iyi sığması için
+      flexDirection: 'row', // Desktop'ta yan yana
+      gap: '20px',
       alignItems: 'flex-start', // İçeriği üstten hizala
       justifyContent: 'space-between', // İçerik arası boşluk dengeli dağıtılsın
     },
@@ -506,6 +595,7 @@ const Projects = () => {
       maxWidth: '500px', // Maksimum genişlik sınırlaması
       height: '100%', // Yüksekliği ayarla
       justifyContent: 'flex-start', // İçeriği üstten başlat
+      flex: '1',
     },
     projectDescription: {
       fontSize: '1.1rem',
@@ -533,6 +623,92 @@ const Projects = () => {
     featureIcon: {
       marginRight: '8px',
       color: 'var(--primary-color, #9c27b0)',
+    },
+    // Proje kartını daha responsive hale getirin
+    projectCard: {
+      width: '100%', // Yüzde genişlik kullan
+      maxWidth: '900px',
+      margin: '0 auto 40px',
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    
+    // Görsel galerisini mobil için düzenleyin
+    imageGallery: {
+      width: '100%',
+      maxWidth: '500px', // Maksimum genişlik ekleyin
+      height: 'auto', // Aspekt oranını korusun
+      maxHeight: '300px',
+    },
+    
+    // Oklar ve göstergeler için daha büyük dokunma alanı
+    navigationButton: {
+      width: '40px',  // Mobilde daha büyük
+      height: '40px', // Mobilde daha büyük
+      opacity: 0.8,   // Her zaman biraz görünür
+    },
+    
+    // Teknoloji etiketlerini mobil için düzelt
+    techTag: {
+      display: 'inline-block',
+      margin: '0 5px 5px 0', // Alt marjin ekle, taşma olursa yeni satıra geçebilsin
+      whiteSpace: 'normal', // Metin sarması aktif
+    },
+    
+    // Media queries ekleyin
+    '@media (max-width: 768px)': {
+      projectsContainer: {
+        padding: '0 10px', // Mobilde daha az padding
+      },
+      projectCard: {
+        padding: '15px', // Mobilde daha az padding
+      },
+      projectTitle: {
+        fontSize: '1.4rem', // Mobilde daha küçük başlık
+      },
+      projectDescription: {
+        fontSize: '0.9rem', // Mobilde daha küçük açıklama
+      },
+      featureList: {
+        paddingLeft: '20px', // Mobilde daha az liste girintisi
+      },
+      featureItem: {
+        fontSize: '0.9rem', // Mobilde daha küçük özellik metni
+        marginBottom: '5px',
+      },
+      techTag: {
+        fontSize: '0.8rem',
+        padding: '4px 10px',
+      },
+      projectContent: {
+        flexDirection: 'column-reverse', // Mobilde görseller üstte, detaylar altta
+      },
+      
+      imageGallery: {
+        maxWidth: '100%', // Mobilde tam genişlikte
+        marginBottom: '20px',
+      },
+    },
+    
+    '@media (max-width: 480px)': {
+      projectTitle: {
+        fontSize: '1.3rem',
+      },
+      
+      navigationButton: {
+        width: '35px', // Daha küçük ekranlarda biraz daha küçük
+        height: '35px',
+      },
+      
+      dotIndicatorsContainer: {
+        marginTop: '10px', // Küçük ekranlarda daha az boşluk
+      },
+      
+      dotIndicator: {
+        width: '8px', // Daha küçük noktalar
+        height: '8px',
+        margin: '0 4px', // Daha az boşluk
+      }
     }
   };
   
@@ -568,6 +744,7 @@ const Projects = () => {
               <div 
                 key={project.id} 
                 ref={projectRefs.current[index]}
+                className="projectSection"
                 style={{
                   ...styles.projectSection,
                   ...(visibleProjects.includes(index) ? styles.projectSectionVisible : {})
@@ -575,7 +752,7 @@ const Projects = () => {
               >
                 <div style={styles.projectHeader}>
                   <div style={styles.projectNumber}>#{index + 1}</div>
-                  <h3 style={styles.projectTitle}>{project.title}</h3>
+                  <h3 className="projectTitle" style={styles.projectTitle}>{project.title[language]}</h3>
                 </div>
                 
                 <div style={styles.projectTags}>
@@ -584,40 +761,45 @@ const Projects = () => {
                   ))}
                 </div>
                 
-                <div style={{
-                  ...styles.projectContent,
-                  flexDirection: isMobile ? 'column' : 'row',
-                  alignItems: isMobile ? 'center' : 'flex-start',
-                  minHeight: isMobile ? 'auto' : (isTablet ? '400px' : '450px'),
-                  flexWrap: isTablet ? 'wrap' : 'nowrap' // Tablet görünümünde sarmalama
-                }}>
+                <div 
+                  className="projectContent"
+                  style={{
+                    ...styles.projectContent,
+                    flexDirection: isMobile ? 'column' : 'row',
+                    alignItems: isMobile ? 'center' : 'flex-start',
+                    minHeight: isMobile ? 'auto' : (isTablet ? '400px' : '450px'),
+                    flexWrap: isTablet ? 'wrap' : 'nowrap' // Tablet görünümünde sarmalama
+                  }}
+                >
                   {/* Proje görsel galerisi */}
-                  <div style={{
-                    ...styles.galleryContainer,
-                    width: isMobile ? '100%' : '55%',
-                    height: isMobile ? 'auto' : '400px', // Sabit yükseklik
-                    marginBottom: isMobile ? '30px' : 0
-                  }}>
+                  <div 
+                    className="galleryContainer"
+                    style={{
+                      ...styles.galleryContainer,
+                      width: isMobile ? '100%' : '55%',
+                      height: isMobile ? 'auto' : '400px', // Sabit yükseklik
+                      marginBottom: isMobile ? '30px' : 0
+                    }}
+                  >
                     {images.length > 0 && !hasError ? (
                       <>
                         <img 
+                          key={`project-${project.id}-image-${currentImageIndex}`}
                           src={getImagePath(currentImage)}
-                          alt={`${project.title} görsel ${currentImageIndex + 1}`}
+                          alt={`${project.title[language]} görsel ${currentImageIndex + 1}`}
                           style={{
                             ...styles.galleryImage,
                             transition: 'opacity 0.3s, transform 0.3s ease',
+                            opacity: 1 // Baştan görünür yap
                           }}
                           loading="lazy"
-                          onClick={() => changeImage(project.id, 'next')}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            changeImage(project.id, 'next');
+                          }}
                           onError={() => handleImageError(project.id, currentImageIndex)}
                           onLoad={(e) => {
-                            // Add animation when image loads successfully
-                            e.target.style.opacity = 1;
-                            // Update loading state
-                            setLoadingImages(prev => ({
-                              ...prev,
-                              [project.id]: false
-                            }));
                             // Clear error state for this image
                             setImageErrors(prev => {
                               const newErrors = { ...prev };
@@ -628,16 +810,11 @@ const Projects = () => {
                           }}
                           className="gallery-image"
                         />
-                        {loadingImages[project.id] && (
-                          <div style={styles.galleryLoadingOverlay}>
-                            <div style={styles.galleryLoadingAnimation}></div>
-                          </div>
-                        )}
                       </>
                     ) : (
                       <div style={styles.placeholderContainer}>
                         <div style={styles.placeholderIcon}>🖼️</div>
-                        <div>Image could not be loaded for {project.title}</div>
+                        <div>Image could not be loaded for {project.title[language]}</div>
                         <div style={{fontSize: '0.85rem', marginTop: '8px', opacity: 0.7}}>
                           {hasError && currentImage ? (
                             <>
@@ -662,6 +839,7 @@ const Projects = () => {
                               : 'rgba(0, 0, 0, 0.7)'
                           }}
                           onClick={(e) => {
+                            e.preventDefault();
                             e.stopPropagation();
                             changeImage(project.id, 'prev');
                           }}
@@ -685,6 +863,7 @@ const Projects = () => {
                               : 'rgba(0, 0, 0, 0.7)'
                           }}
                           onClick={(e) => {
+                            e.preventDefault();
                             e.stopPropagation();
                             changeImage(project.id, 'next');
                           }}
@@ -710,23 +889,32 @@ const Projects = () => {
                                 ...(i === currentImageIndex ? styles.galleryDotActive : {})
                               }}
                               onClick={(e) => {
+                                e.preventDefault();
                                 e.stopPropagation();
+                                console.log(`Changing to dot index ${i} for project ${project.id}`);
+                                
                                 // Önce hata state'ini temizle
                                 setImageErrors(prev => {
                                   const newErrors = { ...prev };
                                   delete newErrors[`${project.id}-${i}`];
                                   return newErrors;
                                 });
-                                // Yükleme durumunu başlat
+                                
+                                // Yükleme durumu kaldırıldı
                                 setLoadingImages(prev => ({
                                   ...prev,
-                                  [project.id]: true
+                                  [project.id]: false
                                 }));
-                                // Görsel indeksini güncelle
-                                setActiveImageIndices(prev => ({
-                                  ...prev,
-                                  [project.id]: i
-                                }));
+                                
+                                // Görsel indeksini doğrudan değiştir
+                                setActiveImageIndices(prev => {
+                                  const newState = {
+                                    ...prev,
+                                    [project.id]: i
+                                  };
+                                  console.log('New active indices:', newState);
+                                  return newState;
+                                });
                               }}
                             />
                           ))}
@@ -736,23 +924,26 @@ const Projects = () => {
                   </div>
 
                   {/* Proje detayları */}
-                  <div style={{
-                    ...styles.projectDetails,
-                    width: isMobile ? '100%' : '42%',
-                    minHeight: isMobile ? 'auto' : '400px', // Minimum yükseklik
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between'
-                  }}>
-                    <p style={styles.projectDescription}>
-                      {project.description}
+                  <div 
+                    className="projectDetails"
+                    style={{
+                      ...styles.projectDetails,
+                      width: isMobile ? '100%' : '42%',
+                      minHeight: isMobile ? 'auto' : '400px', // Minimum yükseklik
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    <p className="projectDescription" style={styles.projectDescription}>
+                      {project.description[language]}
                     </p>
                     
-                    {project.features && project.features.length > 0 && (
+                    {project.features && project.features[language] && project.features[language].length > 0 && (
                       <div style={styles.projectFeatures}>
-                        <h4 style={styles.featuresTitle}>Features</h4>
+                        <h4 style={styles.featuresTitle}>{text.features}</h4>
                         <ul style={styles.featuresList}>
-                          {project.features.map((feature, i) => (
+                          {project.features[language].map((feature, i) => (
                             <li key={i} style={styles.featureItem}>
                               <span style={styles.featureIcon}>➤</span>
                               {" " + feature}
@@ -761,6 +952,65 @@ const Projects = () => {
                         </ul>
                       </div>
                     )}
+                    
+                    {/* İletişim ve proje bağlantıları */}
+                    <div className="navButtons" style={{marginTop: 'auto', marginBottom: '10px'}}>
+                      <a
+                        href={`mailto:mert54bolukbasi@gmail.com?subject=Project Inquiry: ${project.title[language]}`}
+                        className="contactButton"
+                        style={{
+                          ...styles.contactButton,
+                          backgroundColor: 'var(--primary-color, #9c27b0)',
+                          color: '#fff',
+                          padding: '12px 24px',
+                          borderRadius: '30px',
+                          fontSize: '1rem',
+                          fontWeight: '600',
+                          textDecoration: 'none',
+                          display: 'inline-block',
+                          transition: 'background-color 0.3s ease',
+                          marginRight: '10px',
+                          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.backgroundColor = 'rgba(156, 39, 176, 0.9)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.backgroundColor = 'var(--primary-color, #9c27b0)';
+                        }}
+                      >
+                        {text.contactButton}
+                      </a>
+                      
+                      <a
+                        href="#"
+                        className="viewProjectButton"
+                        style={{
+                          ...styles.viewProjectButton,
+                          backgroundColor: 'transparent',
+                          color: 'var(--primary-color, #9c27b0)',
+                          padding: '12px 24px',
+                          borderRadius: '30px',
+                          fontSize: '1rem',
+                          fontWeight: '600',
+                          textDecoration: 'none',
+                          display: 'inline-block',
+                          transition: 'all 0.3s ease',
+                          border: '2px solid var(--primary-color, #9c27b0)',
+                          boxShadow: '0 4px 12px rgba(156, 39, 176, 0.2)',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.backgroundColor = 'transparent';
+                          e.target.style.color = 'var(--primary-color, #9c27b0)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.backgroundColor = 'transparent';
+                          e.target.style.color = 'var(--primary-color, #9c27b0)';
+                        }}
+                      >
+                        {text.viewProjectButton}
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -1,3 +1,9 @@
+/* CSS File imports */
+@import './styles/global.css';
+@import './styles/variables.css';
+@import './styles/StarBackground.css';
+@import './styles/Projects.css';
+
 #root {
   width: 100%;
   height: 100vh;
@@ -65,4 +71,56 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Mevcut CSS'inize ekleyin */
+.section-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Tüm etiketler için minimal olarak dokunulabilir alanlar */
+button, a, [role="button"], input[type="submit"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Mobil Media Queries */
+@media (max-width: 768px) {
+  .section-content {
+    padding: 0 15px;
+  }
+  
+  h1 {
+    font-size: 2rem !important;
+  }
+  
+  h2 {
+    font-size: 1.7rem !important;
+  }
+  
+  p {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-content {
+    padding: 0 10px;
+  }
+  
+  h1 {
+    font-size: 1.8rem !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  p {
+    font-size: 0.9rem !important;
+  }
 }
