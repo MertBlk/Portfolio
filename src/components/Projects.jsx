@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import esyaHatirlatici from '../assets/images/esyaHatirlatici.jpeg';
 import esyaHatirlatici2 from '../assets/images/esyaHatirlatici2.jpeg';
 import ruvido from '../assets/images/ruvido.jpeg';
@@ -76,180 +77,181 @@ const Projects = () => {
     }
   };
   
-  const projectsData = [
-    {
-      id: 1,
-      title: {
-        tr: "Eşya Hatırlatıcı Uygulaması",
-        en: "Item Reminder App"
-      },
-      description: {
-        tr: "Tek bir amaca hizmet eden ve bu amacı etkili bir şekilde yerine getiren bir uygulama. Konum tabanlı bildirimler ve kullanıcı dostu arayüz ile eşyalarınızı hatırlamanıza yardımcı olur.",
-        en: "An application with a single purpose, developed to serve that purpose effectively. It provides location-based notifications and a user-friendly interface to help users remember their items."
-      },
-      technologies: ["React Native", "JavaScript"],
-      features: {
-        tr: [
-          "Duyarlı tasarım (tüm cihazlarda çalışır)",
-          "Koyu/açık tema desteği",
-          "Animasyonlu geçişler",
-          "Konum tabanlı bildirimler",
-          "Kullanıcı dostu arayüz",
-          "Eşya hatırlatma ve bildirim sistemi"
-        ],
-        en: [
-          "Responsive design (works on all devices)",
-          "Dark/light theme support",
-          "Animated transitions",
-          "Location-based notifications",
-          "User-friendly interface",
-          "Item reminder and notification system"
-        ]
-      },
-      images: [
-        'esyaHatirlatici.jpeg',
-        'esyaHatirlatici2.jpeg',
-        "images/esyaBildirim.png",
-        "images/esyaKonum.png",
-        "images/esyaAyar.png"
-      ]
-    },    
-    {
-      id: 2,
-      title: {
-        tr: "E-Ticaret Platformu",
-        en: "E-Commerce Platform"
-      },
-      description: {
-        tr: "Kapsamlı bir e-ticaret platformu. React ve Node.js ile geliştirilmiş, kullanıcı kimlik doğrulama, ürün katalogları, sepet yönetimi ve ödeme işleme özellikleri içerir.",
-        en: "A comprehensive e-commerce platform. Developed with React and Node.js, includes user authentication, product catalogs, cart management, and payment processing."
-      },
-      technologies: ["React", "Node.js", "Firebase", "Virtual-POS"],
-      features: {
-        tr: [
-          "Kullanıcı kaydı ve kimlik doğrulama",
-          "Ürün arama ve filtreleme",
-          "Sepet ve favoriler yönetimi",
-          "Güvenli ödeme işleme",
-          "Admin paneli ile ürün yönetimi"
-        ],
-        en: [
-          "User registration and authentication",
-          "Product search and filtering",
-          "Cart and favorites management",
-          "Secure payment processing",
-          "Product management with admin panel"
-        ]
-      },
-      images: [
-        "images/ruvidoHome.png",
-        "images/ruvidoNavbar.png", 
-        "images/ruvidoSepet.png",
-        "images/ruvidoKoleksiyon.png",
-        "images/ruvidoAdminEkleme.png",
-        "images/ruvidoUrunDuzenleme.png",
-        "images/ruvidoProfil.png"
+// Component dışında tanımla ki her render'da yeniden oluşturulmasın
+const projectsData = [
+  {
+    id: 1,
+    title: {
+      tr: "Eşya Hatırlatıcı Uygulaması",
+      en: "Item Reminder App"
+    },
+    description: {
+      tr: "Tek bir amaca hizmet eden ve bu amacı etkili bir şekilde yerine getiren bir uygulama. Konum tabanlı bildirimler ve kullanıcı dostu arayüz ile eşyalarınızı hatırlamanıza yardımcı olur.",
+      en: "An application with a single purpose, developed to serve that purpose effectively. It provides location-based notifications and a user-friendly interface to help users remember their items."
+    },
+    technologies: ["React Native", "JavaScript"],
+    features: {
+      tr: [
+        "Duyarlı tasarım (tüm cihazlarda çalışır)",
+        "Koyu/açık tema desteği",
+        "Animasyonlu geçişler",
+        "Konum tabanlı bildirimler",
+        "Kullanıcı dostu arayüz",
+        "Eşya hatırlatma ve bildirim sistemi"
+      ],
+      en: [
+        "Responsive design (works on all devices)",
+        "Dark/light theme support",
+        "Animated transitions",
+        "Location-based notifications",
+        "User-friendly interface",
+        "Item reminder and notification system"
       ]
     },
-    {
-      id: 3,
-      title: {
-        tr: "Kurumsal Web Sitesi",
-        en: "Corporate Website"
-      },
-      description: {
-        tr: "Kurumsal şirketler için özel olarak tasarlanmış bir web sitesi. Modern tasarım ve kullanıcı dostu arayüz ile kurumsal iletişimi güçlendirir.",
-        en: "A website specially designed for corporate companies. Strengthens corporate communication with modern design and user-friendly interface."
-      },
-      technologies: ["React"],
-      features: {
-        tr: [
-          "Kurumsal iletişim formları",
-          "Hizmet sunumları",
-          "Referans projeler",
-          "Blog ve haber güncellemeleri",
-          "İletişim bilgileri ve harita"
-        ],
-        en: [
-          "Corporate communication forms",
-          "Service presentations",
-          "Reference projects",
-          "Blog and news updates",
-          "Contact information and map"
-        ]
-      },
-      images: [
-        "images/ruvidoTekstil.png",
-        "images/ruvido3.png",
-        "images/ruvido4.png",
-        "images/ruvido5.png"
+    images: [
+      'esyaHatirlatici.jpeg',
+      'esyaHatirlatici2.jpeg',
+      "images/esyaBildirim.png",
+      "images/esyaKonum.png",
+      "images/esyaAyar.png"
+    ]
+  },    
+  {
+    id: 2,
+    title: {
+      tr: "E-Ticaret Platformu",
+      en: "E-Commerce Platform"
+    },
+    description: {
+      tr: "Kapsamlı bir e-ticaret platformu. React ve Node.js ile geliştirilmiş, kullanıcı kimlik doğrulama, ürün katalogları, sepet yönetimi ve ödeme işleme özellikleri içerir.",
+      en: "A comprehensive e-commerce platform. Developed with React and Node.js, includes user authentication, product catalogs, cart management, and payment processing."
+    },
+    technologies: ["React", "Node.js", "Firebase", "Virtual-POS"],
+    features: {
+      tr: [
+        "Kullanıcı kaydı ve kimlik doğrulama",
+        "Ürün arama ve filtreleme",
+        "Sepet ve favoriler yönetimi",
+        "Güvenli ödeme işleme",
+        "Admin paneli ile ürün yönetimi"
+      ],
+      en: [
+        "User registration and authentication",
+        "Product search and filtering",
+        "Cart and favorites management",
+        "Secure payment processing",
+        "Product management with admin panel"
       ]
     },
-    {
-      id: 4,
-      title: {
-        tr: "Araç Satış Platformu",
-        en: "Vehicle Sales Platform"
-      },
-      description: {
-        tr: "Kapsamlı araç alım ve satım platformu. Kullanıcılar araç ilanları oluşturabilir, arama yapabilir ve detaylı araç bilgilerine erişebilir.",
-        en: "Comprehensive vehicle buying and selling platform. Users can post vehicle listings, search, and access detailed vehicle information."
-      },
-      technologies: ["React", "Node.js"],
-      features: {
-        tr: [
-          "Araç ilanı oluşturma ve yönetimi",
-          "Gelişmiş arama ve filtreleme seçenekleri",
-          "Kullanıcı hesap yönetimi",
-          "Araç fotoğraf galerisi"
-        ],
-        en: [
-          "Vehicle listing creation and management",
-          "Advanced search and filtering options",
-          "User account management",
-          "Vehicle photo gallery"
-        ]
-      },
-      images: [
-        "images/aracSatis.png", 
-        "images/aracIlan.png",
-        "images/aracHesap.png"
+    images: [
+      "images/ruvidoHome.png",
+      "images/ruvidoNavbar.png", 
+      "images/ruvidoSepet.png",
+      "images/ruvidoKoleksiyon.png",
+      "images/ruvidoAdminEkleme.png",
+      "images/ruvidoUrunDuzenleme.png",
+      "images/ruvidoProfil.png"
+    ]
+  },
+  {
+    id: 3,
+    title: {
+      tr: "Kurumsal Web Sitesi",
+      en: "Corporate Website"
+    },
+    description: {
+      tr: "Kurumsal şirketler için özel olarak tasarlanmış bir web sitesi. Modern tasarım ve kullanıcı dostu arayüz ile kurumsal iletişimi güçlendirir.",
+      en: "A website specially designed for corporate companies. Strengthens corporate communication with modern design and user-friendly interface."
+    },
+    technologies: ["React"],
+    features: {
+      tr: [
+        "Kurumsal iletişim formları",
+        "Hizmet sunumları",
+        "Referans projeler",
+        "Blog ve haber güncellemeleri",
+        "İletişim bilgileri ve harita"
+      ],
+      en: [
+        "Corporate communication forms",
+        "Service presentations",
+        "Reference projects",
+        "Blog and news updates",
+        "Contact information and map"
       ]
     },
-    {
-      id: 5,
-      title: {
-        tr: "Otel Web Sitesi",
-        en: "Hotel Website"
-      },
-      description: {
-        tr: "Otel hakkında tüm bilgileri içeren kullanıcı dostu arayüze sahip bir web sitesi.",
-        en: "A website with a user-friendly interface containing all information about the hotel."
-      },
-      technologies: ["HTML", "CSS", "JavaScript", "Bootstrap"],
-      features: {
-        tr: [
-          "Gelişmiş otel ve oda arama filtresi",
-          "İnteraktif harita üzerinde otel görselleştirme",
-          "Çoklu oda rezervasyon seçenekleri",
-          "Kullanıcı yorumları ve puanlamaları",
-          "Özel teklifler ve indirim sistemi"
-        ],
-        en: [
-          "Advanced hotel and room search filtering",
-          "Hotel visualization on interactive map",
-          "Multiple room reservation options",
-          "User reviews and ratings",
-          "Special offers and discount system"
-        ]
-      },
-      images: [
-        "images/otel.jpeg", 
-        "images/otel2.jpeg",
-        "images/otel3.jpeg"
+    images: [
+      "images/ruvidoTekstil.png",
+      "images/ruvido3.png",
+      "images/ruvido4.png",
+      "images/ruvido5.png"
+    ]
+  },
+  {
+    id: 4,
+    title: {
+      tr: "Araç Satış Platformu",
+      en: "Vehicle Sales Platform"
+    },
+    description: {
+      tr: "Kapsamlı araç alım ve satım platformu. Kullanıcılar araç ilanları oluşturabilir, arama yapabilir ve detaylı araç bilgilerine erişebilir.",
+      en: "Comprehensive vehicle buying and selling platform. Users can post vehicle listings, search, and access detailed vehicle information."
+    },
+    technologies: ["React", "Node.js"],
+    features: {
+      tr: [
+        "Araç ilanı oluşturma ve yönetimi",
+        "Gelişmiş arama ve filtreleme seçenekleri",
+        "Kullanıcı hesap yönetimi",
+        "Araç fotoğraf galerisi"
+      ],
+      en: [
+        "Vehicle listing creation and management",
+        "Advanced search and filtering options",
+        "User account management",
+        "Vehicle photo gallery"
       ]
-    }
-  ];
+    },
+    images: [
+      "images/aracSatis.png", 
+      "images/aracIlan.png",
+      "images/aracHesap.png"
+    ]
+  },
+  {
+    id: 5,
+    title: {
+      tr: "Otel Web Sitesi",
+      en: "Hotel Website"
+    },
+    description: {
+      tr: "Otel hakkında tüm bilgileri içeren kullanıcı dostu arayüze sahip bir web sitesi.",
+      en: "A website with a user-friendly interface containing all information about the hotel."
+    },
+    technologies: ["HTML", "CSS", "JavaScript", "Bootstrap"],
+    features: {
+      tr: [
+        "Gelişmiş otel ve oda arama filtresi",
+        "İnteraktif harita üzerinde otel görselleştirme",
+        "Çoklu oda rezervasyon seçenekleri",
+        "Kullanıcı yorumları ve puanlamaları",
+        "Özel teklifler ve indirim sistemi"
+      ],
+      en: [
+        "Advanced hotel and room search filtering",
+        "Hotel visualization on interactive map",
+        "Multiple room reservation options",
+        "User reviews and ratings",
+        "Special offers and discount system"
+      ]
+    },
+    images: [
+      "images/otel.jpeg", 
+      "images/otel2.jpeg",
+      "images/otel3.jpeg"
+    ]
+  }
+];
   
   const [visibleProjects, setVisibleProjects] = useState([]);
   const [activeImageIndices, setActiveImageIndices] = useState({});
@@ -281,7 +283,7 @@ const Projects = () => {
     setLoadingImages(initialLoadingState);
     
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+      entries.forEach(entry => { // PARANTEZ EKLENDİ
         if (entry.isIntersecting) {
           setVisibleProjects(prev => {
             if (!prev.includes(parseInt(entry.target.dataset.index))) {
@@ -305,7 +307,7 @@ const Projects = () => {
         if (ref.current) observer.unobserve(ref.current);
       });
     };
-  }, [projectsData]);
+  }, []); // projectsData artık component dışında tanımlandığı için bağımlılık listesinden kaldırıldı
   
   // Switch between images
   const changeImage = (projectId, direction) => {
@@ -386,15 +388,24 @@ const Projects = () => {
     }
   };
   
+  const [hoveredNavs, setHoveredNavs] = useState({});
+  
+  // Responsive design için react-responsive kullanma
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+  const isTablet = useMediaQuery({ query: '(min-width: 769px) and (max-width: 1024px)' });
+  
   const styles = {
     projectsContainer: {
       display: 'flex',
       flexDirection: 'column',
-      gap: isMobile ? '80px' : (isTablet ? '100px' : '120px'),
+      gap: isMobile ? '60px' : (isTablet ? '80px' : '100px'),
       width: '100%',
-      maxWidth: isMobile ? '100%' : (isTablet ? '1000px' : '1400px'),
+      maxWidth: '1200px',
       margin: '0 auto',
-      padding: isMobile ? '0 10px' : (isTablet ? '0 20px' : '0 40px'),
+      padding: '0',
+      alignItems: 'center',
+      justifyContent: 'center',
+      boxSizing: 'border-box',
     },
     projectsTitle: {
       fontSize: isMobile ? '2rem' : (isTablet ? '2.5rem' : '3.5rem'),
@@ -406,16 +417,21 @@ const Projects = () => {
     },
     projectSection: {
       width: '100%',
+      maxWidth: isMobile ? '94%' : (isTablet ? '95%' : '1200px'), // Masaüstünde daha büyük
       backgroundColor: 'rgba(30, 30, 30, 0.6)',
       borderRadius: isMobile ? '16px' : '24px',
-      padding: isMobile ? '20px' : (isTablet ? '30px 40px' : '50px 60px'),
+      padding: isMobile ? '20px' : (isTablet ? '30px' : '60px'), // Padding artırıldı
       boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(156, 39, 176, 0.15)',
       opacity: 0,
       transform: 'translateY(40px)',
       transition: 'opacity 0.8s ease, transform 0.8s ease',
       border: '1px solid rgba(156, 39, 176, 0.15)',
-      marginBottom: '20px',
-      minHeight: isMobile ? 'auto' : (isTablet ? '400px' : '500px'),
+      minHeight: isMobile ? 'auto' : (isTablet ? '450px' : '550px'),
+      margin: '0 auto 30px auto',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      boxSizing: 'border-box',
     },
     projectSectionVisible: {
       opacity: 1,
@@ -424,9 +440,11 @@ const Projects = () => {
     projectHeader: {
       display: 'flex',
       alignItems: 'center',
-      marginBottom: isMobile ? '15px' : '20px',
+      marginBottom: isMobile ? '20px' : '30px',
       flexDirection: isMobile ? 'column' : 'row',
-      textAlign: isMobile ? 'center' : 'left',
+      textAlign: 'center',
+      width: '100%',
+      justifyContent: 'center',
     },
     projectNumber: {
       fontSize: isMobile ? '1.2rem' : (isTablet ? '1.4rem' : '1.6rem'),
@@ -446,125 +464,103 @@ const Projects = () => {
       backgroundClip: 'text',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
+      textAlign: 'center',
     },
     projectTags: {
       display: 'flex',
       flexWrap: 'wrap',
-      gap: isMobile ? '6px' : '10px',
-      marginBottom: isMobile ? '20px' : '25px',
-      justifyContent: isMobile ? 'center' : 'flex-start',
+      gap: isMobile ? '8px' : '12px',
+      marginBottom: isMobile ? '25px' : '35px',
+      justifyContent: 'center',
+      width: '100%',
     },
     projectTag: {
       backgroundColor: 'rgba(255, 255, 255, 0.1)',
       color: 'var(--text-color, #fff)',
-      padding: isMobile ? '6px 12px' : '8px 16px',
+      padding: isMobile ? '8px 16px' : '10px 20px',
       borderRadius: '25px',
       fontSize: isMobile ? '0.85rem' : '1rem',
       fontWeight: '500',
     },
     projectContent: {
       display: 'flex',
-      flexDirection: 'row',
-      gap: '20px',
-      alignItems: 'flex-start',
-      justifyContent: 'space-between',
+      flexDirection: isMobile ? 'column-reverse' : 'row',
+      gap: isMobile ? '24px' : '40px',
+      alignItems: isMobile ? 'center' : 'flex-start',
+      justifyContent: 'center',
+      width: '100%',
+      maxWidth: '100%',
+      margin: '0 auto',
+      boxSizing: 'border-box',
+      overflow: 'visible',
     },
     galleryContainer: {
-      width: isMobile ? '100%' : (isTablet ? '50%' : '55%'),
-      position: 'relative',
-      borderRadius: '16px',
-      overflow: 'hidden',
-      boxShadow: '0 8px 24px rgba(0, 0, 0, 0.3), 0 0 10px rgba(156, 39, 176, 0.2)',
-      aspectRatio: isMobile ? '16/10' : '4/3',
-      backgroundColor: '#1a1a1a',
-      border: '1px solid rgba(255, 255, 255, 0.05)',
-      transform: 'translateZ(0)',
-      transition: 'transform 0.3s ease',
-      marginRight: isMobile ? '0' : '25px',
-      marginBottom: isMobile ? '20px' : '0',
-    },
-    galleryLoadingOverlay: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
+      width: isMobile ? '100%' : '80%',  // %75'ten %80'e çıkarıldı
+      maxWidth: isMobile ? '100%' : '1000px', // 950px'den 1000px'e çıkarıldı
+      minWidth: isMobile ? 'auto' : 'auto',
+      height: isMobile ? 'auto' : '400px', // 420px'den 450px'e çıkarıldı
+      aspectRatio: isMobile ? '16/9' : undefined,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'rgba(0, 0, 0, 0.6)',
-      color: '#fff',
-      zIndex: 1,
-      backdropFilter: 'blur(5px)', // Bulanıklaştırma efekti
-      WebkitBackdropFilter: 'blur(5px)',
-    },
-    galleryLoadingAnimation: {
-      width: '40px', // Daha büyük yükleme göstergesi
-      height: '40px',
-      border: '4px solid rgba(255, 255, 255, 0.15)',
-      borderRadius: '50%',
-      borderTop: '4px solid var(--primary-color, #9c27b0)',
-      boxShadow: '0 0 15px rgba(156, 39, 176, 0.5)', // Işıltılı efekt
-      animation: 'spin 1s cubic-bezier(0.68, -0.6, 0.32, 1.6) infinite', // Daha yumuşak animasyon
+      position: 'relative',
+      borderRadius: isMobile ? '12px' : '20px',
+      overflow: 'hidden', // İçindeki görselin taşmasını engeller
+      boxShadow: isMobile 
+        ? '0 4px 16px rgba(0, 0, 0, 0.3)' 
+        : '0 12px 32px rgba(0, 0, 0, 0.4), 0 0 15px rgba(156, 39, 176, 0.25)',
+      backgroundColor: '#1a1a1a',
+      border: '1px solid rgba(255, 255, 255, 0.05)',
+      marginBottom: isMobile ? '20px' : 0,
+      boxSizing: 'border-box',
+      flex: isMobile ? '1 1 100%' : '0 0 70%', // %65'ten %70'e çıkarıldı
     },
     galleryImage: {
       width: '100%',
-      height: '100%',
-      objectFit: 'contain', // Görüntünün tamamını göster, kırpmayı önle
-      backgroundColor: '#111', // Görsel arka planı
+      height: '100%', 
+      objectFit: 'scale-down', // 'contain' yerine 'scale-down' kullanılabilir
+      objectPosition: 'center', 
+      backgroundColor: '#111',
       display: 'block',
-      transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-      cursor: 'pointer',
-      filter: 'brightness(1.02)',
-      padding: '5px', // İçten boşluk ekleyerek görüntünün kenarlarına mesafe bırak
+      transition: 'transform 0.3s ease, opacity 0.3s ease',
+      cursor: isMobile ? 'pointer' : 'default',
+      filter: 'brightness(1.02) contrast(1.05)',
+      padding: '8px', // 0px'den 8px'e çıkarıldı, görselin kenarlarda kırpılma riskini azaltır
+      maxHeight: 'none', // Yükseklik için max limitini kaldırdık
+      minHeight: 'auto',
+      borderRadius: isMobile ? '8px' : '16px',
     },
-    placeholderContainer: {
-      width: '100%',
-      height: '100%',
+    projectDetails: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: '#bbb', // Daha parlak renk
-      fontSize: '1.2rem', // Daha büyük yazı
-      textAlign: 'center',
-      padding: '30px',
-      backgroundColor: 'rgba(35, 35, 35, 0.85)',
-      borderRadius: '16px',
-      border: '1px solid rgba(156, 39, 176, 0.2)', // Mor kenarlık
-      backdropFilter: 'blur(8px)',
-      WebkitBackdropFilter: 'blur(8px)',
+      gap: isMobile ? '16px' : '30px',
+      width: isMobile ? '100%' : '33%', // %38'den %33'e düşürüldü
+      maxWidth: isMobile ? '100%' : '600px',
+      height: '100%',
+      justifyContent: 'flex-start',
+      flex: isMobile ? '1 1 100%' : '0 0 33%', // %38'den %33'e düşürüldü
+      boxSizing: 'border-box',
+      padding: isMobile ? '0' : '0 20px',
     },
-    placeholderIcon: {
-      fontSize: '3rem', // Daha büyük ikon
-      marginBottom: '15px',
-      color: 'var(--primary-color, #9c27b0)',
-      animation: 'pulse 2s infinite', // Nabız efekti
-      opacity: '0.8',
-    },
+    // Galeri Navigasyon butonları
     galleryNav: {
       position: 'absolute',
       top: '50%',
       transform: 'translateY(-50%)',
-      backgroundColor: 'rgba(25, 25, 25, 0.75)',
+      background: 'rgba(0, 0, 0, 0.7)',
       color: 'white',
-      width: '50px', // Daha büyük düğmeler
-      height: '50px',
-      borderRadius: '50%',
+      width: isMobile ? '35px' : '40px',
+      height: isMobile ? '35px' : '40px',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      fontSize: '1.7rem', // Daha büyük ok ikonları
-      fontWeight: '300',
+      border: 'none',
+      borderRadius: '50%',
       cursor: 'pointer',
-      userSelect: 'none',
       transition: 'all 0.3s ease',
-      border: '1px solid rgba(255, 255, 255, 0.15)',
-      outline: 'none',
-      zIndex: 2,
-      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-      backdropFilter: 'blur(3px)',
-      WebkitBackdropFilter: 'blur(3px)',
+      fontSize: '18px',
+      opacity: 0.7,
+      zIndex: 5,
     },
     galleryNavLeft: {
       left: '10px',
@@ -580,7 +576,7 @@ const Projects = () => {
       display: 'flex',
       justifyContent: 'center',
       gap: '8px',
-      zIndex: 2,
+      zIndex: 5,
     },
     galleryDot: {
       width: '10px',
@@ -588,49 +584,59 @@ const Projects = () => {
       borderRadius: '50%',
       backgroundColor: 'rgba(255, 255, 255, 0.5)',
       cursor: 'pointer',
+      transition: 'all 0.3s ease',
     },
     galleryDotActive: {
-      backgroundColor: 'white',
+      backgroundColor: 'var(--primary-color)',
       transform: 'scale(1.2)',
     },
-    projectDetails: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: isMobile ? '15px' : '20px',
-      width: isMobile ? '100%' : (isTablet ? '48%' : '42%'),
-      maxWidth: isMobile ? 'none' : '500px',
-      height: '100%',
-      justifyContent: 'flex-start',
-      flex: '1',
-    },
     projectDescription: {
-      fontSize: isMobile ? '1rem' : '1.1rem',
-      lineHeight: 1.6,
-      color: 'var(--text-color, #fff)',
-      marginBottom: isMobile ? '15px' : '20px',
+      fontSize: isMobile ? '0.95rem' : '1.05rem',
+      lineHeight: '1.6',
+      color: 'var(--text-color)',
+      marginBottom: '15px',
+      textAlign: 'left',
     },
     projectFeatures: {
-      marginTop: isMobile ? '15px' : '20px',
+      marginTop: '20px',
     },
     featuresTitle: {
-      fontSize: isMobile ? '1.1rem' : '1.3rem',
-      marginBottom: '10px',
-      color: 'var(--primary-color, #9c27b0)',
+      fontSize: isMobile ? '1.1rem' : '1.2rem',
+      fontWeight: '600',
+      marginBottom: '15px',
+      color: 'var(--text-color)',
     },
     featuresList: {
-      listStyleType: 'none',
-      paddingLeft: 0,
+      paddingLeft: '20px',
+      listStyle: 'none',
+      margin: 0,
     },
     featureItem: {
-      position: 'relative',
-      paddingLeft: '25px',
-      marginBottom: '8px',
-      lineHeight: 1.5,
       fontSize: isMobile ? '0.9rem' : '1rem',
+      marginBottom: '8px',
+      position: 'relative',
+      lineHeight: '1.5',
+      color: 'var(--text-secondary, rgba(255, 255, 255, 0.8))',
     },
     featureIcon: {
-      marginRight: '8px',
-      color: 'var(--primary-color, #9c27b0)',
+      color: 'var(--primary-color)',
+      marginRight: '5px',
+      fontWeight: 'bold',
+    },
+    placeholderContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100%',
+      color: 'rgba(255, 255, 255, 0.6)',
+      padding: '20px',
+      textAlign: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    },
+    placeholderIcon: {
+      fontSize: '3rem',
+      marginBottom: '15px',
     },
     // Proje kartını daha responsive hale getirin
     projectCard: {
@@ -666,35 +672,109 @@ const Projects = () => {
     // Media queries ekleyin
     '@media (max-width: 768px)': {
       projectsContainer: {
-        padding: '0 10px', // Mobilde daha az padding
+        padding: '0 10px',
       },
       projectCard: {
-        padding: '15px', // Mobilde daha az padding
+        padding: '15px',
       },
       projectTitle: {
-        fontSize: '1.4rem', // Mobilde daha küçük başlık
+        fontSize: '1.4rem',
       },
       projectDescription: {
-        fontSize: '0.9rem', // Mobilde daha küçük açıklama
+        fontSize: '0.9rem',
       },
       featureList: {
-        paddingLeft: '20px', // Mobilde daha az liste girintisi
+        paddingLeft: '20px',
       },
       featureItem: {
-        fontSize: '0.9rem', // Mobilde daha küçük özellik metni
+        fontSize: '0.9rem',
         marginBottom: '5px',
       },
       techTag: {
         fontSize: '0.8rem',
         padding: '4px 10px',
       },
-      projectContent: {
-        flexDirection: 'column-reverse', // Mobilde görseller üstte, detaylar altta
+      
+      galleryContainer: {
+        width: '100%',
+        maxWidth: '100%',
+        height: 'auto',
+        aspectRatio: '16/9',
+        minHeight: '240px', // 220px'den 240px'e çıkarıldı
+        maxHeight: '300px', // 270px'den 300px'e çıkarıldı
+        marginBottom: '20px',
       },
       
-      imageGallery: {
-        maxWidth: '100%', // Mobilde tam genişlikte
+      galleryImage: {
+        width: '100%',
+        height: '100%',
+        objectFit: 'scale-down', // 'contain' yerine 'scale-down' kullanılabilir
+        maxHeight: 'none', // Sınırlamayı kaldırıldı
+        minHeight: 'auto',
+        padding: '8px', // Padding eklendi
+        borderRadius: '8px',
+        cursor: 'pointer',
+      },
+      
+      // projectContent: { // BU BLOK KALDIRILDI, isMobile ile ana stilde yönetiliyor
+      //   flexDirection: 'column-reverse',
+      // },
+      
+      galleryContainer: {
+        width: '100%',
+        maxWidth: '100%',
+        height: 'auto',
+        aspectRatio: '16/9', // Telefon için daha uygun oran
+        minHeight: '240px', // 220px'den 240px'e çıkarıldı
+        maxHeight: '300px', // 270px'den 300px'e çıkarıldı
         marginBottom: '20px',
+      },
+      
+      galleryImage: {
+        width: '100%',
+        height: '100%',
+        objectFit: 'scale-down', // 'contain' yerine 'scale-down' kullanılabilir
+        maxHeight: 'none', // Sınırlamayı kaldırıldı
+        minHeight: 'auto',
+        padding: '8px', // Padding eklendi
+        borderRadius: '8px',
+        cursor: 'pointer',
+      },
+      
+      // Navigation butonlarını mobil için optimize et
+      galleryNav: {
+        width: '35px',
+        height: '35px',
+        fontSize: '16px',
+        opacity: 0.9, // Mobilde daha görünür
+        background: 'rgba(0, 0, 0, 0.8)',
+        backdropFilter: 'blur(4px)',
+      },
+      
+      galleryNavLeft: {
+        left: '8px',
+      },
+      
+      galleryNavRight: {
+        right: '8px',
+      },
+      
+      // Dot indicator'ları mobil için optimize et
+      galleryDotsContainer: {
+        bottom: '10px',
+        gap: '6px',
+      },
+      
+      galleryDot: {
+        width: '8px',
+        height: '8px',
+        backgroundColor: 'rgba(255, 255, 255, 0.6)',
+      },
+      
+      galleryDotActive: {
+        backgroundColor: 'var(--primary-color)',
+        transform: 'scale(1.3)',
+        boxShadow: '0 0 8px rgba(156, 39, 176, 0.6)',
       },
     },
     
@@ -720,25 +800,9 @@ const Projects = () => {
     }
   };
   
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-  const [hoveredNavs, setHoveredNavs] = useState({});
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-      setWindowHeight(window.innerHeight);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const isMobile = windowWidth <= 768;
-  const isTablet = windowWidth <= 1024 && windowWidth > 768;
-
   return (
-    <section id="projects" className="section">
-      <div className="section-content">
+    <section id="projects" className="section" style={{width: '100%', margin: '0 auto'}}>
+      <div className="section-content" style={{maxWidth: '1400px', margin: '0 auto', width: '100%'}}>
         <h2 style={styles.projectsTitle}>{text.title}</h2>
         
         <div className="projects-container" style={styles.projectsContainer}>
@@ -771,23 +835,12 @@ const Projects = () => {
                 
                 <div 
                   className="project-content"
-                  style={{
-                    ...styles.projectContent,
-                    flexDirection: isMobile ? 'column' : 'row',
-                    alignItems: isMobile ? 'center' : 'flex-start',
-                    minHeight: isMobile ? 'auto' : (isTablet ? '400px' : '450px'),
-                    gap: isMobile ? '20px' : (isTablet ? '20px' : '30px')
-                  }}
+                  style={styles.projectContent}
                 >
-                  {/* Proje görsel galerisi */}
+                  {/* Gallery Container */}
                   <div 
-                    className="gallery-container"
-                    style={{
-                      ...styles.galleryContainer,
-                      width: isMobile ? '100%' : (isTablet ? '50%' : '55%'),
-                      height: isMobile ? 'auto' : '400px',
-                      marginBottom: isMobile ? '20px' : 0
-                    }}
+                    className="gallery-container" 
+                    style={styles.galleryContainer}
                   >
                     {images.length > 0 && !hasError ? (
                       <>
@@ -798,23 +851,18 @@ const Projects = () => {
                           style={{
                             ...styles.galleryImage,
                             transition: 'opacity 0.3s, transform 0.3s ease',
-                            opacity: 1 // Baştan görünür yap
+                            opacity: 1
                           }}
                           loading="lazy"
                           onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            changeImage(project.id, 'next');
+                            // Placeholder for potential future click action (e.g., open lightbox)
+                            console.log("Image clicked:", getImagePath(currentImage));
                           }}
                           onError={() => handleImageError(project.id, currentImageIndex)}
                           onLoad={(e) => {
-                            // Clear error state for this image
-                            setImageErrors(prev => {
-                              const newErrors = { ...prev };
-                              delete newErrors[`${project.id}-${currentImageIndex}`];
-                              return newErrors;
-                            });
-                            console.log(`Image loaded successfully: Project ${project.id}, index ${currentImageIndex}`);
+                            // Placeholder for potential future load action
+                            console.log("Image loaded:", getImagePath(currentImage));
+                            setLoadingImages(prev => ({ ...prev, [project.id]: false }));
                           }}
                           className="gallery-image"
                         />
@@ -830,12 +878,12 @@ const Projects = () => {
                               <div>Processed Path: {getImagePath(currentImage)}</div>
                               <div>Index: {currentImageIndex}</div>
                             </>
-                          ) : 'Image not found'}
+                          ) : 'Image not found or no images for this project.'}
                         </div>
                       </div>
                     )}
                     
-                    {/* Gezinme düğmeleri (sadece birden fazla görsel varsa ve hata yoksa göster) */}
+                    {/* Navigation Arrows */}
                     {images.length > 1 && !hasError && (
                       <>
                         <button 
@@ -846,11 +894,7 @@ const Projects = () => {
                               ? 'rgba(156, 39, 176, 0.8)' 
                               : 'rgba(0, 0, 0, 0.7)'
                           }}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            changeImage(project.id, 'prev');
-                          }}
+                          onClick={(e) => { e.stopPropagation(); changeImage(project.id, 'prev'); }}
                           onMouseEnter={() => setHoveredNavs(prev => ({
                             ...prev,
                             [`${project.id}-left`]: true
@@ -870,11 +914,7 @@ const Projects = () => {
                               ? 'rgba(156, 39, 176, 0.8)' 
                               : 'rgba(0, 0, 0, 0.7)'
                           }}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            changeImage(project.id, 'next');
-                          }}
+                          onClick={(e) => { e.stopPropagation(); changeImage(project.id, 'next'); }}
                           onMouseEnter={() => setHoveredNavs(prev => ({
                             ...prev,
                             [`${project.id}-right`]: true
@@ -887,7 +927,7 @@ const Projects = () => {
                           &#10095;
                         </button>
                         
-                        {/* Nokta göstergeler */}
+                        {/* Dot Indicators */}
                         <div style={styles.galleryDotsContainer}>
                           {images.map((_, i) => (
                             <div
@@ -897,32 +937,19 @@ const Projects = () => {
                                 ...(i === currentImageIndex ? styles.galleryDotActive : {})
                               }}
                               onClick={(e) => {
-                                e.preventDefault();
                                 e.stopPropagation();
-                                console.log(`Changing to dot index ${i} for project ${project.id}`);
-                                
-                                // Önce hata state'ini temizle
-                                setImageErrors(prev => {
-                                  const newErrors = { ...prev };
-                                  delete newErrors[`${project.id}-${i}`];
+                                setActiveImageIndices(prev => ({ ...prev, [project.id]: i }));
+                                // Clear error for this project when dot is clicked
+                                setImageErrors(prevErrors => {
+                                  const newErrors = { ...prevErrors };
+                                  Object.keys(newErrors).forEach(key => {
+                                    if (key.startsWith(`${project.id}-`)) {
+                                      delete newErrors[key];
+                                    }
+                                  });
                                   return newErrors;
                                 });
-                                
-                                // Yükleme durumu kaldırıldı
-                                setLoadingImages(prev => ({
-                                  ...prev,
-                                  [project.id]: false
-                                }));
-                                
-                                // Görsel indeksini doğrudan değiştir
-                                setActiveImageIndices(prev => {
-                                  const newState = {
-                                    ...prev,
-                                    [project.id]: i
-                                  };
-                                  console.log('New active indices:', newState);
-                                  return newState;
-                                });
+                                setLoadingImages(prev => ({ ...prev, [project.id]: false })); // Reset loading
                               }}
                             />
                           ))}
@@ -931,67 +958,32 @@ const Projects = () => {
                     )}
                   </div>
 
-                  {/* Proje detayları */}
+                  {/* Project Details */}
                   <div 
                     className="project-details"
-                    style={{
-                      ...styles.projectDetails,
-                      width: isMobile ? '100%' : (isTablet ? '48%' : '42%'),
-                      minHeight: isMobile ? 'auto' : '400px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'space-between'
-                    }}
+                    style={styles.projectDetails}
                   >
-                    <p className="projectDescription" style={styles.projectDescription}>
-                      {project.description[language]}
-                    </p>
-                    
-                    {project.features && project.features[language] && project.features[language].length > 0 && (
-                      <div style={styles.projectFeatures}>
-                        <h4 style={styles.featuresTitle}>{text.features}</h4>
-                        <ul style={styles.featuresList}>
-                          {project.features[language].map((feature, i) => (
-                            <li key={i} style={styles.featureItem}>
-                              <span style={styles.featureIcon}>➤</span>
-                              {" " + feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                    
-                    {/* İletişim ve proje bağlantıları */}
-                    <div className="navButtons" style={{marginTop: 'auto', marginBottom: '10px'}}>
-                      <a
-                        href={`mailto:mert54bolukbasi@gmail.com?subject=Project Inquiry: ${project.title[language]}`}
-                        className="contactButton"
-                        style={{
-                          ...styles.contactButton,
-                          backgroundColor: 'var(--primary-color, #9c27b0)',
-                          color: '#fff',
-                          padding: '12px 24px',
-                          borderRadius: '30px',
-                          fontSize: '1rem',
-                          fontWeight: '600',
-                          textDecoration: 'none',
-                          display: 'inline-block',
-                          transition: 'background-color 0.3s ease',
-                          marginRight: '10px',
-                          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.target.style.backgroundColor = 'rgba(156, 39, 176, 0.9)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.target.style.backgroundColor = 'var(--primary-color, #9c27b0)';
-                        }}
-                      >
-                        {text.contactButton}
-                      </a>
+                    <div> {/* Wrapper for description and features to allow button to be at bottom */}
+                      <p className="projectDescription" style={styles.projectDescription}>
+                        {project.description[language]}
+                      </p>
                       
-{/* View Project butonunu kaldırdık */}
+                      {project.features && project.features[language] && project.features[language].length > 0 && (
+                        <div style={styles.projectFeatures}>
+                          <h4 style={styles.featuresTitle}>{text.features}</h4>
+                          <ul style={styles.featuresList}>
+                            {project.features[language].map((feature, i) => (
+                              <li key={i} style={styles.featureItem}>
+                                <span style={styles.featureIcon}>➤</span>
+                                {" " + feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
+                    
+                    {/* İletişim ve proje bağlantıları KISMI KALDIRILDI */}
                   </div>
                 </div>
               </div>

@@ -32,6 +32,7 @@ body, html, #root {
   /* min-height: 100vh; height: 100% ile değiştirildi */
   background-color: #000; /* Arka planı siyah yapalım */
   position: relative; /* İçerik konumlandırması için */
+  overflow-x: hidden; /* Yatay kaydırmayı en dış seviyede engelle */
 }
 
 h1 {
